@@ -6,4 +6,5 @@ const nextConfig = {
     defaultLocale: "en",
   },
 };
-module.exports = nextTranslate(nextConfig);
+const config = nextTranslate(nextConfig);
+export default config;

@@ -31,3 +31,6 @@ body {
     text-wrap: balance;
   }
 }
+#menu-toggle:checked + #menu {
+  display: block;
+}
