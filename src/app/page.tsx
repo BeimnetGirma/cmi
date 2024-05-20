@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import Image from "next/image";
 
 const navLinks = [
@@ -16,12 +17,8 @@ const navLinks = [
 ];
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {navLinks.map((link) => (
-        <a href={link.href} key={link.title} className="text-2xl font-bold">
-          {link.title}
-        </a>
-      ))}
-    </main>
+    <>
+      <main className="flex min-h-screen items-center justify-between p-24"></main>
+    </>
   );
 }
