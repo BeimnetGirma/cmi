@@ -4,7 +4,7 @@ import React from "react";
 
 const News = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col">
       <div className="w-full">
         <div className="relative">
           <Image
