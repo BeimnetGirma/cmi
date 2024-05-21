@@ -31,6 +31,13 @@ body {
     text-wrap: balance;
   }
 }
+div.slick-slide {
+  display: inline;
+  width: 150px;
+}
+.image {
+  width: 150px;
+}
 #menu-toggle:checked + #menu {
   display: block;
 }
