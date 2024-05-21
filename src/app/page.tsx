@@ -10,17 +10,10 @@ export default function Home() {
       {/* Hero */}
       <div className="bg-contain bg-no-repeat bg-center h-96 flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
         <div className="flex flex-col items-end justify-center w-1/2 mr-20">
-          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
-            Ethiopian Construction Project Management Institute
-          </h2>
+          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">Ethiopian Construction Project Management Institute</h2>
           <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
-            <p className="text-justify">
-              An intuitive and reliable quality system designed for the building
-              and construction industry, ensuring safety and predictability.
-            </p>
-            <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-              View Projects
-            </button>
+            <p className="text-justify">An intuitive and reliable quality system designed for the building and construction industry, ensuring safety and predictability.</p>
+            <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">View Projects</button>
           </div>
         </div>
       </div>
@@ -29,48 +22,24 @@ export default function Home() {
         <div className="md:w-1/3 md:mr-4">
           <h3 className="text-xl font-bold mb-4 text-indigo-600">ABOUT US</h3>
           <p className="text-left mb-4">
-            A digital platform for comprehensive management for all your
-            scaffolding project. It is for anyone involved in the assembly,
-            usage, rental, or ownership of scaffolding work. A simple and
-            efficient way to apply for scaffolding approval and manage your
-            scaffolding project on Salus Stillas Solutions.
+            A digital platform for comprehensive management for all your scaffolding project. It is for anyone involved in the assembly, usage, rental, or ownership of scaffolding
+            work. A simple and efficient way to apply for scaffolding approval and manage your scaffolding project on Salus Stillas Solutions.
           </p>
-          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
-            Read More
-          </button>
+          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">Read More</button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-          <Image
-            src="/assets/imgs/aboutus.svg"
-            alt="About Us Image"
-            className="rounded-lg justify-end"
-            width={500}
-            height={330}
-          />
+          <Image src="/assets/imgs/aboutus.svg" alt="About Us Image" className="rounded-lg justify-end" width={500} height={330} />
         </div>
       </div>
       {/* Demo Section */}
       <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-          <Image
-            src="/assets/imgs/demoguy.svg"
-            alt="Demo Guy"
-            className="rounded-lg justify-end"
-            width={250}
-            height={330}
-          />
+          <Image src="/assets/imgs/demoguy.svg" alt="Demo Guy" className="rounded-lg justify-end" width={250} height={330} />
         </div>
         <div className="md:w-1/3 md:mr-4">
-          <h3 className="text-xl font-bold mb-4 text-indigo-600">
-            A SIMPLE AND EASY WAY TO APPLY FOR SCAFFOLDING
-          </h3>
-          <p className="text-left mb-4">
-            An intuitive and reliable quality system designed for the building
-            and construction industry, ensuring safety and predictability.
-          </p>
-          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
-            Get Demo
-          </button>
+          <h3 className="text-xl font-bold mb-4 text-indigo-600">A SIMPLE AND EASY WAY TO APPLY FOR SCAFFOLDING</h3>
+          <p className="text-left mb-4">An intuitive and reliable quality system designed for the building and construction industry, ensuring safety and predictability.</p>
+          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">Get Demo</button>
         </div>
       </div>
       {/* Our Services */}
@@ -81,68 +50,32 @@ export default function Home() {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-blue-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Time Registration
-            </h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">Time Registration</h4>
             <p className="text-center w-3/4 pb-10">
-              Effortless time tracking for every team member. Just log machine
-              hours, overtime, and allowances, then instantly view your projects
-              time breakdown.
+              Effortless time tracking for every team member. Just log machine hours, overtime, and allowances, then instantly view your projects time breakdown.
             </p>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-cyan-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-cyan-600">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </div>
             </div>
             <h4 className="text-lg font-bold text-slate-900 p-4">Checklists</h4>
-            <p className="text-center w-3/4 pb-10">
-              Complete checklists with templates adapted to all industries. Can
-              be easily customized and customized.
-            </p>
+            <p className="text-center w-3/4 pb-10">Complete checklists with templates adapted to all industries. Can be easily customized and customized.</p>
           </div>
 
           <div className="p-4   flex flex-col items-center justify-center  border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-orange-600"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-orange-600">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -154,9 +87,7 @@ export default function Home() {
 
             <h4 className="text-lg font-bold text-slate-900 p-4">Forms</h4>
             <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
+              Get mobile-friendly forms with options for signing directly on mobile. We also have a form builder where you can freely build all the forms you need.
             </p>
           </div>
         </div>
@@ -165,44 +96,23 @@ export default function Home() {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-yellow-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-yellow-600">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
                 </svg>
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Observations
-            </h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">Observations</h4>
             <p className="text-center w-3/4 pb-10">
-              Deviation handling with notification. Deviations are registered,
-              commented on and documented directly on mobile. Image function
-              directly in the deviation makes it a breeze.
+              Deviation handling with notification. Deviations are registered, commented on and documented directly on mobile. Image function directly in the deviation makes it a
+              breeze.
             </p>
           </div>
 
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-purple-600"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-purple-600">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -214,21 +124,13 @@ export default function Home() {
 
             <h4 className="text-lg font-bold text-slate-900 p-4">Procedures</h4>
             <p className="text-center w-3/4 pb-10">
-              Procedures are adapted to your company in relation to statutory
-              requirements, with audit history and notification to employees.
+              Procedures are adapted to your company in relation to statutory requirements, with audit history and notification to employees.
             </p>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-rose-950"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-rose-950">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -240,9 +142,7 @@ export default function Home() {
 
             <h4 className="text-lg font-bold text-slate-900 p-4">Orders</h4>
             <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
+              Get mobile-friendly forms with options for signing directly on mobile. We also have a form builder where you can freely build all the forms you need.
             </p>
           </div>
         </div>
@@ -250,14 +150,7 @@ export default function Home() {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-blue-600"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-600">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -269,22 +162,13 @@ export default function Home() {
 
             <h4 className="text-lg font-bold text-slate-900 p-4">Pictures</h4>
             <p className="text-center w-3/4 pb-10">
-              Take pictures directly of checklists or deviations and get full
-              control and documentation of all work carried out on the
-              construction site.
+              Take pictures directly of checklists or deviations and get full control and documentation of all work carried out on the construction site.
             </p>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-green-400"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-green-400">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -295,54 +179,34 @@ export default function Home() {
             </div>
 
             <h4 className="text-lg font-bold text-slate-900 p-4">Filers</h4>
-            <p className="text-center w-3/4 pb-10">
-              Complete checklists with templates adapted to all industries. Can
-              be easily customized and customized.
-            </p>
+            <p className="text-center w-3/4 pb-10">Complete checklists with templates adapted to all industries. Can be easily customized and customized.</p>
           </div>
           <div className="p-4   flex flex-col items-center justify-center ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-pink-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-pink-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-pink-600">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Inspections
-            </h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">Inspections</h4>
             <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
+              Get mobile-friendly forms with options for signing directly on mobile. We also have a form builder where you can freely build all the forms you need.
             </p>
           </div>
         </div>
       </div>
+
+      {/* Our Clients */}
       <div className="pb-20">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          OUR CLIENTS
-        </h2>
+        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">OUR CLIENTS</h2>
         <ClientsSlider />
       </div>
 
       {/* FQA */}
       <div className="bg-slate-50 p-8">
-        <h2 className="text-xl font-bold text-center mb-6">
-          FREQUENTLY ASKED QUESTIONS
-        </h2>
+        <h2 className="text-xl font-bold text-center mb-6">FREQUENTLY ASKED QUESTIONS</h2>
         <FQA />
       </div>
       <div className="p-8">
@@ -351,69 +215,31 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog1.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
+            <Image className="w-full h-80 object-cover object-center" src="/assets/imgs/blog1.svg" alt="this is an image" width={250} height={350} />
             <div className="p-4">
               <h3 className="text-xl font-bold mb-2">News Title #1</h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
+              <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et purus viverra, molestie magna nec.</p>
+              <Link href={"#"} className="font-bold text-primary-main underline hover:text-indigo-500">
                 Read More
               </Link>
             </div>
           </div>
           <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog2.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
+            <Image className="w-full h-80 object-cover object-center" src="/assets/imgs/blog2.svg" alt="this is an image" width={250} height={350} />
             <div className="p-4">
-              <h3 className="text-xl font-bold mb-2">
-                Here’s an example when the Blog Title is too long
-              </h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
+              <h3 className="text-xl font-bold mb-2">Here’s an example when the Blog Title is too long</h3>
+              <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et purus viverra, molestie magna nec.</p>
+              <Link href={"#"} className="font-bold text-primary-main underline hover:text-indigo-500">
                 Read More
               </Link>
             </div>
           </div>
           <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog3.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
+            <Image className="w-full h-80 object-cover object-center" src="/assets/imgs/blog3.svg" alt="this is an image" width={250} height={350} />
             <div className="p-4">
               <h3 className="text-xl font-bold mb-2">News Title #3</h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
+              <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et purus viverra, molestie magna nec.</p>
+              <Link href={"#"} className="font-bold text-primary-main underline hover:text-indigo-500">
                 Read More
               </Link>
             </div>
