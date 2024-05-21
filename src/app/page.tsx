@@ -1,4 +1,3 @@
-import NavBar from "@/components/NavBar";
 import Image from "next/image";
 import Link from "next/link";
 import ClientsSlider from "@/components/ClientsSlider";
@@ -8,19 +7,18 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      <NavBar />
       {/* Hero */}
       <div className="bg-contain bg-no-repeat bg-center h-96 flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
         <div className="flex flex-col items-end justify-center w-1/2 mr-20">
-          <h2 className="text-4xl text-indigo-500 font-bold mr-10 mb-5">
-            SALUS STILLAS SOLUTIONS
+          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
+            Ethiopian Construction Project Management Institute
           </h2>
           <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
             <p className="text-justify">
               An intuitive and reliable quality system designed for the building
               and construction industry, ensuring safety and predictability.
             </p>
-            <button className="bg-indigo-600 hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
+            <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
               View Projects
             </button>
           </div>
@@ -37,7 +35,7 @@ export default function Home() {
             efficient way to apply for scaffolding approval and manage your
             scaffolding project on Salus Stillas Solutions.
           </p>
-          <button className="bg-indigo-600 hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
+          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
             Read More
           </button>
         </div>
@@ -70,7 +68,7 @@ export default function Home() {
             An intuitive and reliable quality system designed for the building
             and construction industry, ensuring safety and predictability.
           </p>
-          <button className="bg-indigo-600 hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
+          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
             Get Demo
           </button>
         </div>
@@ -334,7 +332,7 @@ export default function Home() {
         </div>
       </div>
       <div className="pb-20">
-        <h2 className="text-xl font-bold text-indigo-600 text-center mt-10 mb-5 p-0">
+        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
           OUR CLIENTS
         </h2>
         <ClientsSlider />
@@ -366,7 +364,7 @@ export default function Home() {
               </p>
               <Link
                 href={"#"}
-                className="font-bold text-indigo-600 underline hover:text-indigo-500"
+                className="font-bold text-primary-main underline hover:text-indigo-500"
               >
                 Read More
               </Link>
@@ -390,7 +388,7 @@ export default function Home() {
               </p>
               <Link
                 href={"#"}
-                className="font-bold text-indigo-600 underline hover:text-indigo-500"
+                className="font-bold text-primary-main underline hover:text-indigo-500"
               >
                 Read More
               </Link>
@@ -412,7 +410,7 @@ export default function Home() {
               </p>
               <Link
                 href={"#"}
-                className="font-bold text-indigo-600 underline hover:text-indigo-500"
+                className="font-bold text-primary-main underline hover:text-indigo-500"
               >
                 Read More
               </Link>
