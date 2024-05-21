@@ -346,7 +346,9 @@ export default function Home() {
         <FQA />
       </div>
       <div className="p-8">
-        <h2 className="text-xl font-bold text-center mb-6">BLOGS</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
+          <Link href="/news">News</Link>
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <Image
