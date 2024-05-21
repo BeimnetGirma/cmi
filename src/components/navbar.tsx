@@ -6,14 +6,15 @@ const Navbar = () => {
   return (
     <nav className="lg:px-16 px-6 bg-white shadow-md flex flex-wrap items-center lg:py-0 py-5">
       <div className="flex-1 flex justify-between items-center">
-        <a href="/" className="flex text-lg font-semibold">
+        <a href="/" className="flex text-center text-lg font-semibold">
           <Image
-            src="/assets/imgs/logo.svg"
-            width="150"
-            height="150"
+            src="/assets/imgs/logo.jpeg"
+            width="50"
+            height="50"
             className="p-2"
-            alt="Rz Codes Logo"
+            alt="ECMIP Logo"
           />
+          <span>ECPMI</span>
         </a>
       </div>
       <label htmlFor="menu-toggle" className="cursor-pointer lg:hidden block">
