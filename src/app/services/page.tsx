@@ -20,11 +20,16 @@ const Services = () => {
       </div>
       <div>
         <div className="flex flex-col justify-center pt-20">
-          <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">WHAT WE DO</h1>
+          <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">
+            WHAT WE DO
+          </h1>
           <div className="flex justify-center pt-8">
             <p className="text-sm text-slate-800 w-1/3 text-center">
-              At Salus Stillas Solutions, our primary goal is to deliver high-quality and secure services to our customers by providing a digital platform for comprehensive
-              management of all your scaffolding work. We are dedicated to advancing the construction industry through excellence.
+              At Salus Stillas Solutions, our primary goal is to deliver
+              high-quality and secure services to our customers by providing a
+              digital platform for comprehensive management of all your
+              scaffolding work. We are dedicated to advancing the construction
+              industry through excellence.
             </p>
           </div>
         </div>
@@ -34,18 +39,42 @@ const Services = () => {
           <div className="p-4 flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-blue-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">Time Registration</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              Time Registration
+            </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-cyan-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-cyan-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
                 </svg>
               </div>
             </div>
@@ -55,7 +84,14 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center  border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-orange-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-orange-600"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -70,19 +106,39 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-yellow-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-yellow-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+                  />
                 </svg>
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Observations</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              Observations
+            </h4>
           </div>
 
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-purple-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-purple-600"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -97,7 +153,14 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-rose-950">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-rose-950"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -112,7 +175,14 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-blue-600"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -127,7 +197,14 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-green-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-green-400"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -142,33 +219,65 @@ const Services = () => {
           <div className="p-4   flex flex-col items-center justify-center ">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-pink-100 mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-pink-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-8 h-8 text-pink-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                  />
                 </svg>
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Inspections</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              Inspections
+            </h4>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3"></div>
       </div>
       <div className="p-2 flex flex-col items-center justify-center">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">WE HELP YOU MANAGE YOUR ALL SCAFFOLDING WORK</h2>
-        <button className="rounded text-sm text-white bg-primary-main hover:bg-indigo-500 p-2 ">Let's Work Together</button>
-        <Image src="/assets/imgs/worktogether.svg" alt="Team" width={1200} height={500} />
+        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
+          WE HELP YOU MANAGE YOUR ALL SCAFFOLDING WORK
+        </h2>
+        <button className="rounded text-sm text-white bg-primary-main hover:bg-indigo-500 p-2 ">
+          Lets Work Together
+        </button>
+        <Image
+          src="/assets/imgs/worktogether.svg"
+          alt="Team"
+          width={1200}
+          height={500}
+        />
       </div>
       <div className="p-2">
         <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 w-3/4 m-auto">
           <div className="md:w-1/3 md:mr-4">
-            <h3 className="text-xl font-bold mb-4 text-primary-main">ADVANCING CONSTRUCTION INDUSTRY</h3>
+            <h3 className="text-xl font-bold mb-4 text-primary-main">
+              ADVANCING CONSTRUCTION INDUSTRY
+            </h3>
             <p className="text-left mb-4">
-              Delivering high-quality and secure services to our customers by providing a digital platform for comprehensive management of all kind of scaffolding work.
+              Delivering high-quality and secure services to our customers by
+              providing a digital platform for comprehensive management of all
+              kind of scaffolding work.
             </p>
           </div>
           <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-            <Image src="/assets/imgs/service-video.svg" alt="About Us Image" className="rounded-lg justify-end hover:border-blue-500 hover:border-2" width={400} height={330} />
+            <Image
+              src="/assets/imgs/service-video.svg"
+              alt="About Us Image"
+              className="rounded-lg justify-end hover:border-blue-500 hover:border-2"
+              width={400}
+              height={330}
+            />
           </div>
         </div>
       </div>
@@ -176,22 +285,51 @@ const Services = () => {
         <div className="flex flex-col items-center justify-center py-10 w-3/4 m-auto 2">
           <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-2">
             <div className=" flex flex-col items-center justify-center p-10">
-              <Image src="/assets/imgs/contact-guy.svg" alt="Contact Us" width={1000} height={500} />
+              <Image
+                src="/assets/imgs/contact-guy.svg"
+                alt="Contact Us"
+                width={1000}
+                height={500}
+              />
             </div>
             <div className="p-4 flex flex-col items-center ">
-              <h2 className="text-xl font-bold text-primary-main text-center p-0">GET A FREE DEMO</h2>
+              <h2 className="text-xl font-bold text-primary-main text-center p-0">
+                GET A FREE DEMO
+              </h2>
               <div className="flex justify-center mb-10 w-3/4">
-                <p className="text-sm text-slate-800 text-center">Please fill the below form to get information about our Products or Services</p>
+                <p className="text-sm text-slate-800 text-center">
+                  Please fill the below form to get information about our
+                  Products or Services
+                </p>
               </div>
               <form className="flex flex-col items-center w-full text-sm">
-                <input type="text" placeholder="Company Name" className="w-full p-2  mb-4 border border-gray-300 rounded" />
-                <input type="text" placeholder="Your Full Name" className="w-full p-2  mb-4 border border-gray-300 rounded" />
-                <input type="text" placeholder="Mobile Number" className="w-full p-2 mb-4 border border-gray-300 rounded" />
-                <input type="text" placeholder="Mail Id" className="w-full p-2 mb-4 border border-gray-300 rounded" />
+                <input
+                  type="text"
+                  placeholder="Company Name"
+                  className="w-full p-2  mb-4 border border-gray-300 rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="Your Full Name"
+                  className="w-full p-2  mb-4 border border-gray-300 rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="Mobile Number"
+                  className="w-full p-2 mb-4 border border-gray-300 rounded"
+                />
+                <input
+                  type="text"
+                  placeholder="Mail Id"
+                  className="w-full p-2 mb-4 border border-gray-300 rounded"
+                />
                 <div className="flex justify-start my-10">
                   <p className="text-xs text-slate-800 text-left">
-                    We require this information to reach out to you and provide you with information about our products and services. Please rest assured, we prioritize your
-                    privacy, and your information is kept completely secure with us. You can review our{" "}
+                    We require this information to reach out to you and provide
+                    you with information about our products and services. Please
+                    rest assured, we prioritize your privacy, and your
+                    information is kept completely secure with us. You can
+                    review our{" "}
                     <Link href={"#"} className="font-bold hover:underline">
                       Privacy Policy
                     </Link>{" "}
@@ -202,7 +340,10 @@ const Services = () => {
                     here.
                   </p>
                 </div>
-                <button type="submit" className="bg-primary-main text-white py-2 px-4 rounded hover:bg-primary-dark">
+                <button
+                  type="submit"
+                  className="bg-primary-main text-white py-2 px-4 rounded hover:bg-primary-dark"
+                >
                   Get Demo
                 </button>
               </form>
