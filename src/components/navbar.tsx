@@ -29,28 +29,16 @@ const NavBar = () => {
       <div className="container mx-auto flex justify-between items-center py-4">
         <div>
           <a href="#" className="flex items-center space-x-2">
-            <Image
-              src="/assets/imgs/logo.jpeg"
-              alt="Logo"
-              width={100}
-              height={100}
-            />
+            <Image src="/assets/imgs/logo.png" alt="Logo" width={80} height={80} />
           </a>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
           {navLinks.map((link) => (
-            <Link
-              href={link.href}
-              key={link.title}
-              className="text-slate-900 hover:text-indigo-600"
-            >
+            <Link href={link.href} key={link.title} className="text-slate-900 hover:text-indigo-600">
               {link.title}
             </Link>
           ))}
-          <Link
-            href={"/login"}
-            className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors"
-          >
+          <Link href={"/login"} className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
             Login
           </Link>
         </div>
