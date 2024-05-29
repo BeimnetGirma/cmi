@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import LanguageSelector from "./LanguageSelector";
+
 const NavBar = () => {
   const navLinks = [
     {
@@ -38,6 +40,7 @@ const NavBar = () => {
               {link.title}
             </Link>
           ))}
+          <LanguageSelector />
           <Link href={"/login"} className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
             Login
           </Link>
