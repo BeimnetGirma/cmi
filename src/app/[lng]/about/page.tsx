@@ -1,9 +1,12 @@
 import ClientsSlider from "@/components/clients-slider";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "../../../components/footer";
+import Footer from "@/components/footer";
+import { useTranslation } from "@/app/i18n";
+import { PageProps } from "@/types";
 
-const AboutUs = () => {
+const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
+  const { t } = await useTranslation(lng, "");
   return (
     <div className="pt-8 mt-20">
       <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header.svg')]">
@@ -13,9 +16,9 @@ const AboutUs = () => {
           <p className="text-sm md:text-lg pt-2">
             {" "}
             <Link href={"/"} className="hover:text-slate-300">
-              Home
+              {t("home").toUpperCase()}
             </Link>{" "}
-            / About Us
+            / {t("about").toUpperCase()}
           </p>
         </div>
       </div>

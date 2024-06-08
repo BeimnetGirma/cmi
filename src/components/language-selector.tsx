@@ -1,4 +1,5 @@
 "use client";
+import { useTranslation } from "@/app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { PageProps } from "@/types";
 import Link from "next/link";

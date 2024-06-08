@@ -4,6 +4,7 @@ import NavBar from "@/components/navbar";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "../globals.css";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,14 @@ export default function RootLayout({
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
         <NavBar params={{ lng }} />
-        {children}
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, {
+              params: { lng },
+            } as React.Attributes);
+          }
+          return child;
+        })}
       </body>
     </html>
   );
