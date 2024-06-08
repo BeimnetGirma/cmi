@@ -1,4 +1,4 @@
-export type AboutPageProps = {
+export type PageProps = {
   params: {
     lng: string;
   };
