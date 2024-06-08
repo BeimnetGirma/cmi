@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/footer";
+import Footer from "../../../components/footer";
 
 const Support = () => {
   return (
