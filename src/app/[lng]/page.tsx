@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ClientsSlider from "@/components/ClientsSlider";
-import FQA from "@/components/FQA";
-import Footer from "@/components/Footer";
+import ClientsSlider from "@/components/clients-slider";
+import FQA from "@/components/faq";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (

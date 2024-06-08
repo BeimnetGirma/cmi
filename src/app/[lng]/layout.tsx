@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
-        <NavBar />
+        <NavBar params={{ lng }} />
         {children}
       </body>
     </html>

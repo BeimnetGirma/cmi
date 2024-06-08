@@ -1,7 +1,7 @@
-import ClientsSlider from "@/components/ClientsSlider";
+import ClientsSlider from "@/components/clients-slider";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 
 const AboutUs = () => {
   return (
