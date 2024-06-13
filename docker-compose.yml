@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  ghost:
+    image: ghost:latest
+    restart: always
+    ports:
+      - "2368:2368"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - /home/ghost/content:/var/lib/ghost/content
+
+  # production
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      MYSQL_USER: ghost
+      MYSQL_PASSWORD: ghostdbpass
+      MYSQL_DATABASE: ghostdb
+    volumes:
+      - /home/ghost/mysql:/var/lib/mysql
