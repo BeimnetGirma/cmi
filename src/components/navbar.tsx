@@ -17,6 +17,10 @@ const NavBar: React.FC<PageProps> = async ({ params: { lng } }) => {
       href: "/about",
     },
     {
+      title: t("standards"),
+      href: "/standards",
+    },
+    {
       title: t("services"),
       href: "/services",
     },
