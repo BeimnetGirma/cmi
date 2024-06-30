@@ -15,10 +15,14 @@ services:
   db:
     image: mysql:5.7
     restart: always
+    ports:
+      - 3906:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=your_mysql_root_password
-      - MYSQL_DATABASE=ghost
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cmi
       - MYSQL_USER=ghost
-      - MYSQL_PASSWORD=your_ghost_mysql_password
+      - MYSQL_PASSWORD=ghost
     volumes:
       - ./ghost/data:/var/lib/mysql
+      - ./data/department.sql:/docker-entrypoint-initdb.d/department.sql
+      - ./data/research.sql:/docker-entrypoint-initdb.d/research.sql
