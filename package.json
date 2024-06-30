@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.1.6",
     "accept-language": "^3.0.18",
     "dayjs": "^1.11.11",
     "i18next": "^23.11.5",

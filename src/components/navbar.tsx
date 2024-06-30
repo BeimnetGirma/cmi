@@ -1,8 +1,11 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSelector from "./LanguageSelector";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 
 const NavBar = () => {
+  const { user, isLoaded } = useUser();
   const navLinks = [
     {
       title: "Home",
@@ -41,9 +44,16 @@ const NavBar = () => {
             </Link>
           ))}
           <LanguageSelector />
-          <Link href={"/login"} className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
-            Login
-          </Link>
+
+          {isLoaded && user ? (
+            <SignOutButton redirectUrl="/">
+              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">Sign Out</button>
+            </SignOutButton>
+          ) : (
+            <Link href={"/login"} className="g-gray-400 text-white rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-500 transition-colors">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
