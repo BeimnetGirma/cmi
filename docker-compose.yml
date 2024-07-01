@@ -1,24 +1,57 @@
-version: "3"
+version: "3.1"
+
 services:
   ghost:
     image: ghost:4.8
+    container_name: ecmi-ghost
     restart: always
     ports:
-      - 2368:2368
+      - 8005:2368
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: rootpassword
+      database__connection__database: ghost
+
+      url: http://localhost:8005
+
+      mail__transport: SMTP
+      mail__options__host: smtp.gmail.com
+      mail__options__port: 587
+      mail__options__secure: false
+      mail__options__auth__user: my_email
+      mail__options__auth__pass: "my_email_pass"
     volumes:
       - ./ghost/content:/var/lib/ghost/content
-    environment:
-      - url=http://localhost:2368
-    depends_on:
-      - db
 
   db:
     image: mysql:5.7
     restart: always
+    container_name: ecmi-db
+    ports:
+      - 3340:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=your_mysql_root_password
-      - MYSQL_DATABASE=ghost
-      - MYSQL_USER=ghost
-      - MYSQL_PASSWORD=your_ghost_mysql_password
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ghost
+      MYSQL_USER: ghost
+      MYSQL_PASSWORD: ghost_password
     volumes:
       - ./ghost/data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD && mysql -u $$MYSQL_USER --password=$$MYSQL_PASSWORD -e ''SHOW DATABASES LIKE "$$MYSQL_DATABASE";''',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  ghost:
+  db:
