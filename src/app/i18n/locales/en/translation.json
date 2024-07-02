@@ -13,5 +13,7 @@
   "ourServices": "Our Services",
   "ourClients": "Our Clients",
   "faq": "Frequently Asked Questions",
-  "news": "News"
+  "news": "News",
+  "notFound": "Page Not Found",
+  "notFoundContent": "The page you are looking for doesn't exist. Go back to home page."
 }
