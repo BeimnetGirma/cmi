@@ -1,8 +1,17 @@
 {
   "home": "Home Page",
   "about": "About",
+  "aboutUs": "About Us",
   "contactUs": "Contact Us",
   "login": "Login",
   "support": "Support",
-  "services": "Services"
+  "services": "Services",
+  "companyName": "Ethiopian Construction Project Management Institute",
+  "viewProjects": "View Projects",
+  "viewServices": "View Services",
+  "readMore": "Read More",
+  "ourServices": "Our Services",
+  "ourClients": "Our Clients",
+  "faq": "Frequently Asked Questions",
+  "news": "News"
 }

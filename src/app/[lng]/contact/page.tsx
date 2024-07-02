@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/footer";
 
 const Contact = () => {
   return (
@@ -259,8 +258,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

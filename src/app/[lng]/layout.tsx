@@ -5,6 +5,7 @@ import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "../globals.css";
 import React from "react";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
           }
           return child;
         })}
+        <Footer params={{ lng }} />
       </body>
     </html>
   );

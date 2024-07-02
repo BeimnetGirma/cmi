@@ -1,6 +1,8 @@
+"use client";
+import { PageProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-const Footer = () => {
+const Footer: React.FC<PageProps> = ({ params }) => {
   return (
     <footer>
       <div className="w-full">
