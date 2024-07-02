@@ -20,6 +20,10 @@ const NavBar = () => {
       href: "/services",
     },
     {
+      title: "Researches",
+      href: "/research",
+    },
+    {
       title: "Support",
       href: "/support",
     },
