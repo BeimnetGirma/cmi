@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ClientsSlider from "@/components/clients-slider";
 import FQA from "@/components/faq";
-import Footer from "@/components/footer";
 import { PageProps } from "@/types";
 import { useTranslation } from "../i18n";
 
@@ -47,7 +46,7 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
         </div>
       </div>
       {/* Demo Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
+      {/* <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
           <Image
             src="/assets/imgs/demoguy.svg"
@@ -69,7 +68,7 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
             Get Demo
           </button>
         </div>
-      </div>
+      </div> */}
       {/* Our Services */}
 
       <div className="flex flex-col items-center justify-center p-8 pl-40 bg-slate-50">
@@ -160,7 +159,7 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
@@ -328,7 +327,7 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
               the forms you need.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Our Clients */}

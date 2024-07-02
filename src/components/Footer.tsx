@@ -1,8 +1,10 @@
 "use client";
+import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-const Footer: React.FC<PageProps> = ({ params }) => {
+const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
+  const { t } = useTranslation(lng, "translation");
   return (
     <footer>
       <div className="w-full">
@@ -29,26 +31,24 @@ const Footer: React.FC<PageProps> = ({ params }) => {
             </div>
 
             <div className="w-1/2">
-              <h3 className="text-sm font-semibold mb-1 mt-10">ABOUT US</h3>
-              <p className=" text-sm text-slate-300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec, viverra nunc.
-                Etiam molestie, tortor at convallis feugiat
-              </p>
+              <h3 className="text-sm font-semibold mb-1 mt-10">
+                {t("aboutUs")}
+              </h3>
+              <p className=" text-sm text-slate-300">{t("aboutUsFooter")}</p>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div>
-                <h3 className="text-sm font-semibold mb-1"> PRODUCTS</h3>
+                <h3 className="text-sm font-semibold mb-1">{t("services")}</h3>
                 <ul className="text-sm text-slate-300">
-                  <li>Quality System</li>
-                  <li>Central Approval</li>
-                  <li>MeST Course</li>
+                  <li>{t("preConstructionPhase")}</li>
+                  <li>{t("constructionPhase")}</li>
+                  <li>{t("postConstructionPhase")}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold mb-1">Contact</h3>
+                <h3 className="text-sm font-semibold mb-1">{t("contactUs")}</h3>
                 <ul className="text-sm text-slate-300">
                   <li>
                     <span className="flex">

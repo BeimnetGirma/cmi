@@ -1,34 +1,33 @@
+import { useTranslation } from "@/app/i18n";
+import { PageProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-const Services = () => {
+const Services: React.FC<PageProps> = async ({ params: { lng } }) => {
+  const { t } = await useTranslation(lng, "translation");
   return (
     <div className="pt-8 mt-20">
       <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-services.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="text-center z-10 text-sm">
-          <h1 className="text-xl md:text-3xl font-bold">OUR SERVICES</h1>
+          <h1 className="text-xl md:text-3xl font-bold">{t("services")}</h1>
           <p className="text-sm md:text-lg pt-2">
             {" "}
             <Link href={"/"} className="hover:text-slate-300">
-              Home
+              {t("homeLink")}
             </Link>{" "}
-            / Services
+            / {t("services")}
           </p>
         </div>
       </div>
       <div>
         <div className="flex flex-col justify-center pt-20">
           <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">
-            WHAT WE DO
+            {t("whatWeDo")}
           </h1>
           <div className="flex justify-center pt-8">
             <p className="text-sm text-slate-800 w-1/3 text-center">
-              At Salus Stillas Solutions, our primary goal is to deliver
-              high-quality and secure services to our customers by providing a
-              digital platform for comprehensive management of all your
-              scaffolding work. We are dedicated to advancing the construction
-              industry through excellence.
+              {t("whatWeDoContent")}
             </p>
           </div>
         </div>
@@ -54,8 +53,8 @@ const Services = () => {
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Time Registration
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("preConstructionPhase")}
             </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
@@ -77,7 +76,9 @@ const Services = () => {
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">Checklists</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("constructionPhase")}
+            </h4>
           </div>
 
           <div className="p-4   flex flex-col items-center justify-center  border-b-2">
@@ -100,9 +101,11 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Forms</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("postConstructionPhase")}
+            </h4>
           </div>
-          <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
+          <div className="p-4 flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
                 <svg
@@ -122,8 +125,8 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Observations
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("contractReviewAndNegotiations")}
             </h4>
           </div>
 
@@ -147,7 +150,9 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Procedures</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("changeOrderAnalysis")}
+            </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-b-2">
             <div className="flex items-center mb-2 mt-5">
@@ -169,7 +174,9 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Orders</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("constructionDesignReviews")}
+            </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
@@ -191,7 +198,9 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Pictures</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("productivityAnalysis")}
+            </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
             <div className="flex items-center mb-2 mt-5">
@@ -213,7 +222,9 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Filers</h4>
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("earnedValueManagement")}
+            </h4>
           </div>
           <div className="p-4   flex flex-col items-center justify-center ">
             <div className="flex items-center mb-2 mt-5">
@@ -235,8 +246,8 @@ const Services = () => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Inspections
+            <h4 className="text-lg text-center font-bold text-slate-900 p-4">
+              {t("inspectionAndQualityAssurance")}
             </h4>
           </div>
         </div>
@@ -245,10 +256,10 @@ const Services = () => {
       </div>
       <div className="p-2 flex flex-col items-center justify-center">
         <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          WE HELP YOU MANAGE YOUR ALL SCAFFOLDING WORK
+          WE HELP YOU MANAGE YOUR ALL CONSTRUCTION WORK
         </h2>
         <button className="rounded text-sm text-white bg-primary-main hover:bg-indigo-500 p-2 ">
-          Lets Work Together
+          {t("letsWorkTogether")}
         </button>
         <Image
           src="/assets/imgs/worktogether.svg"
