@@ -96,7 +96,7 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
               </div>
             </div>
             <h4 className="text-lg font-bold text-slate-900 p-4">
-              Time Registration
+              {t("preConstructionPhase")}
             </h4>
             <p className="text-center w-3/4 pb-10">
               Effortless time tracking for every team member. Just log machine
@@ -123,7 +123,9 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">Checklists</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              {t("constructionPhase")}
+            </h4>
             <p className="text-center w-3/4 pb-10">
               Complete checklists with templates adapted to all industries. Can
               be easily customized and customized.
@@ -150,7 +152,9 @@ const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Forms</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              {t("postConstructionPhase")}
+            </h4>
             <p className="text-center w-3/4 pb-10">
               Get mobile-friendly forms with options for signing directly on
               mobile. We also have a form builder where you can freely build all

@@ -27,13 +27,14 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
             {t("background").toUpperCase()}
           </h1>
           <div className="flex justify-center p-10">
-            <p className="text-lg text-slate-800 w-1/3 text-center ">
+            <p className="text-lg text-slate-800 w-1/2 text-center ">
               {t("backgroundContent")}
             </p>
           </div>
           <div className="relative z-10 h-80 md:h-80 bg-contain bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/aboutus1.svg')]"></div>
         </div>
       </div>
+
       <div className="pb-20">
         <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
           OUR CLIENTS
