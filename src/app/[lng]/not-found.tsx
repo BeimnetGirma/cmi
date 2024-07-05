@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import Footer from "../../components/footer";
+import Footer from "@/components/footer";
 import { PageProps } from "@/types";
 import { useTranslation } from "../i18n";
 
-const Custom404: React.FC<PageProps> = async ({ params: { lng } }) => {
+const Custom404: React.FC<PageProps> = async ({ params = {} }) => {
+  const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
   return (
     <>

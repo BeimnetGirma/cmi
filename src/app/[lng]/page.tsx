@@ -6,7 +6,8 @@ import FQA from "@/components/faq";
 import { PageProps } from "@/types";
 import { useTranslation } from "../i18n";
 
-const Home: React.FC<PageProps> = async ({ params: { lng } }) => {
+const Home: React.FC<PageProps> = async ({ params }) => {
+  const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
   return (
     <>

@@ -19,13 +19,14 @@ export async function generateStaticParams() {
 }
 export default function RootLayout({
   children,
-  params: { lng },
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: {
     lng: string;
   };
 }>) {
+  const { lng = "en" } = params;
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>

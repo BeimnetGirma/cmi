@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslation } from "@/app/i18n";
 import { PageProps } from "@/types";
 
-const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
+const AboutUs: React.FC<PageProps> = async ({ params: { lng = "en" } }) => {
   const { t } = await useTranslation(lng, "translation");
   return (
     <div className="pt-8 mt-20">
