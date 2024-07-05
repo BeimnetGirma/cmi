@@ -18,7 +18,7 @@ const Login = () => {
           <form className="space-y-6" action="#" method="POST">
             <div className="flex justify-center">
               <Image
-                src="/assets/imgs/logo.svg"
+                src="/assets/imgs/logo.png"
                 alt="logo"
                 width={150}
                 height={150}

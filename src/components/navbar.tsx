@@ -1,28 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
-import LanguageSelector from "./LanguageSelector";
+import LanguageSelector from "./language-selector";
+import React from "react";
+import { PageProps } from "@/types";
+import { useTranslation } from "@/app/i18n";
 
-const NavBar = () => {
+const NavBar: React.FC<PageProps> = async ({ params: { lng } }) => {
+  const { t } = await useTranslation(lng, "navbar");
   const navLinks = [
     {
-      title: "Home",
+      title: t("home"),
       href: "/",
     },
     {
-      title: "About Us",
+      title: t("about"),
       href: "/about",
     },
     {
-      title: "Services",
+      title: t("standards"),
+      href: "/standards",
+    },
+    {
+      title: t("services"),
       href: "/services",
     },
     {
-      title: "Support",
+      title: t("support"),
       href: "/support",
     },
 
     {
-      title: "Contact Us",
+      title: t("contactUs"),
       href: "/contact",
     },
   ];
@@ -30,19 +38,31 @@ const NavBar = () => {
     <nav className="fixed top-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center py-4">
         <div>
-          <a href="#" className="flex items-center space-x-2">
-            <Image src="/assets/imgs/logo.png" alt="Logo" width={80} height={80} />
-          </a>
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/assets/imgs/logo.png"
+              alt="Logo"
+              width={80}
+              height={80}
+            />
+          </Link>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
           {navLinks.map((link) => (
-            <Link href={link.href} key={link.title} className="text-slate-900 hover:text-indigo-600">
+            <Link
+              href={link.href}
+              key={link.title}
+              className="text-slate-900 hover:text-indigo-600"
+            >
               {link.title}
             </Link>
           ))}
-          <LanguageSelector />
-          <Link href={"/login"} className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
-            Login
+          <LanguageSelector params={{ lng }} />
+          <Link
+            href={"/login"}
+            className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors"
+          >
+            {t("login")}
           </Link>
         </div>
       </div>

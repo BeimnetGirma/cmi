@@ -1,41 +1,40 @@
-import ClientsSlider from "@/components/ClientsSlider";
+import ClientsSlider from "@/components/clients-slider";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import { useTranslation } from "@/app/i18n";
+import { PageProps } from "@/types";
 
-const AboutUs = () => {
+const AboutUs: React.FC<PageProps> = async ({ params: { lng = "en" } }) => {
+  const { t } = await useTranslation(lng, "translation");
   return (
     <div className="pt-8 mt-20">
       <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="text-center z-10 text-sm">
-          <h1 className="text-xl md:text-3xl font-bold">ABOUT US</h1>
+          <h1 className="text-xl md:text-3xl font-bold">{t("aboutUs")}</h1>
           <p className="text-sm md:text-lg pt-2">
             {" "}
             <Link href={"/"} className="hover:text-slate-300">
-              Home
+              {t("home").toUpperCase()}
             </Link>{" "}
-            / About Us
+            / {t("about").toUpperCase()}
           </p>
         </div>
       </div>
       <div>
         <div className="flex flex-col justify-center py-20">
           <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">
-            PROVIDING THE BEST QUALITY SERVICES AND CONSTRUCTIONS
+            {t("background").toUpperCase()}
           </h1>
           <div className="flex justify-center p-10">
-            <p className="text-sm text-slate-800 w-1/3 text-center">
-              We provide a digital system designed specifically for the building
-              and construction industry. Our system streamlines and digitizes
-              daily operations through efficient project management, deviation
-              tracking, time recording, and procedural enhancements, making your
-              work easier.
+            <p className="text-lg text-slate-800 w-1/2 text-center ">
+              {t("backgroundContent")}
             </p>
           </div>
           <div className="relative z-10 h-80 md:h-80 bg-contain bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/aboutus1.svg')]"></div>
         </div>
       </div>
+
       <div className="pb-20">
         <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
           OUR CLIENTS
@@ -87,7 +86,6 @@ const AboutUs = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

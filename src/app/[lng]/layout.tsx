@@ -4,6 +4,8 @@ import NavBar from "@/components/navbar";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "../globals.css";
+import React from "react";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,18 +19,27 @@ export async function generateStaticParams() {
 }
 export default function RootLayout({
   children,
-  params: { lng },
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: {
     lng: string;
   };
 }>) {
+  const { lng = "en" } = params;
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
-        <NavBar />
-        {children}
+        <NavBar params={{ lng }} />
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, {
+              params: { lng },
+            } as React.Attributes);
+          }
+          return child;
+        })}
+        <Footer params={{ lng }} />
       </body>
     </html>
   );

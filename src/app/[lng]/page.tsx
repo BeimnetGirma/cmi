@@ -1,26 +1,26 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ClientsSlider from "@/components/ClientsSlider";
-import FQA from "@/components/FQA";
-import Footer from "@/components/Footer";
+import ClientsSlider from "@/components/clients-slider";
+import FQA from "@/components/faq";
+import { PageProps } from "@/types";
+import { useTranslation } from "../i18n";
 
-export default function Home() {
+const Home: React.FC<PageProps> = async ({ params }) => {
+  const { lng = "en" } = params;
+  const { t } = await useTranslation(lng, "translation");
   return (
     <>
       {/* Hero */}
       <div className="bg-contain bg-no-repeat bg-center h-96 flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
         <div className="flex flex-col items-end justify-center w-1/2 mr-20">
           <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
-            Ethiopian Construction Project Management Institute
+            {t("companyName")}
           </h2>
           <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
-            <p className="text-justify">
-              An intuitive and reliable quality system designed for the building
-              and construction industry, ensuring safety and predictability.
-            </p>
+            <p className="text-justify">{t("companyIntro")}</p>
             <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-              View Projects
+              {t("viewProjects")}
             </button>
           </div>
         </div>
@@ -28,16 +28,12 @@ export default function Home() {
       {/* About Us Section */}
       <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 bg-slate-50">
         <div className="md:w-1/3 md:mr-4">
-          <h3 className="text-xl font-bold mb-4 text-indigo-600">ABOUT US</h3>
-          <p className="text-left mb-4">
-            A digital platform for comprehensive management for all your
-            scaffolding project. It is for anyone involved in the assembly,
-            usage, rental, or ownership of scaffolding work. A simple and
-            efficient way to apply for scaffolding approval and manage your
-            scaffolding project on Salus Stillas Solutions.
-          </p>
+          <h3 className="text-xl font-bold mb-4 text-primary-main">
+            {t("aboutUs")}
+          </h3>
+          <p className="text-left mb-4">{t("aboutUsIntro")}</p>
           <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
-            Read More
+            {t("readMore")}
           </button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
@@ -51,7 +47,7 @@ export default function Home() {
         </div>
       </div>
       {/* Demo Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
+      {/* <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
           <Image
             src="/assets/imgs/demoguy.svg"
@@ -62,7 +58,7 @@ export default function Home() {
           />
         </div>
         <div className="md:w-1/3 md:mr-4">
-          <h3 className="text-xl font-bold mb-4 text-indigo-600">
+          <h3 className="text-xl font-bold mb-4 text-primary-main">
             A SIMPLE AND EASY WAY TO APPLY FOR SCAFFOLDING
           </h3>
           <p className="text-left mb-4">
@@ -73,11 +69,13 @@ export default function Home() {
             Get Demo
           </button>
         </div>
-      </div>
+      </div> */}
       {/* Our Services */}
 
       <div className="flex flex-col items-center justify-center p-8 pl-40 bg-slate-50">
-        <h3 className="text-xl font-bold mb-4 text-indigo-600">OUR SERVICES</h3>
+        <h3 className="text-xl font-bold mb-4 text-primary-main">
+          {t("ourServices")}
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
@@ -99,7 +97,7 @@ export default function Home() {
               </div>
             </div>
             <h4 className="text-lg font-bold text-slate-900 p-4">
-              Time Registration
+              {t("preConstructionPhase")}
             </h4>
             <p className="text-center w-3/4 pb-10">
               Effortless time tracking for every team member. Just log machine
@@ -126,7 +124,9 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">Checklists</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              {t("constructionPhase")}
+            </h4>
             <p className="text-center w-3/4 pb-10">
               Complete checklists with templates adapted to all industries. Can
               be easily customized and customized.
@@ -153,7 +153,9 @@ export default function Home() {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">Forms</h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">
+              {t("postConstructionPhase")}
+            </h4>
             <p className="text-center w-3/4 pb-10">
               Get mobile-friendly forms with options for signing directly on
               mobile. We also have a form builder where you can freely build all
@@ -162,7 +164,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
@@ -330,13 +332,13 @@ export default function Home() {
               the forms you need.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Our Clients */}
       <div className="pb-20">
         <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          OUR CLIENTS
+          {t("ourClients").toUpperCase()}
         </h2>
         <ClientsSlider />
       </div>
@@ -344,13 +346,13 @@ export default function Home() {
       {/* FQA */}
       <div className="bg-slate-50 p-8">
         <h2 className="text-xl font-bold text-center mb-6">
-          FREQUENTLY ASKED QUESTIONS
+          {t("faq").toUpperCase()}
         </h2>
         <FQA />
       </div>
       <div className="p-8">
         <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
-          <Link href="/news">News</Link>
+          <Link href="/news">{t("news")}</Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
@@ -423,9 +425,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* FOOTER */}
-      <Footer />
     </>
   );
-}
+};
+
+export default Home;
