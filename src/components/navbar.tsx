@@ -6,11 +6,14 @@ import React from "react";
 import { PageProps } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname, useRouter } from "next/navigation";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 
 const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const pathname = usePathname();
   const router = useRouter();
+  const { user, isLoaded } = useUser();
+
   const navLinks = [
     {
       title: t("home"),
@@ -30,7 +33,11 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
     },
     {
       title: t("contactUs"),
-      href: "/contact",
+      href: "/contact-us",
+    },
+    {
+      title: t("reserach"),
+      href: "/research",
     },
   ];
   return (
@@ -65,6 +72,21 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
           >
             {t("login")}
           </Link>
+
+          {isLoaded && user ? (
+            <SignOutButton redirectUrl="/">
+              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
+                Sign Out
+              </button>
+            </SignOutButton>
+          ) : (
+            <Link
+              href={"/login"}
+              className="g-gray-400 text-white rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-500 transition-colors"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

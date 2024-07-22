@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model department {
+  Department_Name String     @id @db.VarChar(40)
+  research        research[]
+}
+
+model research {
+  Research_Id Int        @id @default(autoincrement())
+  Title       String     @db.VarChar(150)
+  Department  String     @db.VarChar(40)
+  Year        DateTime   @db.Date
+  Path        String     @db.VarChar(150)
+  department  department @relation(fields: [Department], references: [Department_Name], map: "research_ibfk_1")
+
+  @@index([Department], map: "Department")
+}

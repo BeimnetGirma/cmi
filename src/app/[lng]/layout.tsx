@@ -6,6 +6,7 @@ import { languages } from "../i18n/settings";
 import "../globals.css";
 import React from "react";
 import Footer from "@/components/footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,19 +29,21 @@ export default function RootLayout({
 }>) {
   const { lng = "en" } = params;
   return (
-    <html lang={lng} dir={dir(lng)}>
-      <body className={inter.className}>
-        <NavBar params={{ lng }} />
-        {React.Children.map(children, (child) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-              params: { lng },
-            } as React.Attributes);
-          }
-          return child;
-        })}
-        <Footer params={{ lng }} />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang={lng} dir={dir(lng)}>
+        <body className={inter.className}>
+          <NavBar params={{ lng }} />
+          {React.Children.map(children, (child) => {
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child, {
+                params: { lng },
+              } as React.Attributes);
+            }
+            return child;
+          })}
+          <Footer params={{ lng }} />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
