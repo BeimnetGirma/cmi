@@ -2,7 +2,7 @@ import { useTranslation } from "@/app/i18n";
 import { PageProps } from "@/types";
 import React from "react";
 
-const Standards: React.FC<PageProps> = async ({ params: { lng="en" } }) => {
+const Standards: React.FC<PageProps> = async ({ params: { lng } }) => {
   const { t } = await useTranslation(lng, "translation");
 
   return (
