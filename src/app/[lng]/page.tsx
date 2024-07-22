@@ -46,30 +46,7 @@ const Home: React.FC<PageProps> = async ({ params }) => {
           />
         </div>
       </div>
-      {/* Demo Section */}
-      {/* <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 ">
-        <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-          <Image
-            src="/assets/imgs/demoguy.svg"
-            alt="Demo Guy"
-            className="rounded-lg justify-end"
-            width={250}
-            height={330}
-          />
-        </div>
-        <div className="md:w-1/3 md:mr-4">
-          <h3 className="text-xl font-bold mb-4 text-primary-main">
-            A SIMPLE AND EASY WAY TO APPLY FOR SCAFFOLDING
-          </h3>
-          <p className="text-left mb-4">
-            An intuitive and reliable quality system designed for the building
-            and construction industry, ensuring safety and predictability.
-          </p>
-          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
-            Get Demo
-          </button>
-        </div>
-      </div> */}
+
       {/* Our Services */}
 
       <div className="flex flex-col items-center justify-center p-8 pl-40 bg-slate-50">

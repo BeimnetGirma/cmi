@@ -1,12 +1,16 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSelector from "./language-selector";
 import React from "react";
 import { PageProps } from "@/types";
-import { useTranslation } from "@/app/i18n";
+import { useTranslation } from "@/app/i18n/client";
+import { usePathname, useRouter } from "next/navigation";
 
-const NavBar: React.FC<PageProps> = async ({ params: { lng } }) => {
-  const { t } = await useTranslation(lng, "navbar");
+const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
+  const { t } = useTranslation(lng, "navbar");
+  const pathname = usePathname();
+  const router = useRouter();
   const navLinks = [
     {
       title: t("home"),
@@ -24,11 +28,6 @@ const NavBar: React.FC<PageProps> = async ({ params: { lng } }) => {
       title: t("services"),
       href: "/services",
     },
-    {
-      title: t("support"),
-      href: "/support",
-    },
-
     {
       title: t("contactUs"),
       href: "/contact",
@@ -52,15 +51,17 @@ const NavBar: React.FC<PageProps> = async ({ params: { lng } }) => {
             <Link
               href={link.href}
               key={link.title}
-              className="text-slate-900 hover:text-indigo-600"
+              className={`text-slate-900 font-normal hover:text-primary-main transition-colors active:text-primary-main ${
+                pathname === `/${lng}${link.href}` && "text-primary-main"
+              }`}
             >
-              {link.title}
+              {link.title.toUpperCase()}
             </Link>
           ))}
           <LanguageSelector params={{ lng }} />
           <Link
             href={"/login"}
-            className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors"
+            className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors"
           >
             {t("login")}
           </Link>
