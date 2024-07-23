@@ -3,113 +3,10 @@ import { getPosts } from "@/app/ghost/posts";
 import Card from "@/components/card";
 import ImageWithTextOverlay from "@/components/image-overlay";
 import SocialLinks from "@/components/social-icons";
+import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
 import React, { useEffect } from "react";
-
-const blogs = [
-  {
-    id: 1,
-    img: "/assets/imgs/single-blog.png",
-    title: "Blog title 1",
-    category: "Quality System",
-    link: "/blog-title-1",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  // generate 3 more blogs
-  {
-    id: 2,
-    img: "/assets/imgs/blog-1.png",
-    title: "Blog title 2",
-    category: "Quality System",
-    link: "/blog-title-2",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 3,
-    img: "/assets/imgs/blog-2.png",
-    title: "Blog title 3",
-    category: "Quality System",
-    link: "/blog-title-3",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 4,
-    img: "/assets/imgs/blog-3.png",
-    title: "Blog title 4",
-    category: "Quality System",
-    link: "/blog-title-4",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 5,
-    img: "/assets/imgs/blog-4.png",
-    title: "Blog title 4",
-    category: "Quality System",
-    link: "/blog-title-4",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  //generate 5 more blogs
-  {
-    id: 6,
-    img: "/assets/imgs/blog-1.png",
-    title: "Blog title 5",
-    category: "Quality System",
-    link: "/blog-title-5",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 7,
-    img: "/assets/imgs/blog-2.png",
-    title: "Blog title 6",
-    category: "Quality System",
-    link: "/blog-title-6",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 8,
-    img: "/assets/imgs/blog-3.png",
-    title: "Blog title 7",
-    category: "Quality System",
-    link: "/blog-title-7",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 9,
-    img: "/assets/imgs/blog-4.png",
-    title: "Blog title 8",
-    category: "Quality System",
-    link: "/blog-title-8",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-  {
-    id: 10,
-    img: "/assets/imgs/blog-1.png",
-    title: "Blog title 9",
-    category: "Quality System",
-    link: "/blog-title-9",
-    date: "2022-10-10",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.orem ipsum dolor sit amet,",
-  },
-];
+import { PostsOrPages } from "@tryghost/content-api";
 
 const categories = [
   "All",
@@ -117,14 +14,27 @@ const categories = [
   "Safety System",
   "Environment System",
 ];
+
 const News = () => {
+  const [allNews, setAllNews] = React.useState<PostsOrPages[]>([]);
+  const { startLoading, stopLoading, renderLoading } = useLoading();
+
   useEffect(() => {
-    getPosts().then((data) => {
-      if (data) {
-        console.log(data); //list of posts here
-      }
-    });
+    startLoading();
+    getPosts()
+      .then((data: void | PostsOrPages) => {
+        if (data) {
+          setAllNews(data as unknown as PostsOrPages[]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        stopLoading();
+      });
   }, []);
+
   return (
     <div className="flex flex-col">
       <div className="w-full">
@@ -145,10 +55,11 @@ const News = () => {
           </div>
           <div className="flex xs:flex-col-reverse flex-row space-x-4">
             {/* Blog list */}
+            {renderLoading()}
             <div className="flex w-full md:w-3/4  px-5">
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
-                {blogs.map((blog) => (
-                  <React.Fragment key={blog.id}>
+              <div className="relative grid gap-[4vmin] grid-cols-3 py-[4vmin] md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+                {allNews?.map((blog) => (
+                  <React.Fragment key={blog.uuid}>
                     <Card {...blog} />
                   </React.Fragment>
                 ))}
