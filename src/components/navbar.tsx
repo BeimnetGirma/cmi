@@ -66,12 +66,6 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
             </Link>
           ))}
           <LanguageSelector params={{ lng }} />
-          <Link
-            href={"/login"}
-            className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors"
-          >
-            {t("login")}
-          </Link>
 
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
@@ -82,7 +76,7 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
           ) : (
             <Link
               href={"/login"}
-              className="g-gray-400 text-white rounded-md px-4 py-2 bg-blue-600 hover:bg-blue-500 transition-colors"
+              className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors"
             >
               Login
             </Link>
