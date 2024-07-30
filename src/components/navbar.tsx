@@ -36,7 +36,7 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
       href: "/contact-us",
     },
     {
-      title: t("reserach"),
+      title: t("research"),
       href: "/research",
     },
   ];
@@ -45,12 +45,7 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
       <div className="container mx-auto flex justify-between items-center py-4">
         <div>
           <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/assets/imgs/logo.png"
-              alt="Logo"
-              width={80}
-              height={80}
-            />
+            <Image src="/assets/imgs/logo.png" alt="Logo" width={80} height={80} />
           </Link>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
@@ -58,26 +53,19 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
             <Link
               href={link.href}
               key={link.title}
-              className={`text-slate-900 font-normal hover:text-primary-main transition-colors active:text-primary-main ${
-                pathname === `/${lng}${link.href}` && "text-primary-main"
-              }`}
+              className={`text-slate-900 font-normal hover:text-slate-400 transition-colors ${pathname === `/${lng}${link.href}` ? "font-semibold text-blue-900 " : ""}`}
             >
               {link.title.toUpperCase()}
             </Link>
           ))}
-          <LanguageSelector params={{ lng }} />
 
+          <LanguageSelector params={{ lng }} />
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
-              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
-                Sign Out
-              </button>
+              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">Sign Out</button>
             </SignOutButton>
           ) : (
-            <Link
-              href={"/login"}
-              className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors"
-            >
+            <Link href={"/login"} className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors">
               Login
             </Link>
           )}
