@@ -25,17 +25,18 @@ const AdminPage = ({ ...AdminPageProps }) => {
               console.log("researches");
             }}
           >
-            <p className="text-blue-500 hover:text-blue-700">Researches</p>
+            <p className="text-blue-500 hover:text-blue-700 ">Researches</p>
           </button>
           <button onClick={() => setComponent("departments")}>
             <p className="text-blue-500 hover:text-blue-700">Departments</p>
           </button>
-          <button onClick={() => setComponent("reports")}>
+
+          {/* <button onClick={() => setComponent("reports")}>
             <p className="text-blue-500 hover:text-blue-700">Reports</p>
-          </button>
+          </button> */}
         </nav>
       </div>
-
+      {/* <hr className="" /> */}
       <div>{component == "researches" ? AdminPageProps.researches : component == "departments" ? AdminPageProps.departments : <p>Reports will be displayed here</p>}</div>
     </div>
   );
