@@ -2,17 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSelector from "./language-selector";
-import React from "react";
-import { PageProps } from "@/types";
+import React, { useState } from "react";
+import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname, useRouter } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 
-const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
+const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departments, params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const pathname = usePathname();
   const router = useRouter();
   const { user, isLoaded } = useUser();
+  const [showDepartments, setShowDepartments] = useState(false);
 
   const navLinks = [
     {
@@ -33,7 +34,7 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
     },
     {
       title: t("contactUs"),
-      href: "/contact-us",
+      href: "/contact",
     },
     {
       title: t("research"),
@@ -58,7 +59,33 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
               {link.title.toUpperCase()}
             </Link>
           ))}
-
+          <div className="relative" onMouseEnter={() => setShowDepartments(true)} onMouseLeave={() => setShowDepartments(false)}>
+            <Link href="#" className={`text-slate-900 font-normal hover:text-slate-400  transition-colors`}>
+              {"departments".toUpperCase()}
+            </Link>
+            {showDepartments && (
+              <div className="absolute top-full left-0 w-96 bg-white shadow-md rounded-md py-2">
+                {departments.map((department, index) => (
+                  <Link
+                    href={{ pathname: "department", query: { dept: department.Department_Name.toString() } }}
+                    key={index}
+                    className="block px-4 py-2  hover:text-slate-400 transition-colors"
+                  >
+                    {department.Department_Name}
+                  </Link>
+                ))}
+                {/* <Link href="/departments/1" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 1
+                </Link>
+                <Link href="/departments/2" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 2
+                </Link>
+                <Link href="/departments/3" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 3
+                </Link> */}
+              </div>
+            )}
+          </div>
           <LanguageSelector params={{ lng }} />
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
