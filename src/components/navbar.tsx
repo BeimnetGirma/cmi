@@ -2,17 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSelector from "./language-selector";
-import React from "react";
-import { PageProps } from "@/types";
+import React, { useState } from "react";
+import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname, useRouter } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 
-const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
+const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departments, params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const pathname = usePathname();
   const router = useRouter();
   const { user, isLoaded } = useUser();
+  const [showDepartments, setShowDepartments] = useState(false);
 
   const navLinks = [
     {
@@ -33,10 +34,10 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
     },
     {
       title: t("contactUs"),
-      href: "/contact-us",
+      href: "/contact",
     },
     {
-      title: t("reserach"),
+      title: t("research"),
       href: "/research",
     },
   ];
@@ -45,12 +46,7 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
       <div className="container mx-auto flex justify-between items-center py-4">
         <div>
           <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/assets/imgs/logo.png"
-              alt="Logo"
-              width={80}
-              height={80}
-            />
+            <Image src="/assets/imgs/logo.png" alt="Logo" width={80} height={80} />
           </Link>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
@@ -58,26 +54,45 @@ const NavBar: React.FC<PageProps> = ({ params: { lng } }) => {
             <Link
               href={link.href}
               key={link.title}
-              className={`text-slate-900 font-normal hover:text-primary-main transition-colors active:text-primary-main ${
-                pathname === `/${lng}${link.href}` && "text-primary-main"
-              }`}
+              className={`text-slate-900 font-normal hover:text-slate-400 transition-colors ${pathname === `/${lng}${link.href}` ? "font-semibold text-blue-900 " : ""}`}
             >
               {link.title.toUpperCase()}
             </Link>
           ))}
+          <div className="relative" onMouseEnter={() => setShowDepartments(true)} onMouseLeave={() => setShowDepartments(false)}>
+            <Link href="#" className={`text-slate-900 font-normal hover:text-slate-400  transition-colors`}>
+              {"departments".toUpperCase()}
+            </Link>
+            {showDepartments && (
+              <div className="absolute top-full left-0 w-96 bg-white shadow-md rounded-md py-2">
+                {departments.map((department, index) => (
+                  <Link
+                    href={{ pathname: "department", query: { dept: department.Department_Name.toString() } }}
+                    key={index}
+                    className="block px-4 py-2  hover:text-slate-400 transition-colors"
+                  >
+                    {department.Department_Name}
+                  </Link>
+                ))}
+                {/* <Link href="/departments/1" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 1
+                </Link>
+                <Link href="/departments/2" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 2
+                </Link>
+                <Link href="/departments/3" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
+                  Department 3
+                </Link> */}
+              </div>
+            )}
+          </div>
           <LanguageSelector params={{ lng }} />
-
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
-              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">
-                Sign Out
-              </button>
+              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">Sign Out</button>
             </SignOutButton>
           ) : (
-            <Link
-              href={"/login"}
-              className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors"
-            >
+            <Link href={"/login"} className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors">
               Login
             </Link>
           )}
