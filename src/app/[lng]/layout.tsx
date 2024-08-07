@@ -7,6 +7,8 @@ import "../globals.css";
 import React from "react";
 import Footer from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import prisma from "@/db";
+import { Department } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 export async function generateStaticParams() {
   return languages.map((lng: string) => ({ lng }));
 }
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
@@ -28,11 +30,12 @@ export default function RootLayout({
   };
 }>) {
   const { lng = "en" } = params;
+  const departments = await prisma.department.findMany();
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar params={{ lng }} />
+          <NavBar departments={departments} params={{ lng }} />
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {

@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ClientsSlider from "@/components/clients-slider";
 import FQA from "@/components/faq";
-import { PageProps } from "@/types";
-import { useTranslation } from "../i18n";
+import { HomePageProps } from "@/types";
+import { useTranslation } from "@/app/i18n";
+import { PostOrPage } from "@tryghost/content-api";
+import Card from "@/components/card";
 
-const Home: React.FC<PageProps> = async ({ params }) => {
+const Home: React.FC<HomePageProps> = async ({ params, featuredPosts }) => {
   const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
+
   return (
     <>
       {/* Hero */}
@@ -332,7 +335,12 @@ const Home: React.FC<PageProps> = async ({ params }) => {
           <Link href="/news">{t("news")}</Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
+          {featuredPosts?.map((post: PostOrPage) => (
+            <React.Fragment key={post.id}>
+              <Card {...post} />
+            </React.Fragment>
+          ))}
+          {/* <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <Image
               className="w-full h-80 object-cover object-center"
               src="/assets/imgs/blog1.svg"
@@ -399,7 +407,7 @@ const Home: React.FC<PageProps> = async ({ params }) => {
                 Read More
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

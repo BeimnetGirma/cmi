@@ -26,6 +26,7 @@ const Login = () => {
         identifier: email,
         password: password,
       });
+
       if (completeSignIn.status === "complete") {
         await setActive({ session: completeSignIn.createdSessionId });
         router.push("/admin");
@@ -38,35 +39,16 @@ const Login = () => {
   return (
     <div className="flex  min-h-screen">
       <div className="w-3/4">
-        <Image
-          src="/assets/imgs/login-screen.png"
-          className="object-cover w-full h-full"
-          alt="login page"
-          width={1620}
-          height={100}
-        />
+        <Image src="/assets/imgs/login-screen.png" className="object-cover w-full h-full" alt="login page" width={1620} height={100} />
       </div>
       <div className="flex items-center w-1/4">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            method="POST"
-            onSubmit={handleSubmit}
-          >
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div className="flex justify-center">
-              <Image
-                src="/assets/imgs/logo.png"
-                alt="logo"
-                width={150}
-                height={150}
-              />
+              <Image src="/assets/imgs/logo.png" alt="logo" width={150} height={150} />
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email or Username
               </label>
               <div className="mt-2">
@@ -84,17 +66,11 @@ const Login = () => {
 
             <div>
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-primary-main hover:text-indigo-500"
-                  >
+                  <a href="#" className="font-semibold text-primary-main hover:text-indigo-500">
                     Forgot password?
                   </a>
                 </div>
