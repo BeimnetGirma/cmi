@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import React from "react";
 import { trimExcerpt } from "@/helpers";
-
+import { bindDataUrl } from "@/helpers/blur-image";
 const Card: React.FC<PostOrPage> = (props) => {
   const shadowStyle = {
     boxShadow: "0px 2px 1px 0px #00000040",
@@ -14,28 +14,30 @@ const Card: React.FC<PostOrPage> = (props) => {
   return (
     <article
       key={id}
-      className="flex flex-col min-h-56 w-max-[380px] space-y-2 rounded-lg px-4 hover:shadow-xl transition duration-300 ease-in-out cursor-pointer"
+      className="flex flex-col min-h-56 rounded-lg px-4 hover:shadow-xl transition duration-300 ease-in-out cursor-pointer"
       style={shadowStyle}
     >
-      <div className="aspect-auto">
+      <div className="h-56 relative">
         <Image
           src={feature_image!}
-          className="!relative object-cover w-full h-48"
-          alt="Featured Image 1"
-          layout="fill"
+          className="object-cover rounded-t-md h-full w-full "
+          placeholder="blur"
+          loading="lazy"
+          width={500}
+          height={220}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          alt="featured image"
           onError={() => console.log("Image not found")}
+          blurDataURL={bindDataUrl}
         />
       </div>
-      <div className="flex justify-between italic text-secondary-main text-sm px-2">
+      <div className="flex justify-between text-secondary-main text-sm pb-2">
         <p>
-          {
-            // map tags and give styles for each tag
-            tags?.map((tag) => (
-              <span key={tag.id} className="text-primary-main">
-                {tag.name}
-              </span>
-            ))
-          }
+          {tags?.map((tag) => (
+            <span key={tag.id} className="text-primary-main">
+              {tag.name}
+            </span>
+          ))}
         </p>
         <p className="">{dayjs(updated_at).format("DD MMMM YYYY")}</p>
       </div>
