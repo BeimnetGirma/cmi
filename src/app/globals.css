@@ -41,3 +41,44 @@ div.slick-slide {
 #menu-toggle:checked + #menu {
   display: block;
 }
+
+p {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.6em;
+  margin-top: 4vmin;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  padding: 2px;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 2em 0 0;
+}
+figcaption {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  padding: 2px;
+  text-align: center;
+}
+
+ul {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.6em;
+  padding: 1.5em;
+}
+
+figure {
+  margin-top: 6vmin;
+  margin-bottom: 0;
+}

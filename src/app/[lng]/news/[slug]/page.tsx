@@ -1,40 +1,37 @@
 "use client";
-import { getPosts } from "@/app/ghost/posts";
-import Card from "@/components/card";
+import React, { useEffect } from "react";
+import { PostOrPage } from "@tryghost/content-api";
 import ImageWithTextOverlay from "@/components/image-overlay";
 import SocialLinks from "@/components/social-icons";
 import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
-import React, { useEffect } from "react";
-import { PostsOrPages } from "@tryghost/content-api";
+import { getSinglePost } from "@/app/ghost/posts";
+import dayjs from "dayjs";
+import SafeHTML from "@/components/safe-html";
+import Link from "next/link";
 
-const categories = [
-  "All",
-  "Quality System",
-  "Safety System",
-  "Environment System",
-];
-
-const News = () => {
-  const [allNews, setAllNews] = React.useState<PostsOrPages[]>([]);
+export const NewsPage = ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
   const { startLoading, stopLoading, renderLoading } = useLoading();
+  const [news, setNews] = React.useState<PostOrPage>();
 
   useEffect(() => {
     startLoading();
-    getPosts()
-      .then((data: void | PostsOrPages) => {
+    getSinglePost(slug as string)
+      .then((data: void | PostOrPage) => {
         if (data) {
-          setAllNews(data as unknown as PostsOrPages[]);
+          setNews(data as unknown as PostOrPage);
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       })
       .finally(() => {
         stopLoading();
       });
   }, []);
 
+  const categories = ["All", "Quality System", "Safety System"];
   return (
     <div className="flex flex-col">
       <div className="w-full">
@@ -47,22 +44,34 @@ const News = () => {
       </div>
       <div className="container mx-auto">
         <div className="flex-col py-10">
-          <div className="flex-col font-bold text-3xl text-blue-400 text-center my-12">
-            <div>SCAFFOLDING SOLUTIONS</div>
-            <div className="text-secondary-main text-sm">
-              Building Smarter Together
+          <div className="flex-col font-bold text-xl text-blue-400  my-12">
+            <div>
+              <Link href="/news">Blogs {`>`}</Link>
+              <span className="text-secondary-main text-sm pl-2">
+                {news?.title}
+              </span>
             </div>
           </div>
-          <div className="flex xs:flex-col-reverse flex-row space-x-4">
-            {/* Blog list */}
-            {renderLoading()}
+          {renderLoading()}
+          <article className="flex xs:flex-col-reverse flex-row space-x-4">
             <div className="flex w-full md:w-3/4  px-5">
-              <div className="relative grid gap-[4vmin] grid-cols-3 py-[4vmin] md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-                {allNews?.map((blog) => (
-                  <React.Fragment key={blog.uuid}>
-                    <Card {...blog} />
-                  </React.Fragment>
-                ))}
+              <div className="flex flex-col space-y-5">
+                <div className="font-bold text-2xl">{news?.title}</div>
+                <div className="text-secondary-main text-sm">
+                  {dayjs(news?.updated_at).format("MMMM DD, YYYY")}
+                </div>
+                <div className="flex flex-col space-y-5">
+                  <div className="aspect-auto">
+                    <Image
+                      src={news?.feature_image!}
+                      className="!relative object-cover w-full h-96"
+                      alt="Featured Image 1"
+                      layout="fill"
+                      onError={() => console.log("Image not found")}
+                    />
+                  </div>
+                  {<SafeHTML html={news?.html} />}
+                </div>
               </div>
             </div>
             {/* Search articles */}
@@ -118,11 +127,11 @@ const News = () => {
                 <SocialLinks />
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </div>
   );
 };
 
-export default News;
+export default NewsPage;
