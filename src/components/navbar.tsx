@@ -46,7 +46,7 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
       <div className="container mx-auto flex justify-between items-center py-4">
         <div>
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/assets/imgs/logo.png" alt="Logo" width={80} height={80} />
+            <Image src="/assets/imgs/header_logo.jpg" alt="Logo" width={380} height={480} />
           </Link>
         </div>
         <div className="hidden md:flex space-x-6 items-center">
