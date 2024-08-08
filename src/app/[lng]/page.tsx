@@ -15,115 +15,63 @@ const Home: React.FC<HomePageProps> = async ({ params, featuredPosts }) => {
   return (
     <>
       {/* Hero */}
-      <div className="bg-contain bg-no-repeat bg-center h-96 flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
+      <div className="bg-contain bg-no-repeat bg-center  flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
         <div className="flex flex-col items-end justify-center w-1/2 mr-20">
-          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
-            {t("companyName")}
-          </h2>
+          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">{t("companyName")}</h2>
           <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
             <p className="text-justify">{t("companyIntro")}</p>
-            <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-              {t("viewProjects")}
-            </button>
+            <div className="text-right">
+              <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 my-6   ">{t("viewProjects")}</button>
+            </div>
           </div>
         </div>
       </div>
       {/* About Us Section */}
       <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 bg-slate-50">
         <div className="md:w-1/3 md:mr-4">
-          <h3 className="text-xl font-bold mb-4 text-primary-main">
-            {t("aboutUs")}
-          </h3>
+          <h3 className="text-xl font-bold mb-4 text-primary-main">{t("aboutUs")}</h3>
           <p className="text-left mb-4">{t("aboutUsIntro")}</p>
-          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
-            {t("readMore")}
-          </button>
+          <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 mt-2 ">{t("readMore")}</button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-          <Image
-            src="/assets/imgs/aboutus.svg"
-            alt="About Us Image"
-            className="rounded-lg justify-end"
-            width={500}
-            height={330}
-          />
+          <Image src="/assets/imgs/aboutus.svg" alt="About Us Image" className="rounded-lg justify-end" width={500} height={330} />
         </div>
       </div>
 
       {/* Our Services */}
 
       <div className="flex flex-col items-center justify-center p-8 pl-40 bg-slate-50">
-        <h3 className="text-xl font-bold mb-4 text-primary-main">
-          {t("ourServices")}
-        </h3>
+        <h3 className="text-xl font-bold mb-4 text-primary-main">{t("ourServices")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-blue-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              {t("preConstructionPhase")}
-            </h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">{t("preConstructionPhase")}</h4>
             <p className="text-center w-3/4 pb-10">
-              Effortless time tracking for every team member. Just log machine
-              hours, overtime, and allowances, then instantly view your projects
-              time breakdown.
+              Effortless time tracking for every team member. Just log machine hours, overtime, and allowances, then instantly view your projects time breakdown.
             </p>
           </div>
           <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-cyan-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-cyan-600">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </div>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              {t("constructionPhase")}
-            </h4>
-            <p className="text-center w-3/4 pb-10">
-              Complete checklists with templates adapted to all industries. Can
-              be easily customized and customized.
-            </p>
+            <h4 className="text-lg font-bold text-slate-900 p-4">{t("constructionPhase")}</h4>
+            <p className="text-center w-3/4 pb-10">Complete checklists with templates adapted to all industries. Can be easily customized and customized.</p>
           </div>
 
           <div className="p-4   flex flex-col items-center justify-center  border-b-2">
             <div className="flex items-center mb-2 mt-5">
               <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-orange-600"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-orange-600">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -133,13 +81,9 @@ const Home: React.FC<HomePageProps> = async ({ params, featuredPosts }) => {
               </div>
             </div>
 
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              {t("postConstructionPhase")}
-            </h4>
+            <h4 className="text-lg font-bold text-slate-900 p-4">{t("postConstructionPhase")}</h4>
             <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
+              Get mobile-friendly forms with options for signing directly on mobile. We also have a form builder where you can freely build all the forms you need.
             </p>
           </div>
         </div>
@@ -317,17 +261,13 @@ const Home: React.FC<HomePageProps> = async ({ params, featuredPosts }) => {
 
       {/* Our Clients */}
       <div className="pb-20">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          {t("ourClients").toUpperCase()}
-        </h2>
+        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">{t("ourClients").toUpperCase()}</h2>
         <ClientsSlider />
       </div>
 
       {/* FQA */}
       <div className="bg-slate-50 p-8">
-        <h2 className="text-xl font-bold text-center mb-6">
-          {t("faq").toUpperCase()}
-        </h2>
+        <h2 className="text-xl font-bold text-center mb-6">{t("faq").toUpperCase()}</h2>
         <FQA />
       </div>
       <div className="p-8">
