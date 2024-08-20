@@ -148,7 +148,7 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
               <h1 className="text-slate-900 text-2xl relative ">Delete Research</h1>
               <hr className="relative" />
               <div className="relative mx-10 px-10">
-                <p className="text-red-600 text-l">Are you sure you want to delete the department named "{department.Department_Name}"? This action cannot be undone. </p>
+                <p className="text-red-600 text-l">Are you sure you want to delete the department named &quot;{department.Department_Name}&quot;? This action cannot be undone. </p>
               </div>
               <hr className="relative mt-10" />
               <div className="flex relative justify-end mt-10">
