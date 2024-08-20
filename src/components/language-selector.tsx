@@ -40,7 +40,7 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex justify-center">
       <button
         className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600"
         onClick={toggelMenu}
