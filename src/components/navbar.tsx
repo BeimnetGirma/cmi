@@ -7,6 +7,7 @@ import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
+import { title } from "process";
 
 const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
   departments,
@@ -37,6 +38,10 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
     {
       title: t("research"),
       href: "/research",
+    },
+    {
+      title: t("news"),
+      href: "/news",
     },
     {
       title: t("contactUs"),
