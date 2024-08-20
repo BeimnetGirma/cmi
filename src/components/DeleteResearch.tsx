@@ -56,7 +56,7 @@ const DeleteResearch = ({ research, deleteResearch }: DeleteResearchProps) => {
                 <h1 className="text-slate-900 text-2xl relative ">Delete Research</h1>
                 <hr className="relative" />
                 <div className="relative mx-10 px-10">
-                  <p className="text-red-600 text-l">Are you sure you want to delete research titled "{research.Title}"? This action cannot be undone. </p>
+                  <p className="text-red-600 text-l">Are you sure you want to delete research titled &quot;{research.Title}&quot;? This action cannot be undone. </p>
                 </div>
                 <hr className="relative mt-10" />
                 <div className="flex relative justify-end mt-10">

@@ -62,7 +62,7 @@ const Departments = async () => {
           </thead>
           <tbody>
             {departments.map((department, index) => (
-              <Department department={department} index={index} editDepartment={editDepartment} deleteDepartment={deleteDepartment} />
+              <Department key={index} department={department} index={index} editDepartment={editDepartment} deleteDepartment={deleteDepartment} />
             ))}
           </tbody>
         </table>
