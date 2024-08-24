@@ -61,17 +61,17 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
           ))}
           <div className="relative" onMouseEnter={() => setShowDepartments(true)} onMouseLeave={() => setShowDepartments(false)}>
             <Link href="#" className={`text-slate-900 font-normal hover:text-slate-400  transition-colors`}>
-              {"departments".toUpperCase()}
+              {t("departments").toUpperCase()}
             </Link>
             {showDepartments && (
               <div className="absolute top-full left-0 w-96 bg-white shadow-md rounded-md py-2">
                 {departments.map((department, index) => (
                   <Link
-                    href={{ pathname: "department", query: { dept: department.Department_Name.toString() } }}
+                    href={{ pathname: "department", query: { dept: department.name.toString() } }}
                     key={index}
                     className="block px-4 py-2  hover:text-slate-400 transition-colors"
                   >
-                    {department.Department_Name}
+                    {department.name}
                   </Link>
                 ))}
                 {/* <Link href="/departments/1" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
@@ -93,7 +93,7 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
             </SignOutButton>
           ) : (
             <Link href={"/login"} className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors">
-              Login
+              {t("login")}
             </Link>
           )}
         </div>
