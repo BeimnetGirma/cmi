@@ -266,10 +266,10 @@ const Home: React.FC<HomePageProps> = async ({ params, featuredPosts }) => {
       </div>
 
       {/* FQA */}
-      <div className="bg-slate-50 p-8">
+      {/* <div className="bg-slate-50 p-8">
         <h2 className="text-xl font-bold text-center mb-6">{t("faq").toUpperCase()}</h2>
         <FQA />
-      </div>
+      </div> */}
       <div className="p-8">
         <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
           <Link href="/news">{t("news")}</Link>
