@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-type TDepartment = { Department_Name: string };
+import { Department as DepartmentType } from "@/types";
 type DepartmentProps = {
-  department: { Department_Name: string };
+  department: DepartmentType;
   index: number;
-  editDepartment: (oldDepartment: TDepartment, newdepartment: TDepartment) => void;
-  deleteDepartment: (departmentName: string) => void;
+  editDepartment: (oldDepartment: DepartmentType, newdepartment: DepartmentType) => void;
+  deleteDepartment: (id: number) => void;
 };
 const Department = ({ department, index, editDepartment, deleteDepartment }: DepartmentProps) => {
   // const [isOpen, setIsOpen] = useState(false)
-  const [deptName, setDeptName] = useState(department.Department_Name);
+  const [deptName, setDeptName] = useState(department.name);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -29,19 +29,19 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
   };
   const handleUpdate = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    editDepartment(department, { Department_Name: deptName });
+    editDepartment(department, { name: deptName });
     closeEditModal();
   };
   const handleDelete = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    deleteDepartment(department.Department_Name);
+    department.id ? deleteDepartment(department.id) : null;
     closeDeleteModal();
   };
   return (
     <>
       <tr key={index}>
         <td className="p-6 border">{index + 1}</td>
-        <td className="p-6 border">{department.Department_Name}</td>
+        <td className="p-6 border">{department.name}</td>
         <td className="p-6 border">
           <div className="flex flex-row gap-3 justify-center">
             {" "}
@@ -145,10 +145,10 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-2xl relative ">Delete Research</h1>
+              <h1 className="text-slate-900 text-2xl relative ">Delete Department</h1>
               <hr className="relative" />
               <div className="relative mx-10 px-10">
-                <p className="text-red-600 text-l">Are you sure you want to delete the department named &quot;{department.Department_Name}&quot;? This action cannot be undone. </p>
+                <p className="text-red-600 text-l">Are you sure you want to delete the department named &quot;{department.name}&quot;? This action cannot be undone. </p>
               </div>
               <hr className="relative mt-10" />
               <div className="flex relative justify-end mt-10">

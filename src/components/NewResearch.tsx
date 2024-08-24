@@ -1,9 +1,9 @@
 "use client";
+import { Department, Research } from "@/types";
 import React, { useState } from "react";
 
-type Research = { Research_Id?: number; Title: string; Department: string; Year: Date; Path: string };
 type NewResearchProps = {
-  departments: { Department_Name: string }[];
+  departments: Department[];
   createResearch: (research: Research) => void;
 };
 
@@ -25,7 +25,13 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    createResearch({ Title: title, Department: department, Year: new Date(year), Path: filePath });
+    const research: Research = {
+      title: title,
+      departmentId: parseInt(department),
+      year: new Date(year),
+      path: filePath,
+    };
+    createResearch(research);
   };
 
   return (
@@ -96,8 +102,8 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
                       Select Department
                     </option>
                     {departments.map((dept, index) => (
-                      <option value={dept.Department_Name} key={index}>
-                        {dept.Department_Name}
+                      <option value={dept.id} key={index}>
+                        {dept.name}
                       </option>
                     ))}
                   </select>

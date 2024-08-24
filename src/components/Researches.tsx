@@ -4,14 +4,15 @@ import NewResearch from "@/components/NewResearch";
 import EditResearch from "@/components/EditResearch";
 import DeleteResearch from "@/components/DeleteResearch";
 import { revalidatePath } from "next/cache";
+import { Research } from "@/types";
 const Researches = async () => {
   var researches = await prisma.research.findMany();
   var departments = await prisma.department.findMany();
-  type Research = { Research_Id?: number; Title: string; Department: string; Year: Date; Path: string };
+
   async function createResearch(newResearch: Research) {
     "use server";
     try {
-      newResearch.Year = new Date(newResearch.Year); // Convert Year to Date object
+      newResearch.year = new Date(newResearch.year); // Convert Year to Date object
       await prisma.research.create({ data: newResearch });
     } catch (error) {
       console.error(error);
@@ -21,11 +22,11 @@ const Researches = async () => {
     "use server";
     try {
       await prisma.research.update({
-        where: { Research_Id: research.Research_Id },
+        where: { id: research.id },
         data: {
-          Title: research.Title,
-          Department: research.Department,
-          Year: research.Year,
+          title: research.title,
+          departmentId: research.departmentId,
+          year: research.year,
         },
       });
     } catch (error) {
@@ -36,7 +37,7 @@ const Researches = async () => {
     "use server";
     try {
       await prisma.research.delete({
-        where: { Research_Id: researchId },
+        where: { id: researchId },
       });
       revalidatePath("/");
     } catch (error) {
@@ -64,10 +65,10 @@ const Researches = async () => {
           <tbody>
             {researches.map((research, index) => (
               <tr key={index}>
-                <td className="p-6 border">{research.Research_Id}</td>
-                <td className="p-6 border">{research.Title}</td>
-                <td className="p-6 border">{research.Department}</td>
-                <td className="p-6 border">{research.Year.toLocaleDateString()}</td>
+                <td className="p-6 border">{research.id}</td>
+                <td className="p-6 border">{research.title}</td>
+                <td className="p-6 border">{departments.find((dept) => dept.id === research.departmentId)?.name}</td>
+                <td className="p-6 border">{research.year.toLocaleDateString()}</td>
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
                     {" "}

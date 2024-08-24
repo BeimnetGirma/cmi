@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-type Department = { Department_Name: string };
+import { Department } from "@/types";
 type NewDepartmentProps = {
   createDepartment: (department: Department) => void;
 };
@@ -17,7 +17,7 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
   const [deptName, setDeptName] = useState("");
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    createDepartment({ Department_Name: deptName });
+    createDepartment({ name: deptName });
     closeModal();
   };
   return (

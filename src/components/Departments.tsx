@@ -4,11 +4,10 @@ import React from "react";
 import Department from "@/components/Department";
 import NewDepartment from "@/components/NewDepartment";
 import { revalidatePath } from "next/cache";
-
-type Department = { Department_Name: string };
+import { Department as DepartmentType } from "@/types";
 const Departments = async () => {
   const departments = await prisma.department.findMany();
-  async function createDepartment(newDepartment: Department) {
+  async function createDepartment(newDepartment: DepartmentType) {
     "use server";
 
     try {
@@ -18,14 +17,14 @@ const Departments = async () => {
       console.error(error);
     }
   }
-  async function editDepartment(oldDepartment: Department, newDepartment: Department) {
+  async function editDepartment(oldDepartment: DepartmentType, newDepartment: DepartmentType) {
     "use server";
 
     try {
       await prisma.department.update({
-        where: { Department_Name: oldDepartment.Department_Name },
+        where: { id: oldDepartment.id },
         data: {
-          Department_Name: newDepartment.Department_Name,
+          name: newDepartment.name,
         },
       });
       revalidatePath("/");
@@ -33,13 +32,12 @@ const Departments = async () => {
       console.error(error);
     }
   }
-  async function deleteDepartment(departmentName: string) {
+  async function deleteDepartment(id: number) {
     "use server";
-    console.log(departmentName);
 
     try {
       await prisma.department.delete({
-        where: { Department_Name: departmentName },
+        where: { id: id },
       });
       revalidatePath("/");
     } catch (error) {

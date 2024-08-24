@@ -5,13 +5,13 @@ import React from "react";
 
 const Research = async () => {
   const researchPaper = await prisma.research.findMany();
+  const departments = await prisma.department.findMany();
   return (
     <div>
       <div className="w-full">
         <ImageWithTextOverlay imgUrl="/assets/imgs/header-services.svg" width={1920} height={500} text="Research" />
       </div>
       <div className="flex flex-col justify-center ">
-        
         <div className="justify-end px-52">
           <table className="table-auto mx-auto w-full my-4 border border-collapse ">
             <thead>
@@ -25,10 +25,10 @@ const Research = async () => {
             <tbody>
               {researchPaper.map((paper, index) => (
                 <tr key={index}>
-                  <td className="p-6 border">{paper.Research_Id}</td>
-                  <td className="p-6 border">{paper.Title}</td>
-                  <td className="p-6 border">{paper.Department}</td>
-                  <td className="p-6 border">{paper.Year.toLocaleDateString()}</td>
+                  <td className="p-6 border">{paper.id}</td>
+                  <td className="p-6 border">{paper.title}</td>
+                  <td className="p-6 border">{departments.find((dept) => dept.id === paper.departmentId)?.name}</td>
+                  <td className="p-6 border">{paper.year.toLocaleDateString()}</td>
                   <td className="p-6 border">
                     <div className="flex flex-row gap-3">
                       {" "}
