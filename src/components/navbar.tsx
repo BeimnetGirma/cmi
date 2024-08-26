@@ -5,13 +5,13 @@ import LanguageSelector from "./language-selector";
 import React, { useState } from "react";
 import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
+import { title } from "process";
 
 const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departments, params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const pathname = usePathname();
-  const router = useRouter();
   const { user, isLoaded } = useUser();
   const [showDepartments, setShowDepartments] = useState(false);
 
@@ -33,31 +33,44 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
       href: "/services",
     },
     {
-      title: t("contactUs"),
-      href: "/contact",
-    },
-    {
       title: t("research"),
       href: "/research",
     },
+    {
+      title: t("news"),
+      href: "/news",
+    },
+    {
+      title: t("contactUs"),
+      href: "/contact",
+    },
   ];
   return (
-    <nav className="fixed top-0 w-full bg-white shadow-md z-50">
-      <div className="container mx-auto flex justify-between items-center py-4">
-        <div>
-          <Link href="/" className="flex items-center space-x-2">
-            <Image src="/assets/imgs/header_logo.jpg" alt="Logo" width={380} height={480} />
-          </Link>
-        </div>
-        <div className="hidden md:flex space-x-6 items-center">
+    <nav className="bg-white shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
+      <div className="flex-1 flex justify-between items-center">
+        <Link href="/" className="flex items-center space-x-2">
+          <Image src="/assets/imgs/logo.png" alt="Logo" width={50} height={140} className="block lg:hidden" />
+          <Image src="/assets/imgs/header_logo.jpg" alt="Logo" width={380} height={480} className="hidden lg:block" />
+        </Link>
+      </div>
+      <label htmlFor="menu-toggle" className="cursor-pointer lg:hidden block">
+        <svg className="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <title>menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        </svg>
+      </label>
+      <input className="hidden" type="checkbox" id="menu-toggle" />
+      <div className="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
+        <ul className="text-xl text-center items-center gap-x-5 py-6 md:gap-x-4 lg:text-lg lg:flex ">
           {navLinks.map((link) => (
-            <Link
-              href={link.href}
-              key={link.title}
-              className={`text-slate-900 font-normal hover:text-slate-400 transition-colors ${pathname === `/${lng}${link.href}` ? "font-semibold text-blue-900 " : ""}`}
-            >
-              {link.title.toUpperCase()}
-            </Link>
+            <li key={link.href} className="py-4">
+              <Link
+                href={link.href}
+                className={` hover:text-primary-main transition-colors ${pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main " : "font-normal text-slate-900"}`}
+              >
+                {link.title.toUpperCase()}
+              </Link>
+            </li>
           ))}
           <div className="relative" onMouseEnter={() => setShowDepartments(true)} onMouseLeave={() => setShowDepartments(false)}>
             <Link href="#" className={`text-slate-900 font-normal hover:text-slate-400  transition-colors`}>
@@ -74,19 +87,12 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
                     {department.name}
                   </Link>
                 ))}
-                {/* <Link href="/departments/1" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
-                  Department 1
-                </Link>
-                <Link href="/departments/2" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
-                  Department 2
-                </Link>
-                <Link href="/departments/3" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
-                  Department 3
-                </Link> */}
               </div>
             )}
           </div>
-          <LanguageSelector params={{ lng }} />
+          <li className="py-4">
+            <LanguageSelector params={{ lng }} />
+          </li>
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
               <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">Sign Out</button>
@@ -96,7 +102,7 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
               {t("login")}
             </Link>
           )}
-        </div>
+        </ul>
       </div>
     </nav>
   );
