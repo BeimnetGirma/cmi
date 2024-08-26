@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-type Research = { Research_Id?: number; Title: string; Department: string; Year: Date; Path: string };
+import { Department, Research } from "@/types";
 type EditResearchProps = {
   research: Research;
-  departments: { Department_Name: string }[];
+  departments: Department[];
   editResearch: (research: Research) => void;
 };
 const EditResearch = ({ departments, research, editResearch }: EditResearchProps) => {
@@ -17,13 +17,13 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [title, setTitle] = useState(research.Title);
-  var [department, setDepartment] = useState(research.Department);
-  const [year, setYear] = useState(research.Year);
-  const [filePath, setFilePath] = useState(research.Path);
+  const [title, setTitle] = useState(research.title);
+  var [department, setDepartment] = useState(research.departmentId.toString());
+  const [year, setYear] = useState(research.year);
+  const [filePath, setFilePath] = useState(research.path);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    editResearch({ Research_Id: research.Research_Id, Title: title, Department: department, Year: new Date(year), Path: filePath });
+    editResearch({ id: research.id, title: title, departmentId: +department, year: new Date(year), path: filePath });
   };
   return (
     <>
@@ -88,8 +88,8 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                       }}
                     >
                       {departments.map((dept, index) => (
-                        <option selected={dept.Department_Name == research.Department} value={dept.Department_Name} key={index}>
-                          {dept.Department_Name}
+                        <option selected={dept.id == research.departmentId} value={dept.id} key={index}>
+                          {dept.name}
                         </option>
                       ))}
                     </select>

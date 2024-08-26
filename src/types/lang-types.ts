@@ -8,7 +8,4 @@ export interface PageProps {
 export interface HomePageProps extends PageProps {
   featuredPosts: PostOrPage[];
 }
-export type Department = {
-  Department_Name: String;
-};
 export * from "./lang-types";

@@ -22,7 +22,6 @@ const AdminPage = ({ ...AdminPageProps }) => {
           <button
             onClick={() => {
               setComponent("researches");
-              console.log("researches");
             }}
           >
             <p className={`text-blue-500 hover:text-blue-700  ${component === "researches" ? "font-semibold text-blue-900 " : ""} `}>Researches</p>
