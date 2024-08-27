@@ -46,11 +46,11 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
     },
   ];
   return (
-    <nav className="bg-white shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
+    <nav className="bg-primary-light shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
       <div className="flex-1 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
           <Image src="/assets/imgs/logo.png" alt="Logo" width={50} height={140} className="block lg:hidden" />
-          <Image src="/assets/imgs/header_logo.jpg" alt="Logo" width={380} height={480} className="hidden lg:block" />
+          <Image src="/assets/imgs/logo-no-bg.png" alt="Logo" width={380} height={480} className="hidden lg:block" />
         </Link>
       </div>
       <label htmlFor="menu-toggle" className="cursor-pointer lg:hidden block">
@@ -66,14 +66,16 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
             <li key={link.href} className="py-4">
               <Link
                 href={link.href}
-                className={` hover:text-primary-main transition-colors ${pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main " : "font-normal text-slate-900"}`}
+                className={` hover:text-secondary-highlight transition-colors ${
+                  pathname === `/${lng}${link.href}` ? "font-semibold text-secondary-highlight " : "font-normal text-secondary-light"
+                }`}
               >
                 {link.title.toUpperCase()}
               </Link>
             </li>
           ))}
           <div className="relative" onMouseEnter={() => setShowDepartments(true)} onMouseLeave={() => setShowDepartments(false)}>
-            <Link href="#" className={`text-slate-900 font-normal hover:text-slate-400  transition-colors`}>
+            <Link href="#" className={`text-slate-700 font-normal hover:text-slate-400  transition-colors`}>
               {t("departments").toUpperCase()}
             </Link>
             {showDepartments && (
@@ -82,7 +84,7 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({ departmen
                   <Link
                     href={{ pathname: "department", query: { dept: department.name.toString() } }}
                     key={index}
-                    className="block px-4 py-2  hover:text-slate-400 transition-colors"
+                    className="block px-4 py-2 hover:text-slate-400 transition-colors"
                   >
                     {department.name}
                   </Link>
