@@ -8,7 +8,6 @@ import React from "react";
 import Footer from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import prisma from "@/db";
-import { Department } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
