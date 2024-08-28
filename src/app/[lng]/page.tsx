@@ -18,12 +18,19 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   return (
     <>
       {/* Hero */}
-      <div className="bg-contain bg-no-repeat bg-center  flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
-        <div className="flex flex-col items-end justify-center w-1/2 mr-20">
-          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
+      <div className="container mx-auto flex flex-col md:flex-row items-center  justify-center mt-20">
+        <Image
+          src={"/assets/imgs/1.jpg"}
+          className="rounded-lg"
+          alt="Hero Image"
+          width={800}
+          height={500}
+        />
+        <div className="flex flex-col items-end justify-center">
+          <h2 className="text-4xl text-center text-primary-main font-bold  mb-5">
             {t("companyName")}
           </h2>
-          <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
+          <div className="text-slate-900 rounded-md mx-5">
             <p className="text-justify">{t("companyIntro")}</p>
             <div className="text-right">
               <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 my-6   ">
@@ -34,8 +41,8 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         </div>
       </div>
       {/* About Us Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 bg-slate-50">
-        <div className="md:w-1/3 md:mr-4">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center p-8 my-20 ">
+        <div className="md:w-1/2">
           <h3 className="text-xl font-bold mb-4 text-primary-main">
             {t("aboutUs")}
           </h3>
@@ -46,7 +53,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
           <Image
-            src="/assets/imgs/aboutus.svg"
+            src="/assets/imgs/5.jpg"
             alt="About Us Image"
             className="rounded-lg justify-end"
             width={500}
