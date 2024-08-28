@@ -32,9 +32,9 @@ export async function getSinglePage(pageSlug: string) {
   });
 }
 
-export async function getFeaturedPosts() {
+export async function getFeaturedPosts(limit: number = 3) {
   return await api.posts
-    .browse({ filter: "featured:true", include: "tags,authors", limit: "3" })
+    .browse({ filter: "featured:true", include: "tags,authors", limit })
     .catch((e) => {
       console.error(e);
     });
