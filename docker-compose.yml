@@ -91,7 +91,7 @@ services:
       MYSQL_USER: ghost
       MYSQL_PASSWORD: ghost_password
     volumes:
-      - ./ghost/data:/var/lib/mysql
+      - ./ghost/dev/data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
     healthcheck:
       test:
