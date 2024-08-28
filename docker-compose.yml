@@ -8,11 +8,11 @@ services:
     ports:
       - 8005:2368
     depends_on:
-      db:
+      ghost-db:
         condition: service_healthy
     environment:
       database__client: mysql
-      database__connection__host: db
+      database__connection__host: ghost-db
       database__connection__user: root
       database__connection__password: rootpassword
       database__connection__database: ghost
@@ -28,10 +28,10 @@ services:
     volumes:
       - ./ghost/content:/var/lib/ghost/content
 
-  db:
+  ghost-db:
     image: mysql:5.7
     restart: always
-    container_name: ecmi-db
+    container_name: ecmi-ghost-db
     ports:
       - 3340:3306
     environment:
@@ -52,6 +52,30 @@ services:
       timeout: 10s
       retries: 5
 
+  cmi-db:
+    image: mysql:5.7
+    restart: always
+    container_name: ecmi-cmidb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cmi
+      MYSQL_USER: cmi
+      MYSQL_PASSWORD: cmi_password
+    volumes:
+      - ./data/department.sql:/docker-entrypoint-initdb.d/department.sql
+      - ./data/research.sql:/docker-entrypoint-initdb.d/research.sql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD && mysql -u $$MYSQL_USER --password=$$MYSQL_PASSWORD -e ''SHOW DATABASES LIKE "$$MYSQL_DATABASE";''',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 volumes:
   ghost:
-  db:
+  ghost-db:
+  cmi-db:

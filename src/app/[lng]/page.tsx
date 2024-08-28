@@ -2,43 +2,58 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ClientsSlider from "@/components/clients-slider";
-import FQA from "@/components/faq";
-import { PageProps } from "@/types";
-import { useTranslation } from "../i18n";
+import { HomePageProps } from "@/types";
+import { useTranslation } from "@/app/i18n";
+import Card from "@/components/card";
+import { FeaturedPosts, Post } from "@/types/featured-posts";
 
-const Home: React.FC<PageProps> = async ({ params }) => {
+const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
+
+  const featuredPosts = await fetch(
+    `${process.env.NEXT_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
+  ).then((res) => res.json() as Promise<FeaturedPosts>);
+
   return (
     <>
       {/* Hero */}
-      <div className="bg-contain bg-no-repeat bg-center h-96 flex items-center mt-40 justify-end bg-[url('/assets/imgs/hero.svg')]">
-        <div className="flex flex-col items-end justify-center w-1/2 mr-20">
-          <h2 className="text-4xl w-1/2 text-center text-primary-main font-bold mr-10 mb-5">
+      <div className="container mx-auto flex flex-col md:flex-row items-center  justify-center mt-20">
+        <Image
+          src={"/assets/imgs/1.jpg"}
+          className="rounded-lg"
+          alt="Hero Image"
+          width={800}
+          height={500}
+        />
+        <div className="flex flex-col items-end justify-center">
+          <h2 className="text-4xl text-center text-primary-main font-bold  mb-5">
             {t("companyName")}
           </h2>
-          <div className="text-slate-900 rounded-md w-1/2 mr-20 mb-5">
+          <div className="text-slate-900 rounded-md mx-5">
             <p className="text-justify">{t("companyIntro")}</p>
-            <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-              {t("viewProjects")}
-            </button>
+            <div className="text-right">
+              <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 my-6   ">
+                {t("viewProjects")}
+              </button>
+            </div>
           </div>
         </div>
       </div>
       {/* About Us Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 bg-slate-50">
-        <div className="md:w-1/3 md:mr-4">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center p-8 my-20 ">
+        <div className="md:w-1/2">
           <h3 className="text-xl font-bold mb-4 text-primary-main">
             {t("aboutUs")}
           </h3>
           <p className="text-left mb-4">{t("aboutUsIntro")}</p>
-          <button className="bg-primary-main  hover:bg-indigo-500 rounded-md transition-colors text-white px-4 py-2 mt-2">
+          <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
             {t("readMore")}
           </button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
           <Image
-            src="/assets/imgs/aboutus.svg"
+            src="/assets/imgs/5.jpg"
             alt="About Us Image"
             className="rounded-lg justify-end"
             width={500}
@@ -140,176 +155,6 @@ const Home: React.FC<PageProps> = async ({ params }) => {
             </p>
           </div>
         </div>
-
-        {/* <div className="grid grid-cols-1 md:grid-cols-3">
-          <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-yellow-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Observations
-            </h4>
-            <p className="text-center w-3/4 pb-10">
-              Deviation handling with notification. Deviations are registered,
-              commented on and documented directly on mobile. Image function
-              directly in the deviation makes it a breeze.
-            </p>
-          </div>
-
-          <div className="p-4   flex flex-col items-center justify-center border-r-2 border-b-2">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-purple-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">Procedures</h4>
-            <p className="text-center w-3/4 pb-10">
-              Procedures are adapted to your company in relation to statutory
-              requirements, with audit history and notification to employees.
-            </p>
-          </div>
-          <div className="p-4   flex flex-col items-center justify-center border-b-2">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-rose-950"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">Orders</h4>
-            <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
-            </p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3">
-          <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-blue-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">Pictures</h4>
-            <p className="text-center w-3/4 pb-10">
-              Take pictures directly of checklists or deviations and get full
-              control and documentation of all work carried out on the
-              construction site.
-            </p>
-          </div>
-          <div className="p-4   flex flex-col items-center justify-center border-r-2 ">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-green-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">Filers</h4>
-            <p className="text-center w-3/4 pb-10">
-              Complete checklists with templates adapted to all industries. Can
-              be easily customized and customized.
-            </p>
-          </div>
-          <div className="p-4   flex flex-col items-center justify-center ">
-            <div className="flex items-center mb-2 mt-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-pink-100 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-pink-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <h4 className="text-lg font-bold text-slate-900 p-4">
-              Inspections
-            </h4>
-            <p className="text-center w-3/4 pb-10">
-              Get mobile-friendly forms with options for signing directly on
-              mobile. We also have a form builder where you can freely build all
-              the forms you need.
-            </p>
-          </div>
-        </div> */}
       </div>
 
       {/* Our Clients */}
@@ -320,86 +165,16 @@ const Home: React.FC<PageProps> = async ({ params }) => {
         <ClientsSlider />
       </div>
 
-      {/* FQA */}
-      <div className="bg-slate-50 p-8">
-        <h2 className="text-xl font-bold text-center mb-6">
-          {t("faq").toUpperCase()}
-        </h2>
-        <FQA />
-      </div>
       <div className="p-8">
         <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
           <Link href="/news">{t("news")}</Link>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog1.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-bold mb-2">News Title #1</h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
-                Read More
-              </Link>
-            </div>
-          </div>
-          <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog2.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-bold mb-2">
-                Here’s an example when the Blog Title is too long
-              </h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
-                Read More
-              </Link>
-            </div>
-          </div>
-          <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-            <Image
-              className="w-full h-80 object-cover object-center"
-              src="/assets/imgs/blog3.svg"
-              alt="this is an image"
-              width={250}
-              height={350}
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-bold mb-2">News Title #3</h3>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus et purus viverra, molestie magna nec.
-              </p>
-              <Link
-                href={"#"}
-                className="font-bold text-primary-main underline hover:text-indigo-500"
-              >
-                Read More
-              </Link>
-            </div>
-          </div>
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
+          {featuredPosts.posts.map((post: Post) => (
+            <React.Fragment key={post.id}>
+              <Card {...post} />
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </>

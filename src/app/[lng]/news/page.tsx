@@ -57,7 +57,7 @@ const News = () => {
             {/* Blog list */}
             {renderLoading()}
             <div className="flex w-full md:w-3/4  px-5">
-              <div className="relative grid gap-[4vmin] grid-cols-3 py-[4vmin] md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+              <div className="relative grid grid-cols-3 gap-[4vmin] py-[4vmin] md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                 {allNews?.map((blog) => (
                   <React.Fragment key={blog.uuid}>
                     <Card {...blog} />

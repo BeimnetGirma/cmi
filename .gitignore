@@ -44,3 +44,6 @@ next-env.d.ts
 
 # ghost data
 /ghost
+
+#prisma
+/prisma/migrations

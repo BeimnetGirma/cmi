@@ -15,6 +15,7 @@ export async function getPosts() {
       console.error(e);
     });
 }
+
 export async function getSinglePost(postSlug: string) {
   return await api.posts.read({ slug: postSlug }).catch((e) => {
     console.error(e);
@@ -29,4 +30,12 @@ export async function getSinglePage(pageSlug: string) {
   return await api.pages.read({ slug: pageSlug }).catch((e) => {
     console.error(e);
   });
+}
+
+export async function getFeaturedPosts(limit: number = 3) {
+  return await api.posts
+    .browse({ filter: "featured:true", include: "tags,authors", limit })
+    .catch((e) => {
+      console.error(e);
+    });
 }
