@@ -9,6 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      PORT: ${{ secrets.PORT }}
+      NEXT_GHOST_URL: ${{ secrets.NEXT_GHOST_URL }}
+      NEXT_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_GHOST_CONTENT_API_KEY }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
