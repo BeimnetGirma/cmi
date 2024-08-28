@@ -80,7 +80,7 @@ services:
     restart: always
     container_name: ecmi-cmi-dev-db
     ports:
-      - 3306:3306
+      - 3350:3306
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: cmi_dev_db
