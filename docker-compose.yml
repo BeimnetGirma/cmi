@@ -22,7 +22,7 @@ services:
       mail__transport: SMTP
       mail__options__host: smtp.gmail.com
       mail__options__port: 587
-      mail__options__secure: false
+      mail__options__secure: "false"
       mail__options__auth__user: my_email
       mail__options__auth__pass: "my_email_pass"
     volumes:
@@ -80,7 +80,7 @@ services:
     restart: always
     container_name: ecmi-cmi-dev-db
     ports:
-      - 3306:3306
+      - 3350:3306
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: cmi_dev_db
