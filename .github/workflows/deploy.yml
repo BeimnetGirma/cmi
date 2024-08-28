@@ -42,4 +42,4 @@ jobs:
             git pull origin dev
             npm install --production
             npm run build
-            PORT=${{ env.PORT }} pm2 restart test.cmi.gov.et
+            PORT=${{ env.PORT }} pm2 restart test_ecmi
