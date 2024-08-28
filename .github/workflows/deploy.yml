@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: Dev
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      PORT: ${{ secrets.PORT }}
-      NEXT_GHOST_URL: ${{ secrets.NEXT_GHOST_URL }}
-      NEXT_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_GHOST_CONTENT_API_KEY }}
+      GITHUB_TOKEN: ${{ vars.GITHUB_TOKEN }}
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
+      PORT: ${{ vars.PORT }}
+      NEXT_GHOST_URL: ${{ vars.NEXT_GHOST_URL }}
+      NEXT_GHOST_CONTENT_API_KEY: ${{ vars.NEXT_GHOST_CONTENT_API_KEY }}
 
     steps:
       - name: Checkout code
