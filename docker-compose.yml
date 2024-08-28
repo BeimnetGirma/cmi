@@ -42,8 +42,6 @@ services:
     volumes:
       - ./ghost/data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
-      # - ./data/department.sql:/docker-entrypoint-initdb.d/department.sql
-      # - ./data/research.sql:/docker-entrypoint-initdb.d/research.sql
     healthcheck:
       test:
         [
