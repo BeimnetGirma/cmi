@@ -12,7 +12,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { t } = await useTranslation(lng, "translation");
 
   const featuredPosts = await fetch(
-    `${process.env.NEXT_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
+    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
   ).then((res) => res.json() as Promise<FeaturedPosts>);
 
   return (
@@ -165,7 +165,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         <ClientsSlider />
       </div>
 
-      {featuredPosts?.posts?.length && (
+      {!!featuredPosts?.posts?.length && (
         <div className="p-8">
           <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
             <Link href="/news">{t("news")}</Link>
