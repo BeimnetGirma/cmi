@@ -13,6 +13,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       NEXT_GHOST_URL: ${{ secrets.NEXT_GHOST_URL }}
       NEXT_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_GHOST_CONTENT_API_KEY }}
+      APP_PORT: ${{ secrets.APP_PORT }}
 
     steps:
       - name: Checkout code
@@ -40,11 +41,11 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.PASSWORD }}
-          port: 22
+          port: ${{ secrets.SSH_PORT }}
           script: |
             cd /var/www/test/ecmi
             git pull origin dev
             npm install --production
             npm run build
-            PORT=3001 pm2 restart test_ecmi
+            PORT=${{env.APP_PORT}} pm2 restart test_ecmi
           debug: true
