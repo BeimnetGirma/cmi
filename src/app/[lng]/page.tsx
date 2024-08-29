@@ -165,18 +165,20 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         <ClientsSlider />
       </div>
 
-      <div className="p-8">
-        <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
-          <Link href="/news">{t("news")}</Link>
-        </h2>
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
-          {featuredPosts.posts.map((post: Post) => (
-            <React.Fragment key={post.id}>
-              <Card {...post} />
-            </React.Fragment>
-          ))}
+      {featuredPosts?.posts?.length && (
+        <div className="p-8">
+          <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
+            <Link href="/news">{t("news")}</Link>
+          </h2>
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
+            {featuredPosts?.posts?.map((post: Post) => (
+              <React.Fragment key={post.id}>
+                <Card {...post} />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
