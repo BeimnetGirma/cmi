@@ -48,3 +48,4 @@ jobs:
             npm install --production
             npm run build
             PORT=${{ env.PORT }} pm2 restart test_ecmi
+          debug: true
