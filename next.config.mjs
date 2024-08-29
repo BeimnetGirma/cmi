@@ -5,7 +5,7 @@ const config = {
     domains: [
       "localhost",
       "static.ghost.org",
-      `${process.env.NEXT_PUBLIC_GHOST_URL}`,
+      process.env.NEXT_PUBLIC_GHOST_URL,
     ],
   },
   typescript: {
@@ -13,4 +13,5 @@ const config = {
     ignoreBuildErrors: true,
   },
 };
+
 export default config;
