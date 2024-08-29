@@ -49,6 +49,7 @@ jobs:
             git pull origin dev
             npm install --omit=dev
             npm install @prisma/client
+            prisma migrate dev
             export PATH=$PATH:/var/www/test/ecmi/node_modules/.bin 
             npm run build
             PORT=${{env.APP_PORT}} pm2 restart test_ecmi
