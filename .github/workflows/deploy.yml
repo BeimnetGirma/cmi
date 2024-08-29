@@ -43,9 +43,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
             cd /var/www/test/ecmi
             git pull origin dev
-            /usr/local/bin/npm install --production
-            /usr/local/bin/npm run build
+            npm install --production
+            npm run build
             PORT=${{env.APP_PORT}} pm2 restart test_ecmi
           debug: true
