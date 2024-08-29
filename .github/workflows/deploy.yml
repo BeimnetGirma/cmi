@@ -47,7 +47,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
             cd /var/www/test/ecmi
             git pull origin dev
-            npm install --production
+            npm install --omit=dev
             npm run build
             PORT=${{env.APP_PORT}} pm2 restart test_ecmi
           debug: true
