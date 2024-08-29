@@ -11,8 +11,8 @@ jobs:
     environment: Dev
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      NEXT_GHOST_URL: ${{ secrets.NEXT_GHOST_URL }}
-      NEXT_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_GHOST_CONTENT_API_KEY }}
+      NEXT_PUBLIC_GHOST_URL: ${{ secrets.NEXT_GHOST_URL }}
+      NEXT_PUBLIC_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_GHOST_CONTENT_API_KEY }}
       APP_PORT: ${{ secrets.APP_PORT }}
 
     steps:
