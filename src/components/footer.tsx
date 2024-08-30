@@ -58,7 +58,7 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
                 <Image
                   width={20}
                   height={20}
-                  src={"assets/icons/phone.svg"}
+                  src={"/assets/icons/phone.svg"}
                   alt="Phone Icon"
                 />
                 <a href="tel:+25111575633">+251 115 575 633</a>
@@ -67,7 +67,7 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
                 <Image
                   width={20}
                   height={20}
-                  src={"assets/icons/mail.svg"}
+                  src={"/assets/icons/mail.svg"}
                   alt="Phone Icon"
                 />
                 <a href="mailto:info@cmi.gov.et">info@cmi.gov.et</a>
@@ -85,7 +85,7 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
                   <Image
                     width={16}
                     height={16}
-                    src={"assets/icons/facebook.svg"}
+                    src={"/assets/icons/facebook.svg"}
                     alt="Phone Icon"
                   />
                 </Link>
