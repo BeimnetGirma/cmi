@@ -20,7 +20,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
       {/* Hero */}
       <div className="container mx-auto flex flex-col md:flex-row items-center  justify-center mt-20">
         <Image
-          src={"/assets/imgs/1.jpg"}
+          src="/assets/imgs/1.jpg"
           className="rounded-lg"
           alt="Hero Image"
           width={800}
