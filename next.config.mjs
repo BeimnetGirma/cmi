@@ -2,10 +2,19 @@
 
 const config = {
   images: {
-    domains: [
-      "localhost",
-      "static.ghost.org",
-      process.env.NEXT_PUBLIC_GHOST_URL,
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "static.ghost.org",
+      },
+      {
+        protocol: "http",
+        hostname: new URL(process.env.NEXT_PUBLIC_GHOST_URL).hostname,
+      },
     ],
   },
   typescript: {
