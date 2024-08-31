@@ -12,10 +12,12 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { t } = await useTranslation(lng, "translation");
 
   const featuredPosts = await fetch(
-    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
+    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include:author&limit=3`
   ).then((res) => res.json() as Promise<FeaturedPosts>);
 
-  console.log({ featuredPosts });
+  console.log(process.env.NEXT_PUBLIC_GHOST_URL);
+  console.log(process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY);
+  console.log(featuredPosts.posts);
 
   return (
     <>
@@ -175,7 +177,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
           <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
             {featuredPosts?.posts?.map((post: Post) => (
               <React.Fragment key={post.id}>
-                <Card {...post} />
+                <div className="w-full">
+                  <Card {...post} />
+                </div>
               </React.Fragment>
             ))}
           </div>
