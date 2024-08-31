@@ -13,7 +13,10 @@ const config = {
       },
       {
         protocol: "http",
-        hostname: process.env.NEXT_PUBLIC_GHOST_URL,
+        hostname: String(process.env.NEXT_PUBLIC_GHOST_URL).replace(
+          "http://",
+          ""
+        ),
       },
     ],
   },
