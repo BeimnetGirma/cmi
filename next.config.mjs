@@ -22,5 +22,5 @@ const config = {
     ignoreBuildErrors: true,
   },
 };
-console.log(config.images);
+
 export default config;
