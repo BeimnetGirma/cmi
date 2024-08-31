@@ -15,6 +15,8 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
   ).then((res) => res.json() as Promise<FeaturedPosts>);
 
+  console.log({ featuredPosts });
+
   return (
     <>
       {/* Hero */}
