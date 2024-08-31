@@ -2,10 +2,19 @@
 
 const config = {
   images: {
-    domains: [
-      "localhost",
-      "static.ghost.org",
-      process.env.NEXT_PUBLIC_GHOST_URL,
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "static.ghost.org",
+      },
+      {
+        protocol: "http",
+        hostname: new URL(process.env.NEXT_PUBLIC_GHOST_URL).hostname,
+      },
     ],
   },
   typescript: {
@@ -13,8 +22,5 @@ const config = {
     ignoreBuildErrors: true,
   },
 };
-// Log the configuration to the console
-console.log("Next.js Configuration:", config);
-console.log("NEXT_PUBLIC_GHOST_URL:", process.env.NEXT_PUBLIC_GHOST_URL);
 
 export default config;

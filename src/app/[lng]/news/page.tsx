@@ -35,6 +35,7 @@ const News = () => {
       });
   }, []);
 
+  console.log(allNews);
   return (
     <div className="flex flex-col">
       <div className="w-full">
@@ -47,12 +48,6 @@ const News = () => {
       </div>
       <div className="container mx-auto">
         <div className="flex-col py-10">
-          <div className="flex-col font-bold text-3xl text-blue-400 text-center my-12">
-            <div>SCAFFOLDING SOLUTIONS</div>
-            <div className="text-secondary-main text-sm">
-              Building Smarter Together
-            </div>
-          </div>
           <div className="flex xs:flex-col-reverse flex-row space-x-4">
             {/* Blog list */}
             {renderLoading()}
