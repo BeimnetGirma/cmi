@@ -18,17 +18,19 @@ const Card: React.FC<Post> = (props) => {
       style={shadowStyle}
     >
       <div className="h-56 relative">
-        <Image
-          src={feature_image!}
-          className="object-cover rounded-t-md h-full w-full "
-          placeholder="blur"
-          loading="lazy"
-          width={500}
-          height={220}
-          sizes="(max-width: 768px) 100vw, 33vw"
-          alt="featured image"
-          blurDataURL={bindDataUrl}
-        />
+        {feature_image && (
+          <Image
+            src={feature_image!}
+            className="object-cover rounded-t-md h-full w-full "
+            placeholder="blur"
+            loading="lazy"
+            width={500}
+            height={220}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            alt="featured image"
+            blurDataURL={bindDataUrl}
+          />
+        )}
       </div>
       <div className="flex-col space-y-4">
         <div className="font-bold text-black text-2xl py-2">{title}</div>
