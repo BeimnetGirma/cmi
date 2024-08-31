@@ -34,7 +34,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
             <p className="text-justify">{t("companyIntro")}</p>
             <div className="text-right">
               <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 my-6   ">
-                {t("viewProjects")}
+                <Link href={`${lng}/services`}>{t("viewServices")}</Link>
               </button>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
           </h3>
           <p className="text-left mb-4">{t("aboutUsIntro")}</p>
           <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-            {t("readMore")}
+            <Link href={`${lng}/about`}>{t("readMore")}</Link>
           </button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
