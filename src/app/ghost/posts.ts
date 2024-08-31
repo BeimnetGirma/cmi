@@ -2,8 +2,8 @@ import GhostContentAPI from "@tryghost/content-api";
 // Create API instance with site credentials
 
 const api = new GhostContentAPI({
-  url: "http://localhost:8005",
-  key: "cb2db959f0ba68cf299a1b6dc7",
+  url: process.env.NEXT_PUBLIC_GHOST_URL as string,
+  key: process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY as string,
   version: "v4.8",
 });
 
@@ -34,7 +34,7 @@ export async function getSinglePage(pageSlug: string) {
 
 export async function getFeaturedPosts(limit: number = 3) {
   return await api.posts
-    .browse({ filter: "featured:true", include: "tags,authors", limit })
+    .browse({ filter: "featured:true", include: ["tags", "authors"], limit })
     .catch((e) => {
       console.error(e);
     });

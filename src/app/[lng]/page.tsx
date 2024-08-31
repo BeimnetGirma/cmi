@@ -12,7 +12,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { t } = await useTranslation(lng, "translation");
 
   const featuredPosts = await fetch(
-    `${process.env.NEXT_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_GHOST_CONTENT_API_KEY}&filter=featured:true&include=tags,authors&limit=3`
+    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include:author&limit=3`
   ).then((res) => res.json() as Promise<FeaturedPosts>);
 
   return (
@@ -20,7 +20,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
       {/* Hero */}
       <div className="container mx-auto flex flex-col md:flex-row items-center  justify-center mt-20">
         <Image
-          src={"/assets/imgs/1.jpg"}
+          src="/assets/imgs/1.jpg"
           className="rounded-lg"
           alt="Hero Image"
           width={800}
@@ -34,7 +34,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
             <p className="text-justify">{t("companyIntro")}</p>
             <div className="text-right">
               <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 my-6   ">
-                {t("viewProjects")}
+                <Link href={`${lng}/services`}>{t("viewServices")}</Link>
               </button>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
           </h3>
           <p className="text-left mb-4">{t("aboutUsIntro")}</p>
           <button className="bg-primary-main  hover:bg-blue-600 rounded-md transition-colors text-white px-4 py-2 mt-2 ">
-            {t("readMore")}
+            <Link href={`${lng}/about`}>{t("readMore")}</Link>
           </button>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
@@ -165,18 +165,22 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         <ClientsSlider />
       </div>
 
-      <div className="p-8">
-        <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
-          <Link href="/news">{t("news")}</Link>
-        </h2>
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
-          {featuredPosts.posts.map((post: Post) => (
-            <React.Fragment key={post.id}>
-              <Card {...post} />
-            </React.Fragment>
-          ))}
+      {!!featuredPosts?.posts?.length && (
+        <div className="p-8">
+          <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
+            <Link href="/news">{t("news")}</Link>
+          </h2>
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
+            {featuredPosts?.posts?.map((post: Post) => (
+              <React.Fragment key={post.id}>
+                <div className="w-full">
+                  <Card {...post} />
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
