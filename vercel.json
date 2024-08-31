@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/**/*.js": {
-      "runtime": "@vercel/node@v14.x",
+      "runtime": "@vercel/node@v18.0",
       "includeFiles": "prisma/schema.prisma"
     }
   },
