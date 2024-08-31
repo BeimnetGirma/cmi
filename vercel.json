@@ -2,7 +2,7 @@
   "functions": {
     "api/**/*.js": {
       "runtime": "@vercel/node",
-      "includeFiles": ["prisma/schema.prisma"]
+      "includeFiles": "prisma/schema.prisma"
     }
   },
   "routes": [
