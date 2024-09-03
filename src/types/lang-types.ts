@@ -8,4 +8,5 @@ export interface PageProps {
 export interface HomePageProps extends PageProps {
   featuredPosts: PostOrPage[];
 }
+
 export * from "./lang-types";
