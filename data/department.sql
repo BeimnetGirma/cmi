@@ -19,10 +19,10 @@
 -- Table structure for table `department`
 --
 
-DROP TABLE IF EXISTS `Department`;
+DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Department` (
+CREATE TABLE `department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
@@ -35,7 +35,7 @@ CREATE TABLE `Department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `Department` VALUES (1,'New Department'),(2,'New Department 2'),(3,'Testing 5'),(4,'ም/_ዋና_ዳይሬክተር '),(5,'ዕቅድ፣ ለውጥና መልካም አስተዳደር '),(6,'የሰው ሀብት ስራ አመራር ዳይሬክቶሬት'),(7,'የአሰራር ስርዓት ማሻሻያ ዳ/ት'),(8,'የኦዲት አገልግሎት ዳይሬክቶሬት'),(9,'የኮ.ማ ባለድርሻ አካላት እና የግሉ ዘርፍ'),(10,'የኮ.ፕ.ማ  ማማከር አገልግሎት ዳይሬክቶሬት'),(11,'የኮሙኒኬሽንና ኢንፎርሜሽን ቴክኖሎጂ ዳይሬክቶሬት'),(12,'የኮንስትራክሽን ማኔጅመንት ቴክኖሎጂ ሽግግር ዳይ'),(13,'የኮንስትራክሽን ማኔጅመንት ጥናትና ምርምር ዳ/ት'),(14,'የኮንስትራክሽን ማኔጅመንት ፈጻሚዎች ልማት ዳ\\ት'),(15,'የኮንስትራክሽን ኢንዱስትሪ ሙያ ብቃት ማረጋገጫ'),(16,'የግዢና ጠቅላላአ ገልግሎት ዳይሬክቶሬት'),(17,'የፋይናንስና ንብረት አስተዳደር ዳይሬክቶሬት'),(18,'የፋይናንስና ንብረት አስተዳደር ዳይሬክቶሬት የፋ'),(19,'ዳይሬክቶሬት የፋይናንስና ንብረት አስተዳደር ዳ'),(20,'ጥናትና_ምርምር');
+INSERT INTO `department` VALUES (1,'New Department'),(2,'New Department 2'),(3,'Testing 5'),(4,'ም/_ዋና_ዳይሬክተር '),(5,'ዕቅድ፣ ለውጥና መልካም አስተዳደር '),(6,'የሰው ሀብት ስራ አመራር ዳይሬክቶሬት'),(7,'የአሰራር ስርዓት ማሻሻያ ዳ/ት'),(8,'የኦዲት አገልግሎት ዳይሬክቶሬት'),(9,'የኮ.ማ ባለድርሻ አካላት እና የግሉ ዘርፍ'),(10,'የኮ.ፕ.ማ  ማማከር አገልግሎት ዳይሬክቶሬት'),(11,'የኮሙኒኬሽንና ኢንፎርሜሽን ቴክኖሎጂ ዳይሬክቶሬት'),(12,'የኮንስትራክሽን ማኔጅመንት ቴክኖሎጂ ሽግግር ዳይ'),(13,'የኮንስትራክሽን ማኔጅመንት ጥናትና ምርምር ዳ/ት'),(14,'የኮንስትራክሽን ማኔጅመንት ፈጻሚዎች ልማት ዳ\\ት'),(15,'የኮንስትራክሽን ኢንዱስትሪ ሙያ ብቃት ማረጋገጫ'),(16,'የግዢና ጠቅላላአ ገልግሎት ዳይሬክቶሬት'),(17,'የፋይናንስና ንብረት አስተዳደር ዳይሬክቶሬት'),(18,'የፋይናንስና ንብረት አስተዳደር ዳይሬክቶሬት የፋ'),(19,'ዳይሬክቶሬት የፋይናንስና ንብረት አስተዳደር ዳ'),(20,'ጥናትና_ምርምር');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -20,12 +20,16 @@ jobs:
         with:
           node-version: "18"
 
+      - name: Setup Prisma
+        run: npx prisma generate
+
       - name: Run Prisma migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy
 
   build:
+    needs: migrate
     runs-on: ubuntu-latest
     environment: Dev
     env:
@@ -51,6 +55,7 @@ jobs:
         run: npm run build
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment: Dev
     env:
