@@ -7,17 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Department {
+model department {
   id       Int        @id @default(autoincrement())
   name     String     @db.VarChar(40)
-  Research Research[]
+  research research[]
 }
 
-model Research {
-  id           Int        @id @default(autoincrement())
-  title        String     @db.VarChar(150)
-  year         DateTime   @db.Date
-  path         String     @db.VarChar(150)
-  department   Department @relation(fields: [departmentId], references: [id])
-  departmentId Int
+model research {
+  id         Int         @id @default(autoincrement())
+  title      String      @db.VarChar(150)
+  year       DateTime    @db.Date
+  path       String      @db.VarChar(150)
+  deptId     Int?
+  department department? @relation(fields: [deptId], references: [id], onDelete: Restrict, map: "dept_fk")
+
+  @@index([deptId], map: "dept_fk_idx")
 }
