@@ -23,8 +23,6 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
       return null;
     });
 
-  console.log(featuredPosts?.meta);
-
   return (
     <>
       {!!featuredPosts?.posts?.length && (
