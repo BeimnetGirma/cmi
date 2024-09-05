@@ -4,21 +4,34 @@ import Link from "next/link";
 import ClientsSlider from "@/components/clients-slider";
 import { HomePageProps } from "@/types";
 import { useTranslation } from "@/app/i18n";
-import Card from "@/components/card";
 import { FeaturedPosts, Post } from "@/types/featured-posts";
+import Carousel from "@/components/Carousel";
 
 const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
 
   const featuredPosts = await fetch(
-    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include:author&limit=3`
-  ).then((res) => res.json() as Promise<FeaturedPosts>);
+    `${process.env.NEXT_PUBLIC_GHOST_URL}/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=featured:true&include:author&limit=3`,
+    {
+      cache: "no-cache",
+    }
+  )
+    .then((res) => res.json() as Promise<FeaturedPosts>)
+    .catch((err) => {
+      console.error(err);
+      return null;
+    });
 
   return (
     <>
+      {!!featuredPosts?.posts?.length && (
+        <div className="p-5">
+          <Carousel posts={featuredPosts} />
+        </div>
+      )}
       {/* Hero */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center  justify-center mt-20">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">
         <Image
           src="/assets/imgs/1.jpg"
           className="rounded-lg"
@@ -26,7 +39,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
           width={800}
           height={500}
         />
-        <div className="flex flex-col items-end justify-center">
+        <div className="flex flex-col items-end justify-center ">
           <h2 className="text-4xl text-center text-primary-main font-bold  mb-5">
             {t("companyName")}
           </h2>
@@ -164,23 +177,6 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         </h2>
         <ClientsSlider />
       </div>
-
-      {!!featuredPosts?.posts?.length && (
-        <div className="p-8">
-          <h2 className="text-2xl font-bold text-center mb-6 hover:text-secondary-main hover:cursor-pointer">
-            <Link href="/news">{t("news")}</Link>
-          </h2>
-          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  place-items-center gap-5">
-            {featuredPosts?.posts?.map((post: Post) => (
-              <React.Fragment key={post.id}>
-                <div className="w-full">
-                  <Card {...post} />
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 };

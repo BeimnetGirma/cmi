@@ -2,7 +2,6 @@
 import { getPosts } from "@/app/ghost/posts";
 import Card from "@/components/card";
 import ImageWithTextOverlay from "@/components/image-overlay";
-import SocialLinks from "@/components/social-icons";
 import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
 import React, { useEffect } from "react";
@@ -48,11 +47,11 @@ const News = () => {
       </div>
       <div className="container mx-auto">
         <div className="flex-col py-10">
-          <div className="flex xs:flex-col-reverse flex-row space-x-4">
+          <div className="flex xs:flex-col-reverse md:flex-row space-x-4">
             {/* Blog list */}
             {renderLoading()}
             <div className="flex w-full md:w-3/4  px-5">
-              <div className="relative grid grid-cols-3 gap-[4vmin] py-[4vmin] md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+              <div className="relative grid  gap-[4vmin] py-[4vmin] grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                 {allNews?.map((blog) => (
                   <React.Fragment key={blog.uuid}>
                     <Card {...blog} />
@@ -109,8 +108,6 @@ const News = () => {
                   </div>
                 </div>
                 <div className="border-1 border-b-2 border-bg-secondary-main"></div>
-                <div className="font-semibold text-lg">Follow us on </div>
-                <SocialLinks />
               </div>
             </div>
           </div>

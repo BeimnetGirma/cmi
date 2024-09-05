@@ -1,6 +1,6 @@
 export type Department = {
   id?: number;
-  Departmnet_Name: string;
+  name: string;
 };
 export type Research = {
   id?: number;

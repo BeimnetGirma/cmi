@@ -43,7 +43,7 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
         />
       </div>
       <div className="container mx-auto">
-        <div className="flex-col py-10">
+        <div className="flex-col md:flex-row py-10">
           <div className="flex-col font-bold text-xl text-blue-400  my-12">
             <div>
               <Link href="/news">Blogs {`>`}</Link>
@@ -53,7 +53,7 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
             </div>
           </div>
           {renderLoading()}
-          <article className="flex xs:flex-col-reverse flex-row space-x-4">
+          <article className="flex xs:flex-col-reverse md:flex-row space-x-4">
             <div className="flex w-full md:w-3/4  px-5">
               <div className="flex flex-col space-y-5">
                 <div className="font-bold text-2xl">{news?.title}</div>
