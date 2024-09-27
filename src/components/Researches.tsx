@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { Research } from "@/types";
 const Researches = async () => {
   var researches = await prisma.research.findMany();
+  // var researches = await prisma.research.findMany();
   var departments = await prisma.department.findMany();
 
   async function createResearch(newResearch: Research) {
@@ -25,7 +26,7 @@ const Researches = async () => {
         where: { id: research.id },
         data: {
           title: research.title,
-          departmentId: research.departmentId,
+          deptId: research.deptId,
           year: research.year,
         },
       });
@@ -67,7 +68,7 @@ const Researches = async () => {
               <tr key={index}>
                 <td className="p-6 border">{research.id}</td>
                 <td className="p-6 border">{research.title}</td>
-                <td className="p-6 border">{departments.find((dept) => dept.id === research.departmentId)?.name}</td>
+                <td className="p-6 border">{departments.find((dept) => dept.id === research.deptId)?.name}</td>
                 <td className="p-6 border">{research.year.toLocaleDateString()}</td>
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
@@ -83,8 +84,8 @@ const Researches = async () => {
                         />
                       </svg>
                     </Link>
-                    <EditResearch departments={departments} research={research} editResearch={editResearch} />
-                    <DeleteResearch research={research} deleteResearch={deleteResearch} />
+                    <EditResearch departments={departments} research={{ ...research, deptId: research.deptId ?? 0 }} editResearch={editResearch} />
+                    <DeleteResearch research={{ ...research, deptId: research.deptId ?? 0 }} deleteResearch={deleteResearch} />
                   </div>
                 </td>
               </tr>

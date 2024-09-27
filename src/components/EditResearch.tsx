@@ -18,12 +18,12 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
     setIsOpen(false);
   };
   const [title, setTitle] = useState(research.title);
-  var [department, setDepartment] = useState(research.departmentId.toString());
+  var [department, setDepartment] = useState(research.deptId.toString());
   const [year, setYear] = useState(research.year);
   const [filePath, setFilePath] = useState(research.path);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    editResearch({ id: research.id, title: title, departmentId: +department, year: new Date(year), path: filePath });
+    editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: filePath });
   };
   return (
     <>
@@ -88,7 +88,7 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                       }}
                     >
                       {departments.map((dept, index) => (
-                        <option selected={dept.id == research.departmentId} value={dept.id} key={index}>
+                        <option selected={dept.id == research.deptId} value={dept.id} key={index}>
                           {dept.name}
                         </option>
                       ))}
