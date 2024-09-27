@@ -15,6 +15,7 @@ const Researches = async () => {
     try {
       newResearch.year = new Date(newResearch.year); // Convert Year to Date object
       await prisma.research.create({ data: newResearch });
+      revalidatePath("/");
     } catch (error) {
       console.error(error);
     }
@@ -28,8 +29,10 @@ const Researches = async () => {
           title: research.title,
           deptId: research.deptId,
           year: research.year,
+          path: research.path,
         },
       });
+      revalidatePath("/");
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +76,7 @@ const Researches = async () => {
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
                     {" "}
-                    <Link href={"https://pdfobject.com/pdf/sample.pdf"}>
+                    <Link href={research.path}>
                       <svg className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path

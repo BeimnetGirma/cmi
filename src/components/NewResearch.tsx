@@ -1,5 +1,6 @@
 "use client";
 import { Department, Research } from "@/types";
+import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 
 type NewResearchProps = {
@@ -21,17 +22,36 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
   const [title, setTitle] = useState("");
   var [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
-  const [filePath, setFilePath] = useState("");
+  const [file, setFile] = useState<File>();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const research: Research = {
-      title: title,
-      departmentId: parseInt(department),
-      year: new Date(year),
-      path: filePath,
-    };
-    createResearch(research);
+    if (!file) return;
+    try {
+      const formData = new FormData();
+      formData.set("file", file);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        await response.json().then((data) => {
+          if (data) {
+            var filePath = data.path;
+            const research: Research = {
+              title: title,
+              deptId: parseInt(department),
+              year: new Date(year),
+              path: filePath,
+            };
+            createResearch(research);
+            closeModal();
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -91,11 +111,12 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
                   /> */}
                   <select
                     required
+                    typeof="number"
                     name="department"
                     id="department"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                     onChange={(e) => {
-                      department = e.target.value;
+                      setDepartment(e.target.value);
                     }}
                   >
                     <option selected disabled>
@@ -131,7 +152,10 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
                     type="file"
                     id="file"
                     accept=".pdf"
-                    onChange={(e) => setFilePath(e.target.value)}
+                    required
+                    onChange={(e) => {
+                      setFile(e.target.files?.[0]);
+                    }}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                   />
                 </div>

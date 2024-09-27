@@ -21,9 +21,33 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
   var [department, setDepartment] = useState(research.deptId.toString());
   const [year, setYear] = useState(research.year);
   const [filePath, setFilePath] = useState(research.path);
+  const [file, setFile] = useState<File>();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: filePath });
+    e.preventDefault();
+    try {
+      if (file) {
+        const formData = new FormData();
+        formData.set("file", file);
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          await response.json().then((data) => {
+            if (data) {
+              editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: data.path });
+            }
+          });
+        }
+      } else {
+        editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: filePath });
+      }
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -117,7 +141,9 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                       type="file"
                       id="file"
                       accept=".pdf"
-                      onChange={(e) => setFilePath(e.target.value)}
+                      onChange={(e) => {
+                        setFile(e.target.files?.[0]);
+                      }}
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                     />
                   </div>
