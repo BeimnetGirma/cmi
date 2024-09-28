@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Ethiopian Construction Project Management Institute",
   description: "Institute for Construction Project Management in Ethiopia",
+  icons: ["/assets/imgs/logo.png"],
 };
 
 export async function generateStaticParams() {
