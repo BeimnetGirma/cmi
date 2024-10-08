@@ -69,33 +69,28 @@ const Carousel = ({ posts }: CarouselProps) => {
                 filter: "blur(10px)",
                 zIndex: -1,
               }}
-            ></div>
-            <div className="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-30 z-1"></div>
-            <div
-              className="flex justify-center items-center"
-              style={{
-                height: "-webkit-fill-available",
-              }}
-            >
-              <Image
-                width={800}
-                height={500}
-                src={post.feature_image}
-                className="relative block w-3/4 mx-auto py-10 object-fit"
-                alt="..."
-              />
-            </div>
-            <div className="absolute inset-x-[15%] bottom-40 top-44 hidden  text-center w-1/2 mx-auto text-black md:block bg-black opacity-30 z-10"></div>
-            <div className="absolute inset-x-[15%] bottom-40 py-5 text-center w-1/2 mx-auto text-white md:block z-20  ">
-              <h5 className="text-3xl font-bold py-4">{post.title}</h5>
-              <p className="text-base mb-10 hidden md:block">{post.excerpt}</p>
-              <Link
-                href={`news/${post.slug}`}
-                className="bg-primary-main  hover:bg-secondary-light rounded-md transition-colors text-white px-4 py-2 mt-15 "
+            />
+            <Link href={`news/${post.slug}`} className="">
+              <div className="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-30 z-1"></div>
+              <div
+                className="flex justify-center items-center"
+                style={{
+                  height: "-webkit-fill-available",
+                }}
               >
-                Read More
-              </Link>
-            </div>
+                <Image
+                  width={800}
+                  height={500}
+                  src={post.feature_image}
+                  className="relative block w-3/4 mx-auto py-10 object-center transition-transform duration-300 ease-in-out transform hover:scale-125 hover:shadow-lg"
+                  alt="..."
+                />
+              </div>
+              <div className="absolute inset-x-[15%] bottom-40 top-72 hidden  text-center w-1/2 mx-auto text-black md:block bg-black opacity-30 z-10"></div>
+              <div className="absolute inset-x-[15%] bottom-40 py-5 text-center w-1/2 mx-auto text-white md:block z-20  ">
+                <h5 className="text-3xl font-bold py-4">{post.title}</h5>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
