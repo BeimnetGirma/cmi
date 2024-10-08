@@ -17,7 +17,7 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     startLoading();
-    getSinglePost(slug as string)
+    getSinglePost(slug)
       .then((data: void | PostOrPage) => {
         if (data) {
           setNews(data as unknown as PostOrPage);

@@ -5,7 +5,7 @@ export type Department = {
 export type Research = {
   id?: number;
   title: string;
-  departmentId: number;
+  deptId: number;
   year: Date;
   path: string;
 };

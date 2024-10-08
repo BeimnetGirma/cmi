@@ -27,18 +27,18 @@ const Research = async () => {
                 <tr key={index}>
                   <td className="p-6 border">{paper.id}</td>
                   <td className="p-6 border">{paper.title}</td>
-                  <td className="p-6 border">{departments.find((dept) => dept.id === paper.departmentId)?.name}</td>
+                  <td className="p-6 border">{departments.find((dept) => dept.id === paper.deptId)?.name}</td>
                   <td className="p-6 border">{paper.year.toLocaleDateString()}</td>
                   <td className="p-6 border">
                     <div className="flex flex-row gap-3">
                       {" "}
-                      <Link href={"https://pdfobject.com/pdf/sample.pdf"}>
+                      <Link href={paper.path}>
                         <svg className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                           />
                         </svg>

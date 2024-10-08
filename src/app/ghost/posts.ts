@@ -16,6 +16,19 @@ export async function getPosts() {
     });
 }
 
+export async function searchPosts(query: string) {
+  const encodedQuery = encodeURIComponent(query);
+  return await api.posts
+    .browse({
+      include: ["tags", "authors"],
+      limit: "all",
+      filter: `title:${encodedQuery}`,
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+}
+
 export async function getSinglePost(postSlug: string) {
   return await api.posts.read({ slug: postSlug }).catch((e) => {
     console.error(e);
