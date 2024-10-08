@@ -6,6 +6,21 @@ import { PageProps } from "@/types";
 
 const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
   const { t } = await useTranslation(lng, "translation");
+  const boxes = [
+    {
+      title: t("mission"),
+      content: t("missionDetail") === "missionDetail" ? "" : t("missionDetail"),
+    },
+    {
+      title: t("vision"),
+      content: t("visionDetail") === "visionDetail" ? "" : t("visionDetail"),
+    },
+    {
+      title: t("values"),
+      content: t("valuesDetail") === "valuesDetail" ? "" : t("valuesDetail"),
+    },
+  ];
+
   return (
     <div className="pt-8 mt-20">
       <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header.svg')]">
@@ -21,6 +36,20 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
           </p>
         </div>
       </div>
+      {boxes[0].content !== "" && (
+        <div className="py-20">
+          <div className="grid grid-cols-3 gap-x-10 text-center container mx-auto ">
+            {boxes.map((box, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <h4 className="font-semibold text-primary-main text-xl ">
+                  {box.title}
+                </h4>
+                <p className="">{box.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div>
         <div className="flex flex-col justify-center py-20">
           <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">
@@ -31,59 +60,6 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
               {t("backgroundContent")}
             </p>
           </div>
-          <div className="relative z-10 h-80 md:h-80 bg-contain bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/aboutus1.svg')]"></div>
-        </div>
-      </div>
-
-      <div className="pb-20">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          OUR CLIENTS
-        </h2>
-        <ClientsSlider />
-      </div>
-      <div className="p-2">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          MEET THE TEAM
-        </h2>
-        <div className="flex flex-col justify-center items-center">
-          <Image
-            src="/assets/imgs/team1.svg"
-            alt="Team"
-            width={1000}
-            height={500}
-          />
-          <Image
-            src="/assets/imgs/team2.svg"
-            alt="Team"
-            width={1000}
-            height={500}
-          />
-        </div>
-      </div>
-      <div className="p-2">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          CLIENT REVIEWS
-        </h2>
-        <div className="flex flex-col justify-center items-center">
-          <hr className="border-t-4 border-primary-main w-1/3 my-8" />
-          <blockquote className="text-sm text-slate-800 w-1/3 text-center p-4">
-            I recently had the privilege of working with Salus Stillas Solutions
-            for a construction project, and I cant express how impressed I am
-            with their services. From the moment we reached out for a quote to
-            the completion of the project, they demonstrated an unparalleled
-            level of professionalism, expertise, and commitment to safety. First
-            and foremost, their scaffolding setup was impeccable. The team at
-            Salus Stillas Solutions ensured that our construction site was not
-            only accessible but also secure. Their attention to detail in
-            assembling and inspecting the scaffolding was truly commendable,
-            guaranteeing the safety of everyone on-site.
-          </blockquote>
-          <Image
-            src="/assets/imgs/reviews.svg"
-            alt="Team"
-            width={800}
-            height={500}
-          />
         </div>
       </div>
     </div>
