@@ -23,3 +23,11 @@ model research {
 
   @@index([deptId], map: "dept_fk_idx")
 }
+
+model manual {
+  id Int @id @default(autoincrement())
+
+  title String
+
+  path String
+}
