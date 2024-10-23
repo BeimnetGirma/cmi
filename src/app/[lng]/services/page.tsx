@@ -7,7 +7,7 @@ const Services: React.FC<PageProps> = async ({ params: { lng } }) => {
   const { t } = await useTranslation(lng, "translation");
   return (
     <div className="">
-      <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-services.svg')]">
+      <div className="relative h-80 md:h-80 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-services.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="text-center z-10 text-sm">
           <h1 className="text-xl md:text-3xl font-bold">{t("services")}</h1>

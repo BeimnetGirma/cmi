@@ -17,10 +17,10 @@ const ImageWithTextOverlay = ({
       <div className="relative">
         <Image
           src={imgUrl}
-          className="object-cover w-full h-full"
+          className="object-cover w-full"
           alt="news"
           width={width}
-          height={height}
+          height={200}
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <span className="text-white text-3xl font-bold">{text}</span>
