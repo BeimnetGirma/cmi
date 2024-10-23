@@ -7,6 +7,9 @@ import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
+import ResourcesMenu from "./resources-menu";
+import DepartmentMenu from "./department-menu";
+import ExecutiveMenu from "./executive-menu";
 
 const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
   departments,
@@ -31,20 +34,6 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
       href: "/services",
     },
     {
-      title: t("resource"),
-      href: "/resource",
-      submenus: [
-        {
-          title: t("research"),
-          href: "/research",
-        },
-        {
-          title: t("standard"),
-          href: "/standard",
-        },
-      ],
-    },
-    {
       title: t("media"),
       href: "/news",
       submenus: [
@@ -59,24 +48,6 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
         {
           title: t("Magazine"),
           href: "/magazine",
-        },
-      ],
-    },
-    {
-      title: t("executive"),
-      href: "/executive",
-      submenus: [
-        {
-          title: t("cmstandard"),
-          href: "/cmstandard",
-        },
-        {
-          title: t("consultancy"),
-          href: "/consultancy",
-        },
-        {
-          title: t("coe"),
-          href: "/coe",
         },
       ],
     },
@@ -137,34 +108,10 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
               </Link>
             </li>
           ))}
-          <div
-            className="relative"
-            onMouseEnter={() => setShowDepartments(true)}
-            onMouseLeave={() => setShowDepartments(false)}
-          >
-            <Link
-              href="#"
-              className={`text-slate-700 font-normal hover:text-slate-400  transition-colors`}
-            >
-              {t("departments").toUpperCase()}
-            </Link>
-            {showDepartments && (
-              <div className="absolute top-full left-0 w-96 bg-white shadow-md rounded-md py-2">
-                {departments.map((department, index) => (
-                  <Link
-                    href={{
-                      pathname: "department",
-                      query: { dept: department.name },
-                    }}
-                    key={index}
-                    className="block px-4 py-2 hover:text-slate-400 transition-colors"
-                  >
-                    {department.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          <ResourcesMenu params={{ lng }} />
+          <ExecutiveMenu params={{ lng }} />
+          {/* <DepartmentMenu params={{ lng }} departments={departments} /> */}
+
           <li className="py-4">
             <LanguageSelector params={{ lng }} />
           </li>

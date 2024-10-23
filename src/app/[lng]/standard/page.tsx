@@ -3,13 +3,13 @@ import prisma from "@/db";
 import Link from "next/link";
 import React from "react";
 
-const Research = async () => {
-  const researchPaper = await prisma.research.findMany();
-  // const departments = await prisma.department.findMany();
+const Standards = async () => {
+  const manuals = await prisma.manual.findMany();
+
   return (
     <div>
       <div className="w-full">
-        <ImageWithTextOverlay imgUrl="/assets/imgs/header-services.svg" width={1920} height={500} text="Research" />
+        <ImageWithTextOverlay imgUrl="/assets/imgs/header-services.svg" width={1920} height={500} text="Standards" />
       </div>
       <div className="flex flex-col justify-center ">
         <div className="justify-end px-52">
@@ -24,15 +24,14 @@ const Research = async () => {
               </tr>
             </thead>
             <tbody>
-              {researchPaper.map((paper, index) => (
+              {manuals.map((manual, index) => (
                 <tr key={index}>
                   <td className="p-6 border">{index + 1}</td>
-                  <td className="p-6 border">{paper.title}</td>
-                  {/* <td className="p-6 border">{departments.find((dept) => dept.id === paper.deptId)?.name}</td> */}
-                  {/* <td className="p-6 border">{paper.year.toLocaleDateString()}</td> */}
-                  <td className="p-6 border ">
-                    <div className="flex justify-center ">
-                      <Link href={paper.path}>
+                  <td className="p-6 border">{manual.title}</td>
+
+                  <td className="p-6 border">
+                    <div className="flex  justify-center">
+                      <Link href={manual.path}>
                         <svg className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path
@@ -55,4 +54,4 @@ const Research = async () => {
   );
 };
 
-export default Research;
+export default Standards;

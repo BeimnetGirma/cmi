@@ -20,9 +20,6 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Setup Prisma
-        run: npx prisma generate
-
       - name: Run Prisma migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

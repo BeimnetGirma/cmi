@@ -43,6 +43,7 @@ const News = () => {
       const result = await searchPosts(search);
       setAllNews(result as unknown as PostsOrPages[]);
     } catch (error) {
+      console.error(error);
     } finally {
       stopLoading();
     }
@@ -64,7 +65,7 @@ const News = () => {
         <ImageWithTextOverlay
           imgUrl="/assets/imgs/blog-cover.png"
           width={1920}
-          height={500}
+          height={300}
           text="News"
         />
       </div>
