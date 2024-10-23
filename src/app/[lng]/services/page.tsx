@@ -6,7 +6,7 @@ import Link from "next/link";
 const Services: React.FC<PageProps> = async ({ params: { lng } }) => {
   const { t } = await useTranslation(lng, "translation");
   return (
-    <div className="pt-8 mt-20">
+    <div className="">
       <div className="relative h-80 md:h-80 bg-auto bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-services.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="text-center z-10 text-sm">
@@ -254,111 +254,62 @@ const Services: React.FC<PageProps> = async ({ params: { lng } }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3"></div>
       </div>
-      <div className="p-2 flex flex-col items-center justify-center">
-        <h2 className="text-xl font-bold text-primary-main text-center mt-10 mb-5 p-0">
-          WE HELP YOU MANAGE YOUR ALL CONSTRUCTION WORK
-        </h2>
-        <button className="rounded text-sm text-white bg-primary-main hover:bg-indigo-500 p-2 ">
-          {t("letsWorkTogether")}
-        </button>
-        <Image
-          src="/assets/imgs/worktogether.svg"
-          alt="Team"
-          width={1200}
-          height={500}
-        />
-      </div>
-      <div className="p-2">
-        <div className="flex flex-col md:flex-row items-center justify-center p-8 pl-40 w-3/4 m-auto">
-          <div className="md:w-1/3 md:mr-4">
-            <h3 className="text-xl font-bold mb-4 text-primary-main">
-              ADVANCING CONSTRUCTION INDUSTRY
-            </h3>
-            <p className="text-left mb-4">
-              Delivering high-quality and secure services to our customers by
-              providing a digital platform for comprehensive management of all
-              kind of scaffolding work.
+
+      <div className="flex justify-center  ">
+        <div className="p-4 flex flex-col items-center w-[550px]">
+          <h2 className="text-xl font-bold text-primary-main text-center p-0">
+            Contact Us
+          </h2>
+          <div className="flex justify-center mb-10 w-3/4">
+            <p className="text-sm text-slate-800 text-center">
+              Please fill the below form to get information about our Products
+              or Services
             </p>
           </div>
-          <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-            <Image
-              src="/assets/imgs/service-video.svg"
-              alt="About Us Image"
-              className="rounded-lg justify-end hover:border-blue-500 hover:border-2"
-              width={400}
-              height={330}
+          <form className="flex flex-col items-center w-full text-sm">
+            <input
+              type="text"
+              placeholder="Company Name"
+              className="w-full p-2  mb-4 border border-gray-300 rounded"
             />
-          </div>
-        </div>
-      </div>
-      <div className="">
-        <div className="flex flex-col items-center justify-center py-10 w-3/4 m-auto 2">
-          <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-2">
-            <div className=" flex flex-col items-center justify-center p-10">
-              <Image
-                src="/assets/imgs/contact-guy.svg"
-                alt="Contact Us"
-                width={1000}
-                height={500}
-              />
+            <input
+              type="text"
+              placeholder="Your Full Name"
+              className="w-full p-2  mb-4 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              placeholder="Mobile Number"
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+            />
+            <input
+              type="text"
+              placeholder="Mail Id"
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+            />
+            <div className="flex justify-start my-10">
+              <p className="text-xs text-slate-800 text-left">
+                We require this information to reach out to you and provide you
+                with information about our products and services. Please rest
+                assured, we prioritize your privacy, and your information is
+                kept completely secure with us. You can review our{" "}
+                <Link href={"#"} className="font-bold hover:underline">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link href={"#"} className="font-bold hover:underline">
+                  Terms & Conditions
+                </Link>{" "}
+                here.
+              </p>
             </div>
-            <div className="p-4 flex flex-col items-center ">
-              <h2 className="text-xl font-bold text-primary-main text-center p-0">
-                GET A FREE DEMO
-              </h2>
-              <div className="flex justify-center mb-10 w-3/4">
-                <p className="text-sm text-slate-800 text-center">
-                  Please fill the below form to get information about our
-                  Products or Services
-                </p>
-              </div>
-              <form className="flex flex-col items-center w-full text-sm">
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  className="w-full p-2  mb-4 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Your Full Name"
-                  className="w-full p-2  mb-4 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Mobile Number"
-                  className="w-full p-2 mb-4 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Mail Id"
-                  className="w-full p-2 mb-4 border border-gray-300 rounded"
-                />
-                <div className="flex justify-start my-10">
-                  <p className="text-xs text-slate-800 text-left">
-                    We require this information to reach out to you and provide
-                    you with information about our products and services. Please
-                    rest assured, we prioritize your privacy, and your
-                    information is kept completely secure with us. You can
-                    review our{" "}
-                    <Link href={"#"} className="font-bold hover:underline">
-                      Privacy Policy
-                    </Link>{" "}
-                    and{" "}
-                    <Link href={"#"} className="font-bold hover:underline">
-                      Terms & Conditions
-                    </Link>{" "}
-                    here.
-                  </p>
-                </div>
-                <button
-                  type="submit"
-                  className="bg-primary-main text-white py-2 px-4 rounded hover:bg-primary-dark"
-                >
-                  Get Demo
-                </button>
-              </form>
-            </div>
-          </div>
+            <button
+              type="submit"
+              className="bg-primary-main text-white py-2 px-4 rounded hover:bg-primary-dark"
+            >
+              Send Message
+            </button>
+          </form>
         </div>
       </div>
     </div>
