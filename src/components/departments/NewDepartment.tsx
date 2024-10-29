@@ -1,6 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { Department } from "@/types";
+import ImportModalInfo from "./info-modal";
+import Image from "next/image";
+import ImportFromCSV from "./import-from-csv";
+
 type NewDepartmentProps = {
   createDepartment: (department: Department) => void;
 };
@@ -20,12 +24,36 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
     createDepartment({ name: deptName });
     closeModal();
   };
+
+  const importFromFile = async (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
-      <div className="flex flex-row justify-end">
-        <button className="bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center" onClick={openModal}>
-          New
+      <div className="flex flex-row items-center justify-end">
+        <button className="flex space-x-2 bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center">
+          <Image
+            width="24"
+            height="24"
+            src="https://img.icons8.com/ffffff/material-outlined/50/import-csv.png"
+            alt="import-csv"
+          />
+          <ImportFromCSV />
         </button>
+        <button
+          className="flex space-x-2 bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center"
+          onClick={openModal}
+        >
+          <Image
+            width="24"
+            height="24"
+            src="https://img.icons8.com/ffffff/material-outlined/50/plus--v1.png"
+            alt="plus"
+          />
+          <span>New</span>
+        </button>
+        <ImportModalInfo />
       </div>
       {isOpen && (
         <div>
@@ -33,14 +61,29 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
           <div className="fixed inset-60 w-2/4 mx-auto items-center justify-center">
             <div className="absolute inset-0 bg-white h-1/2"></div>
             <div className=" bg-white p-4 rounded-lg">
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-3xl relative ">Add New Department</h1>
-
+              <h1 className="text-slate-900 text-3xl relative ">
+                Add New Department
+              </h1>
               <form
                 className="m-10 relative "
                 onSubmit={(e) => {
@@ -48,7 +91,10 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
                 }}
               >
                 <div className="mb-4">
-                  <label htmlFor="title" className="block text-gray-700 text-xl  mb-2">
+                  <label
+                    htmlFor="title"
+                    className="block text-gray-700 text-xl  mb-2"
+                  >
                     Department Name:
                   </label>
                   <input
@@ -64,7 +110,10 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
                 </div>
 
                 <div className="flex justify-end">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
                     Add Department
                   </button>
                 </div>

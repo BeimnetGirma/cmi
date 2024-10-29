@@ -111,7 +111,7 @@ const Contact = () => {
                 Locate Us
               </h4>
               <p className="justify-center text-center text-sm">
-                In front of Bole Matemia, Hansam office space, 6th floor
+                In front of Bole Painting, Hansam office space, 6th floor
               </p>
             </div>
           </div>

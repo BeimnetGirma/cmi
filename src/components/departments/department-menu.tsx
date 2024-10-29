@@ -1,10 +1,18 @@
 import { PageProps, Department } from "@/types";
 import React, { useState } from "react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "../ui/dropdown-menu";
 import { useTranslation } from "@/app/i18n/client";
 import Link from "next/link";
 
-const DepartmentMenu: React.FC<PageProps & { departments: Department[] }> = ({ departments, params: { lng } }) => {
+const DepartmentMenu: React.FC<PageProps & { departments: Department[] }> = ({
+  departments,
+  params: { lng },
+}) => {
   const { t } = useTranslation(lng, "navbar");
   const [openDropdown, setOpenDropdown] = useState(false);
   return (
@@ -15,16 +23,30 @@ const DepartmentMenu: React.FC<PageProps & { departments: Department[] }> = ({ d
           setOpenDropdown(false);
         }}
       >
-        <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
-          <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
+        <section
+          onMouseEnter={() => setOpenDropdown(true)}
+          onMouseLeave={() => setOpenDropdown(false)}
+        >
+          <DropdownMenuTrigger
+            asChild
+            onMouseEnter={() => setOpenDropdown(true)}
+          >
             <li className="py-4">
-              <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">{t("departments")}</span>
+              <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">
+                {t("departments")}
+              </span>
             </li>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
+          <DropdownMenuContent
+            className="w-56 "
+            onMouseLeave={() => setOpenDropdown(false)}
+          >
             {departments.map((department, index) => (
               <DropdownMenuItem key={index} className="mt-2">
-                <Link href={`/department/${department.name}`} className="hover:text-slate-500 ">
+                <Link
+                  href={`/department/${department.name}`}
+                  className="hover:text-slate-500 "
+                >
                   {department.name}
                 </Link>
               </DropdownMenuItem>

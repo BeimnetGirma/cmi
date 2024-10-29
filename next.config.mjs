@@ -12,6 +12,10 @@ const config = {
         hostname: "static.ghost.org",
       },
       {
+        protocol: "https",
+        hostname: "img.icons8.com",
+      },
+      {
         protocol: "http",
         hostname: String(process.env.NEXT_PUBLIC_GHOST_URL).replace(
           "http://",
@@ -26,4 +30,8 @@ const config = {
   },
 };
 
-export default config;
+const nextConfig = {
+  ...config,
+};
+
+export default nextConfig;

@@ -31,3 +31,12 @@ model manual {
 
   path String
 }
+model Image {
+  id          String   @id @default(uuid())
+  caption     String   @db.VarChar(255)
+  tags        String   @db.Text
+  uploadedAt  DateTime @default(now())
+  imageData   Bytes    @db.LongBlob
+
+  @@index([tags(length: 255)], map: "tags_idx")
+}

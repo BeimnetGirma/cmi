@@ -8,17 +8,18 @@ import { useTranslation } from "@/app/i18n/client";
 import { usePathname } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import ResourcesMenu from "./resources-menu";
-import DepartmentMenu from "./department-menu";
+import DepartmentMenu from "./departments/department-menu";
 import ExecutiveMenu from "./executive-menu";
+import MediaMenu from "./media-menu";
+import AdminMenu from "./admin-menu";
 
 const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
   departments,
   params: { lng },
 }) => {
-  const { t } = useTranslation(lng, "navbar");
   const pathname = usePathname();
+  const { t } = useTranslation(lng, "navbar");
   const { user, isLoaded } = useUser();
-  const [showDepartments, setShowDepartments] = useState(false);
 
   const navLinks = [
     {
@@ -32,24 +33,6 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
     {
       title: t("services"),
       href: "/services",
-    },
-    {
-      title: t("media"),
-      href: "/news",
-      submenus: [
-        {
-          title: t("News"),
-          href: "/news",
-        },
-        {
-          title: t("gallery"),
-          href: "/gallery",
-        },
-        {
-          title: t("Magazine"),
-          href: "/magazine",
-        },
-      ],
     },
     {
       title: t("contactUs"),
@@ -100,7 +83,7 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
                 href={link.href}
                 className={` hover:text-secondary-highlight transition-colors ${
                   pathname === `/${lng}${link.href}`
-                    ? "font-semibold text-secondary-highlight "
+                    ? "font-semibold text-primary-main "
                     : "font-normal text-secondary-light"
                 }`}
               >
@@ -108,10 +91,11 @@ const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
               </Link>
             </li>
           ))}
+          <MediaMenu params={{ lng }} />
           <ResourcesMenu params={{ lng }} />
           <ExecutiveMenu params={{ lng }} />
           {/* <DepartmentMenu params={{ lng }} departments={departments} /> */}
-
+          {user && <AdminMenu params={{ lng }} />}
           <li className="py-4">
             <LanguageSelector params={{ lng }} />
           </li>

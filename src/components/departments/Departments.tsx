@@ -1,23 +1,27 @@
+"use server";
 import prisma from "@/db";
-import Link from "next/link";
 import React from "react";
-import Department from "@/components/Department";
-import NewDepartment from "@/components/NewDepartment";
+import Department from "@/components/departments/Department";
+import NewDepartment from "@/components/departments/NewDepartment";
 import { revalidatePath } from "next/cache";
 import { Department as DepartmentType } from "@/types";
+export async function createDepartment(newDepartment: DepartmentType) {
+  "use server";
+
+  console.log(newDepartment);
+  try {
+    await prisma.department.create({ data: newDepartment });
+    revalidatePath("/admin");
+  } catch (error) {
+    console.error(error);
+  }
+}
 const Departments = async () => {
   const departments = await prisma.department.findMany();
-  async function createDepartment(newDepartment: DepartmentType) {
-    "use server";
-
-    try {
-      await prisma.department.create({ data: newDepartment });
-      revalidatePath("/");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  async function editDepartment(oldDepartment: DepartmentType, newDepartment: DepartmentType) {
+  async function editDepartment(
+    oldDepartment: DepartmentType,
+    newDepartment: DepartmentType
+  ) {
     "use server";
 
     try {
@@ -60,7 +64,13 @@ const Departments = async () => {
           </thead>
           <tbody>
             {departments.map((department, index) => (
-              <Department key={index} department={department} index={index} editDepartment={editDepartment} deleteDepartment={deleteDepartment} />
+              <Department
+                key={department.id}
+                department={department}
+                index={index}
+                editDepartment={editDepartment}
+                deleteDepartment={deleteDepartment}
+              />
             ))}
           </tbody>
         </table>
