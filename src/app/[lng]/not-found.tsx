@@ -4,7 +4,11 @@ import Footer from "@/components/footer";
 import { PageProps } from "@/types";
 import { useTranslation } from "../i18n";
 
-const Custom404: React.FC<PageProps> = async ({ params = {} }) => {
+const Custom404: React.FC<PageProps> = async ({
+  params = {},
+}: {
+  params: { lng?: string };
+}) => {
   const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
   return (
