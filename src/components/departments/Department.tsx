@@ -5,10 +5,18 @@ import { Department as DepartmentType } from "@/types";
 type DepartmentProps = {
   department: DepartmentType;
   index: number;
-  editDepartment: (oldDepartment: DepartmentType, newdepartment: DepartmentType) => void;
+  editDepartment: (
+    oldDepartment: DepartmentType,
+    newdepartment: DepartmentType
+  ) => void;
   deleteDepartment: (id: number) => void;
 };
-const Department = ({ department, index, editDepartment, deleteDepartment }: DepartmentProps) => {
+const Department = ({
+  department,
+  index,
+  editDepartment,
+  deleteDepartment,
+}: DepartmentProps) => {
   // const [isOpen, setIsOpen] = useState(false)
   const [deptName, setDeptName] = useState(department.name);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -44,23 +52,21 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
         <td className="p-6 border">{department.name}</td>
         <td className="p-6 border">
           <div className="flex flex-row gap-3 justify-center">
-            {" "}
-            {/* <Link href={"https://pdfobject.com/pdf/sample.pdf"}>
-                      <svg className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        />
-                      </svg>
-                    </Link> */}
             <button onClick={openEditModal}>
-              <svg className="h-8 w-8 text-yellow-500" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="h-8 w-8 text-yellow-500"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 {" "}
-                <path stroke="none" d="M0 0h24v24H0z" /> <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+                <line x1="16" y1="5" x2="19" y2="8" />
               </svg>
             </button>
             <button onClick={openDeleteModal}>
@@ -76,8 +82,12 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
                 strokeLinejoin="round"
               >
                 {" "}
-                <path stroke="none" d="M0 0h24v24H0z" /> <line x1="4" y1="7" x2="20" y2="7" /> <line x1="10" y1="11" x2="10" y2="17" /> <line x1="14" y1="11" x2="14" y2="17" />{" "}
-                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /> <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <line x1="4" y1="7" x2="20" y2="7" />{" "}
+                <line x1="10" y1="11" x2="10" y2="17" />{" "}
+                <line x1="14" y1="11" x2="14" y2="17" />{" "}
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
               </svg>
             </button>
           </div>
@@ -89,13 +99,29 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
           <div className="fixed inset-60 w-2/4 mx-auto items-center justify-center">
             <div className="absolute inset-0 bg-white h-1/2"></div>
             <div className=" bg-white p-4 rounded-lg">
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeEditModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeEditModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-3xl relative ">Edit Department Detail</h1>
+              <h1 className="text-slate-900 text-3xl relative ">
+                Edit Department Detail
+              </h1>
 
               <form
                 className="m-10 relative "
@@ -104,7 +130,10 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
                 }}
               >
                 <div className="mb-4">
-                  <label htmlFor="deptName" className="block text-gray-700 text-xl  mb-2">
+                  <label
+                    htmlFor="deptName"
+                    className="block text-gray-700 text-xl  mb-2"
+                  >
                     Department Name:
                   </label>
                   <input
@@ -121,10 +150,16 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
                 </div>
 
                 <div className="flex justify-end">
-                  <button className="bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 m-2 rounded" onClick={closeEditModal}>
+                  <button
+                    className="bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 m-2 rounded"
+                    onClick={closeEditModal}
+                  >
                     Cancel
                   </button>
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  m-2 rounded">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  m-2 rounded"
+                  >
                     Update Department
                   </button>
                 </div>
@@ -139,20 +174,42 @@ const Department = ({ department, index, editDepartment, deleteDepartment }: Dep
           <div className="fixed inset-60 w-2/4 h-1/3 mx-auto flex items-center bg-black justify-center">
             <div className="absolute inset-0 bg-white "></div>
             <div className=" bg-white p-4 rounded-lg">
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeDeleteModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeDeleteModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-2xl relative ">Delete Department</h1>
+              <h1 className="text-slate-900 text-2xl relative ">
+                Delete Department
+              </h1>
               <hr className="relative" />
               <div className="relative mx-10 px-10">
-                <p className="text-red-600 text-l">Are you sure you want to delete the department named &quot;{department.name}&quot;? This action cannot be undone. </p>
+                <p className="text-red-600 text-l">
+                  Are you sure you want to delete the department named &quot;
+                  {department.name}&quot;? This action cannot be undone.{" "}
+                </p>
               </div>
               <hr className="relative mt-10" />
               <div className="flex relative justify-end mt-10">
-                <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2" onClick={closeDeleteModal}>
+                <button
+                  className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2"
+                  onClick={closeDeleteModal}
+                >
                   Cancel
                 </button>
                 <button

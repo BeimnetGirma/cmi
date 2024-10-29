@@ -23,3 +23,20 @@ model research {
 
   @@index([deptId], map: "dept_fk_idx")
 }
+
+model manual {
+  id Int @id @default(autoincrement())
+
+  title String
+
+  path String
+}
+model Image {
+  id          String   @id @default(uuid())
+  caption     String   @db.VarChar(255)
+  tags        String   @db.Text
+  uploadedAt  DateTime @default(now())
+  imageData   Bytes    @db.LongBlob
+
+  @@index([tags(length: 255)], map: "tags_idx")
+}

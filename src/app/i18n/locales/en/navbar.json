@@ -7,5 +7,15 @@
   "services": "Services",
   "standards": "Standards",
   "research": "Research",
-  "departments": "Departments"
+  "resource": "Resource",
+  "departments": "Departments",
+  "media": "media",
+  "executive": "Executive",
+  "gallery": "Gallery",
+  "magazine": "Magazine",
+  "cmstandard": "CM Standard",
+  "consultancy": "Consultancy",
+  "coe": "COE",
+  "controlPanel": "Control Panel",
+  "admin": "Admin"
 }

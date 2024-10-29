@@ -7,5 +7,16 @@
   "services": "አገልግሎቶች",
   "standards": "ደረጃዎች",
   "research": "ምርምር",
-  "departments": "የስራ ክፍሎች"
+  "resource": "ምንጭ",
+  "departments": "የስራ ክፍሎች",
+  "executive": "አመራሮች",
+  "media": "ሚዲያ",
+  "news": "ዜና",
+  "gallery": "ጋላሪ",
+  "magazine": "መጽሔት",
+  "cmstandard": "ስታንዳርድ",
+  "consultancy": "ማማከር",
+  "coe": "COE",
+  "controlPanel": "ቅንብሮች",
+  "admin": "አስተዳዳሪ ገጹ"
 }

@@ -3,44 +3,51 @@
 import { useState } from "react";
 import ImageWithTextOverlay from "./image-overlay";
 import EditHomePage from "./EditHomePage";
-// import Researches from "./Researches";
-// import Departments from "./Departments";
 
 interface AdminPageProps {
-  researches: React.ReactNode;
-  departments: React.ReactNode;
+  pages: { [key: string]: React.ReactNode };
+  tabs: string[];
   lng: string;
 }
 const AdminPage = ({ ...AdminPageProps }) => {
   const [component, setComponent] = useState("researches");
-
+  const { pages, tabs } = AdminPageProps;
   return (
-    <div className="">
+    <div className="min-h-screen">
       <div className="w-full">
-        <ImageWithTextOverlay imgUrl="/assets/imgs/header-services.svg" width={1920} height={500} text="Admin Page" />
+        <ImageWithTextOverlay
+          imgUrl="/assets/imgs/header-services.svg"
+          width={1920}
+          height={500}
+          text="Admin Page"
+        />
       </div>
 
       <div className="flex justify-center mt-8 mx-10">
         <nav className="flex space-x-4">
-          <button
-            onClick={() => {
-              setComponent("researches");
-            }}
-          >
-            <p className={`text-blue-500 hover:text-blue-700  ${component === "researches" ? "font-semibold text-blue-900 " : ""} `}>Researches</p>
-            {/* className={`text-slate-900 font-normal hover:text-slate-400 transition-colors ${component === "researches" ? "font-semibold text-blue-900 " : ""}`} */}
-          </button>
-          <button onClick={() => setComponent("departments")}>
-            <p className={`text-blue-500 hover:text-blue-700  ${component === "departments" ? "font-semibold text-blue-900 " : ""} `}>Departments</p>
-          </button>
-
-          <button onClick={() => setComponent("home-page")}>
-            <p className="text-blue-500 hover:text-blue-700">Home Page</p>
-          </button>
+          {tabs.map((tab: string) => (
+            <button
+              key={tab}
+              onClick={() => setComponent(tab.toLowerCase())}
+              className={`text-blue-500 hover:text-blue-700  ${
+                component === tab.toLowerCase()
+                  ? "font-semibold text-blue-900 "
+                  : ""
+              } `}
+            >
+              {tab}
+            </button>
+          ))}
         </nav>
       </div>
-      {/* <hr className="" /> */}
-      <div>{component == "researches" ? AdminPageProps.researches : component == "departments" ? AdminPageProps.departments : <EditHomePage lng={AdminPageProps.lng} />}</div>
+      <div className="border-b-2 border-secondary-400 container mx-auto py-5"></div>
+      <div>
+        {component ? (
+          pages[component]
+        ) : (
+          <EditHomePage lng={AdminPageProps.lng} />
+        )}
+      </div>
     </div>
   );
 };

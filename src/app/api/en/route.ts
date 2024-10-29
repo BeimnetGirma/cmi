@@ -1,7 +1,10 @@
 import fs from "fs";
 import path from "path";
 // const filePath = path.resolve("src/app/i18n/locales/en/translation.json");
-const filePath = path.join(process.cwd(), "src/app/i18n/locales/en/translation.json");
+const filePath = path.join(
+  process.cwd(),
+  "src/app/i18n/locales/en/translation.json"
+);
 console.log(filePath);
 
 export async function GET() {
