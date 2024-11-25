@@ -9,6 +9,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
@@ -33,22 +34,25 @@ const Login = () => {
       }
     } catch (error) {
       console.error({ error });
+      setError(
+        "Failed to sign in. Please check your credentials and try again."
+      );
     }
   };
 
   return (
-    <div className="flex  min-h-screen">
-      <div className="w-3/4">
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="hidden lg:block lg:w-3/4">
         <Image
           src="/assets/imgs/login-screen.png"
           className="object-cover w-full h-full"
           alt="login page"
-          width={1620}
+          width={1520}
           height={100}
         />
       </div>
-      <div className="flex items-center w-1/4">
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex items-center w-full lg:w-1/4 p-4 lg:p-0">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm px-5">
           <form
             className="space-y-6"
             action="#"
@@ -121,6 +125,7 @@ const Login = () => {
                 Sign in
               </button>
             </div>
+            {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
           </form>
         </div>
       </div>
