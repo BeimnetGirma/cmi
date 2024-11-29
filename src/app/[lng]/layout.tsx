@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NavBar from "@/components/navbar";
+import NavBar from "@/components/ui/navbar";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "../globals.css";
 import React from "react";
-import Footer from "@/components/footer";
+import Footer from "@/components/ui/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import prisma from "@/db";
 
