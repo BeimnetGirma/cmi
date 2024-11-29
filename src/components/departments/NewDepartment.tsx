@@ -25,10 +25,6 @@ const NewDepartment = ({ createDepartment }: NewDepartmentProps) => {
     closeModal();
   };
 
-  const importFromFile = async (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div>
       <div className="flex flex-row items-center justify-end">
