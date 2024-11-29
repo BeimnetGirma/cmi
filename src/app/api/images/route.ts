@@ -2,8 +2,6 @@ import prisma from "@/db";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  // get images from prisma
-  // return images
   const images = await prisma.image.findMany();
   return images;
 }
