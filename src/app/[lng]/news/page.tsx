@@ -1,18 +1,11 @@
 "use client";
 import { getPosts, searchPosts } from "@/app/ghost/posts";
-import Card from "@/components/card";
-import ImageWithTextOverlay from "@/components/image-overlay";
+import Card from "@/components/ui/card";
+import ImageWithTextOverlay from "@/components/ui/image-overlay";
 import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { PostsOrPages } from "@tryghost/content-api";
-
-const categories = [
-  "All",
-  "Quality System",
-  "Safety System",
-  "Environment System",
-];
 
 const News = () => {
   const [allNews, setAllNews] = React.useState<PostsOrPages[]>([]);
