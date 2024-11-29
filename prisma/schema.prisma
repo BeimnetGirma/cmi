@@ -26,11 +26,10 @@ model research {
 
 model manual {
   id Int @id @default(autoincrement())
-
   title String
-
   path String
 }
+
 model Image {
   id          String   @id @default(uuid())
   caption     String   @db.VarChar(255)
