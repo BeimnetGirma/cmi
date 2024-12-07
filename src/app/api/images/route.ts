@@ -75,12 +75,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to save image" }, { status: 500 });
   }
 }
-
-export async function DELETE(req: NextRequest) {
-  // delete image from database
-  const { id } = req.query;
-  const image = await prisma.image.delete({
-    where: { id: id as string },
-  });
-  return image;
-}

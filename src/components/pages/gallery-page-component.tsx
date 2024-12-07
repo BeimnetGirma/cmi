@@ -15,6 +15,16 @@ const GalleryPage = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [selectedImageId, setSelectedImageId] = useState("");
+  const openDeleteModal = (id: string) => {
+    setSelectedImageId(id);
+    setIsDeleteOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteOpen(false);
+  };
   const [images, setImages] = useState<Image[]>([]);
   useEffect(() => {
     const fetchImages = async () => {
@@ -89,11 +99,37 @@ const GalleryPage = () => {
     }
   };
 
-  const getBlobUrl = (buffer: Buffer) => {
-    const blob = new Blob([buffer], { type: "image/jpg" });
-    return URL.createObjectURL(blob);
+  const handleDelete = async (e: { preventDefault: () => void }) => {
+    if (selectedImageId) {
+      try {
+        const response = await fetch(`/api/images/${selectedImageId}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          toast.error("Failed to delete image.", {
+            duration: 3000,
+            description: response.statusText,
+          });
+          console.error(response);
+          return;
+        }
+        setImages(images.filter((image) => image.id !== selectedImageId));
+        toast.success("Image deleted successfully", {
+          duration: 3000,
+        });
+        closeDeleteModal();
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error("Failed to delete image.", {
+            duration: 3000,
+            description: error.message,
+          });
+          console.error(error);
+        }
+      }
+      closeDeleteModal();
+    }
   };
-
   return (
     <div className="flex flex-col justify-center ">
       <Toaster position="top-right" richColors />
@@ -107,7 +143,7 @@ const GalleryPage = () => {
       </div>
 
       {isOpen && (
-        <div>
+        <div className="fixed top-0 left-0 z-[9999]">
           <div className="fixed inset-0 w-screen h-screen bg-black opacity-50"></div>
           <div className="fixed inset-60 w-2/4 mx-auto items-center bg-black justify-center">
             <div className="absolute inset-0 bg-white "></div>
@@ -169,15 +205,60 @@ const GalleryPage = () => {
       <div className="justify-center">
         <section className="columns-5 max-w-7xl mx-auto space-y-4 py-6">
           {images.map((el, index) => (
-            <div key={index} className="rounded-md overflow-hidden">
-              <img src={el.imagePath} alt={el.caption} height={600} width={500} />
-              <div className="flex justify-center">
+            <div key={index} className="relative group rounded-md overflow-hidden  transform transition-transform duration-300 hover:scale-105">
+              {/* Image */}
+              <img src={el.imagePath} alt={el.caption} height={600} width={500} className="block" />
+
+              {/* Caption */}
+              <div className="flex justify-center mt-2">
                 <span className="text-sm text-slate-500 text-center">{el.caption}</span>
               </div>
-              {/* <img src={`data:image/png;base64,${imageData}`} alt="Uploaded Image" /> */}
+
+              {/* Delete Button */}
+              <button className="absolute top-2 right-2 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => openDeleteModal(el.id)}>
+                x
+              </button>
             </div>
           ))}
         </section>
+        {isDeleteOpen && (
+          <div>
+            <div className="fixed inset-0 w-screen h-screen bg-black opacity-50"></div>
+            <div className="fixed inset-60 w-2/4 mx-auto flex items-center bg-black justify-center">
+              <div className="absolute inset-0 bg-white "></div>
+              <div className=" bg-white p-4 rounded-lg">
+                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeDeleteModal}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                {/* Add your modal content here */}
+                <h1 className="text-slate-900 text-2xl relative ">Delete</h1>
+                <hr className="relative" />
+                <div className="relative mx-10 px-10">
+                  <p className="text-red-600 text-l">
+                    Are you sure you want to delete image captioned &quot; {images.find((image) => image.id === selectedImageId)?.caption || "Unknown"}&quot;? This action cannot be
+                    undone.{" "}
+                  </p>
+                </div>
+                <hr className="relative mt-10" />
+                <div className="flex relative justify-end mt-10">
+                  <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2" onClick={closeDeleteModal}>
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-red-600 hover:bg-red-700 text-white  py-2 px-4 mx-2 rounded"
+                    onClick={(e) => {
+                      handleDelete(e);
+                    }}
+                  >
+                    Delete Image
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
