@@ -2,13 +2,16 @@
 import React, { useState } from "react";
 import { Standard } from "@/types";
 
-type EditResearchProps = {
+type EditStandardProps = {
   standard: Standard;
   editStandard: (standard: Standard) => void;
 };
 
-const EditStandard = ({ standard, editStandard }: EditResearchProps) => {
+const EditStandard = ({ standard, editStandard }: EditStandardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState(standard.title);
+  const [filePath, setFilePath] = useState(standard.path);
+  const [file, setFile] = useState<File>();
 
   const openModal = () => {
     setIsOpen(true);
@@ -17,9 +20,6 @@ const EditStandard = ({ standard, editStandard }: EditResearchProps) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [title, setTitle] = useState(standard.title);
-  const [filePath, setFilePath] = useState(standard.path);
-  const [file, setFile] = useState<File>();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
