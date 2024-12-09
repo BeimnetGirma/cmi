@@ -2,9 +2,10 @@ import prisma from "@/db";
 import NewStandard from "@/components/standards/new-standard";
 import { revalidatePath } from "next/cache";
 import { Standard as IStandard } from "@/types";
-import FileOpen from "../research/file-open";
 import EditStandard from "@/components/standards/edit-standards";
 import DeleteStandard from "@/components/standards/delete-standards";
+import { FILE_MODULE } from "@/lib/enums";
+import FileOpen from "../ui/file-open";
 
 export async function createStandard(newStandard: IStandard) {
   "use server";
@@ -56,25 +57,31 @@ const Standard = async () => {
         <table className="table-auto mx-auto w-full my-4 border border-collapse ">
           <thead>
             <tr>
-              <th className="p-6 font-bold border">Id</th>
               <th className="p-6 font-bold border">Title</th>
+              <th className="p-6 font-bold border">File Name</th>
+              <th className="p-6 font-bold border">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {standard.map((standard, index) => (
-              <tr key={index}>
-                <td className="p-6 border">{standard.id}</td>
+            {standard.map((standard) => (
+              <tr key={standard.id}>
                 <td className="p-6 border">{standard.title}</td>
+                <td className="p-6 border">
+                  {JSON.parse(standard.path)?.originalName}
+                </td>
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
                     {" "}
-                    <FileOpen filePath={JSON.parse(standard.path)?.filePath} />
+                    <FileOpen
+                      apiUrl={FILE_MODULE.STANDARD}
+                      filePath={JSON.parse(standard.path)?.filePath}
+                    />
                     <EditStandard
                       standard={standard}
                       editStandard={editStandard}
                     />
                     <DeleteStandard
-                      standard={{ ...standard }}
+                      standard={standard}
                       deleteStandard={deleteStandard}
                     />
                   </div>
