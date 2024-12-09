@@ -3,15 +3,17 @@ import useLoading from "@/hooks/useLoading";
 import React, { useState } from "react";
 import { toast, Toaster } from "sonner";
 import Spinner from "../ui/spinner";
-
-import { manual as IManual } from "@prisma/client";
+import { Standard } from "@/types";
 
 type NewStandardProps = {
-  createStandard: (standard: IManual) => void;
+  createStandard: (standard: Standard) => void;
 };
 
 const NewStandard = ({ createStandard }: NewStandardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState<File | undefined>();
+  const { isLoading, startLoading, stopLoading } = useLoading();
 
   const openModal = () => {
     setIsOpen(true);
@@ -20,10 +22,6 @@ const NewStandard = ({ createStandard }: NewStandardProps) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState<File | undefined>();
-  const { isLoading, startLoading, stopLoading } = useLoading();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -50,8 +48,7 @@ const NewStandard = ({ createStandard }: NewStandardProps) => {
       if (data.success) {
         const filePath = data.path;
         const originalName = file.name;
-        const newStandard: IManual = {
-          id: Math.random(),
+        const newStandard: Standard = {
           title: title,
           path: JSON.stringify({
             filePath,
@@ -59,7 +56,7 @@ const NewStandard = ({ createStandard }: NewStandardProps) => {
           }),
         };
         createStandard(newStandard);
-        toast.success("Research uploaded successfully", {
+        toast.success("Standard uploaded successfully", {
           duration: 3000,
         });
         closeModal();
@@ -67,7 +64,7 @@ const NewStandard = ({ createStandard }: NewStandardProps) => {
     } catch (error) {
       stopLoading();
       if (error instanceof Error) {
-        toast.error("Failed to publish the research.", {
+        toast.error("Failed to publish the standard.", {
           duration: 3000,
           description: error.message,
         });
