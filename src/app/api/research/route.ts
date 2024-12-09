@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
 
   const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
 
-  console.log("Downloading file: ", filePath, filename);
+  console.log("Downloading file: ", filePath);
   try {
     const file = fs.readFileSync(filePath);
     return new NextResponse(file, {
