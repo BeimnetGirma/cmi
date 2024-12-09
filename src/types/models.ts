@@ -10,7 +10,7 @@ export type Research = {
   path: string;
 };
 export type Standard = {
-  id?: number;
+  id?: string;
   title: string;
   path: string;
 };
