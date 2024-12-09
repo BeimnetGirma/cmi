@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { toast, Toaster } from "sonner";
-import { Image } from "@prisma/client";
+import { Image as PrismaImage } from "@prisma/client";
+import Image from "next/image";
 const Gallery = () => {
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<PrismaImage[]>([]);
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -16,7 +17,6 @@ const Gallery = () => {
           return;
         }
         const data = await response.json();
-        console.log(data);
 
         setImages(data);
       } catch (error) {
@@ -25,7 +25,6 @@ const Gallery = () => {
             duration: 3000,
             description: error.message,
           });
-          console.error(error);
         }
       }
     };
@@ -36,7 +35,9 @@ const Gallery = () => {
     <div className="justify-center">
       <div className="w-full">
         <div className="flex justify-center">
-          <h1 className="text-primary-main font-bold text-2xl ml-28 pt-6">Gallery</h1>
+          <h1 className="text-primary-main font-bold text-2xl ml-28 pt-6">
+            Gallery
+          </h1>
         </div>
       </div>
       <Toaster position="top-right" richColors />
@@ -44,9 +45,16 @@ const Gallery = () => {
         <section className="columns-5 max-w-7xl mx-auto space-y-4 py-6">
           {images.map((el, index) => (
             <div key={index} className="rounded-md overflow-hidden">
-              <img src={el.imagePath} alt={el.caption} height={600} width={500} />
+              <Image
+                src={el.imagePath}
+                alt={el.caption}
+                height={600}
+                width={500}
+              />
               <div className="flex justify-center">
-                <span className="text-sm text-slate-500 text-center">{el.caption}</span>
+                <span className="text-sm text-slate-500 text-center">
+                  {el.caption}
+                </span>
               </div>
               {/* <img src={`data:image/png;base64,${imageData}`} alt="Uploaded Image" /> */}
             </div>
