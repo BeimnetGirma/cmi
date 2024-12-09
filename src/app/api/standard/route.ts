@@ -6,7 +6,7 @@ import path from "path";
 const STANDARD_UPLOAD_DIR = "public/uploads/standard";
 // Generate routes to upload pdf files and save them to the database.
 export async function POST(req: NextRequest) {
-  const uploadDir = path.join(process.cwd(), "public/uploads/research");
+  const uploadDir = path.join(process.cwd(), STANDARD_UPLOAD_DIR);
   const data = await req.formData();
   const file: File | null = data.get("file") as unknown as File;
   if (!file)
