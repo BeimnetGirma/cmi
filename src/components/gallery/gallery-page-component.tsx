@@ -1,5 +1,5 @@
 "use client";
-import { Image } from "@prisma/client";
+import Image from "next/image";
 // import { revalidatePath } from "next/cache";
 import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
@@ -38,8 +38,6 @@ const GalleryPage = () => {
           return;
         }
         const data = await response.json();
-        console.log(data);
-
         setImages(data);
       } catch (error) {
         if (error instanceof Error) {
@@ -77,14 +75,11 @@ const GalleryPage = () => {
       if (response.ok) {
         await response.json().then((data) => {
           if (data) {
-            // var filePath = data.path;
             images.push(data);
-
             toast.success("Research added successfully", {
               duration: 3000,
             });
             closeModal();
-            // revalidatePath("/");
           }
         });
       }
@@ -134,9 +129,14 @@ const GalleryPage = () => {
     <div className="flex flex-col justify-center ">
       <Toaster position="top-right" richColors />
       <div className="relative flex items-center w-full mt-5">
-        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-primary-main font-bold text-2xl">Gallery</h1>
+        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-primary-main font-bold text-2xl">
+          Gallery
+        </h1>
         <div className="ml-auto">
-          <button className="bg-green-600 text-white rounded-md py-2 px-6 mx-5" onClick={openModal}>
+          <button
+            className="bg-green-600 text-white rounded-md py-2 px-6 mx-5"
+            onClick={openModal}
+          >
             Add Image
           </button>
         </div>
@@ -148,19 +148,41 @@ const GalleryPage = () => {
           <div className="fixed inset-60 w-2/4 mx-auto items-center bg-black justify-center">
             <div className="absolute inset-0 bg-white "></div>
             <div className=" bg-white p-4 rounded-lg">
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-3xl relative ">Add New Image</h1>
+              <h1 className="text-slate-900 text-3xl relative ">
+                Add New Image
+              </h1>
 
               <section>
-                <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
+                <form
+                  className="mt-8 relative"
+                  onSubmit={(e) => handleSubmit(e)}
+                >
                   <div className="mb-4">
                     <div className="mb-4">
-                      <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="image"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Image:
                       </label>
                       <input
@@ -174,7 +196,10 @@ const GalleryPage = () => {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       />
                     </div>
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="title"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Caption:
                     </label>
                     <input
@@ -190,7 +215,10 @@ const GalleryPage = () => {
                   </div>
 
                   <div className="flex justify-end">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
                       <div className="flex space-x-2">
                         <span>Save</span>
                       </div>
@@ -205,17 +233,31 @@ const GalleryPage = () => {
       <div className="justify-center">
         <section className="columns-5 max-w-7xl mx-auto space-y-4 py-6">
           {images.map((el, index) => (
-            <div key={index} className="relative group rounded-md overflow-hidden  transform transition-transform duration-300 hover:scale-105">
+            <div
+              key={index}
+              className="relative group rounded-md overflow-hidden  transform transition-transform duration-300 hover:scale-105"
+            >
               {/* Image */}
-              <img src={el.imagePath} alt={el.caption} height={600} width={500} className="block" />
+              <Image
+                src={el.imagePath}
+                alt={el.caption}
+                height={600}
+                width={500}
+                className="block"
+              />
 
               {/* Caption */}
               <div className="flex justify-center mt-2">
-                <span className="text-sm text-slate-500 text-center">{el.caption}</span>
+                <span className="text-sm text-slate-500 text-center">
+                  {el.caption}
+                </span>
               </div>
 
               {/* Delete Button */}
-              <button className="absolute top-2 right-2 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => openDeleteModal(el.id)}>
+              <button
+                className="absolute top-2 right-2 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => openDeleteModal(el.id)}
+              >
                 x
               </button>
             </div>
@@ -227,9 +269,23 @@ const GalleryPage = () => {
             <div className="fixed inset-60 w-2/4 mx-auto flex items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeDeleteModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeDeleteModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
@@ -237,13 +293,18 @@ const GalleryPage = () => {
                 <hr className="relative" />
                 <div className="relative mx-10 px-10">
                   <p className="text-red-600 text-l">
-                    Are you sure you want to delete image captioned &quot; {images.find((image) => image.id === selectedImageId)?.caption || "Unknown"}&quot;? This action cannot be
-                    undone.{" "}
+                    Are you sure you want to delete image captioned &quot;{" "}
+                    {images.find((image) => image.id === selectedImageId)
+                      ?.caption || "Unknown"}
+                    &quot;? This action cannot be undone.{" "}
                   </p>
                 </div>
                 <hr className="relative mt-10" />
                 <div className="flex relative justify-end mt-10">
-                  <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2" onClick={closeDeleteModal}>
+                  <button
+                    className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2"
+                    onClick={closeDeleteModal}
+                  >
                     Cancel
                   </button>
                   <button
