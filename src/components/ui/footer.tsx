@@ -3,6 +3,7 @@ import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+
 const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
   const { t } = useTranslation(lng, "translation");
   return (
@@ -29,11 +30,11 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
             </Link>
           </div>
           {/* About us */}
-          <div className="flex flex-col py-2">
+          <div className="flex flex-col ">
             <h3 className="text-sm text-secondary-main font-semibold mb-1 ">
               {t("aboutUs")}
             </h3>
-            <div className=" text-sm text-secondary-light">
+            <div className=" text-sm text-secondary-light py-2">
               {t("aboutUsFooter")}
             </div>
           </div>
@@ -43,9 +44,8 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
               {t("services")}
             </h3>
             <ul className="text-sm text-secondary-light flex flex-col space-y-2">
-              <li>{t("preConstructionPhase")}</li>
-              <li>{t("constructionPhase")}</li>
-              <li>{t("postConstructionPhase")}</li>
+              <li>{t("lms_service")}</li>
+              <li>{t("ems_service")}</li>
             </ul>
           </div>
           {/* Contact us */}

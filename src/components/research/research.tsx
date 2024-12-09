@@ -1,25 +1,24 @@
 import prisma from "@/db";
-import Link from "next/link";
-import NewResearch from "@/components/NewResearch";
-import EditResearch from "@/components/EditResearch";
-import DeleteResearch from "@/components/DeleteResearch";
+import NewResearch from "@/components/research/new-research";
+import EditResearch from "@/components/research/edit-research";
+import DeleteResearch from "@/components/research/delete-research";
 import { revalidatePath } from "next/cache";
 import { Research } from "@/types";
-const Researches = async () => {
-  var researches = await prisma.research.findMany();
-  // var researches = await prisma.research.findMany();
-  var departments = await prisma.department.findMany();
-
-  async function createResearch(newResearch: Research) {
-    "use server";
-    try {
-      newResearch.year = new Date(newResearch.year); // Convert Year to Date object
-      await prisma.research.create({ data: newResearch });
-      revalidatePath("/");
-    } catch (error) {
-      console.error(error);
-    }
+import FileOpen from "../ui/file-open";
+export async function createResearch(newResearch: Research) {
+  "use server";
+  try {
+    newResearch.year = new Date(newResearch.year); // Convert Year to Date object
+    await prisma.research.create({ data: newResearch });
+    revalidatePath("/admin");
+  } catch (error) {
+    console.error(error);
   }
+}
+const Researches = async () => {
+  const researches = await prisma.research.findMany();
+  const departments = await prisma.department.findMany();
+
   async function editResearch(research: Research) {
     "use server";
     try {
@@ -56,7 +55,10 @@ const Researches = async () => {
       </div>
 
       <div className="justify-end px-52">
-        <NewResearch departments={departments} createResearch={createResearch} />
+        <NewResearch
+          departments={departments}
+          createResearch={createResearch}
+        />
         <table className="table-auto mx-auto w-full my-4 border border-collapse ">
           <thead>
             <tr>
@@ -71,24 +73,31 @@ const Researches = async () => {
               <tr key={index}>
                 <td className="p-6 border">{research.id}</td>
                 <td className="p-6 border">{research.title}</td>
-                <td className="p-6 border">{departments.find((dept) => dept.id === research.deptId)?.name}</td>
-                <td className="p-6 border">{research.year.toLocaleDateString()}</td>
+                <td className="p-6 border">
+                  {
+                    departments.find((dept) => dept.id === research.deptId)
+                      ?.name
+                  }
+                </td>
+                <td className="p-6 border">
+                  {research.year.toLocaleDateString()}
+                </td>
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
                     {" "}
-                    <Link href={research.path}>
-                      <svg className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        />
-                      </svg>
-                    </Link>
-                    <EditResearch departments={departments} research={{ ...research, deptId: research.deptId ?? 0 }} editResearch={editResearch} />
-                    <DeleteResearch research={{ ...research, deptId: research.deptId ?? 0 }} deleteResearch={deleteResearch} />
+                    <FileOpen
+                      apiUrl="research"
+                      filePath={JSON.parse(research.path)?.filePath}
+                    />
+                    <EditResearch
+                      departments={departments}
+                      research={{ ...research, deptId: research.deptId ?? 0 }}
+                      editResearch={editResearch}
+                    />
+                    <DeleteResearch
+                      research={{ ...research, deptId: research.deptId ?? 0 }}
+                      deleteResearch={deleteResearch}
+                    />
                   </div>
                 </td>
               </tr>

@@ -7,11 +7,11 @@ import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname } from "next/navigation";
 import { SignOutButton, useUser } from "@clerk/nextjs";
-import ResourcesMenu from "./resources-menu";
-import DepartmentMenu from "./departments/department-menu";
-import ExecutiveMenu from "./executive-menu";
+import ResourcesMenu from "../ui/resources-menu";
+import DepartmentMenu from "../departments/department-menu";
+import ExecutiveMenu from "../ui/executive-menu";
 import MediaMenu from "./media-menu";
-import AdminMenu from "./admin-menu";
+import AdminMenu from "../ui/admin-menu";
 
 const NavBar: React.FC<PageProps & { departments: Department[] }> = ({
   departments,

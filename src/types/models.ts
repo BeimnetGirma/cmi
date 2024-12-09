@@ -9,3 +9,8 @@ export type Research = {
   year: Date;
   path: string;
 };
+export type Standard = {
+  id?: string;
+  title: string;
+  path: string;
+};

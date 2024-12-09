@@ -1,4 +1,4 @@
-import ClientsSlider from "@/components/clients-slider";
+import ClientsSlider from "@/components/ui/clients-slider";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "@/app/i18n";

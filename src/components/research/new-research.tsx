@@ -3,13 +3,14 @@ import useLoading from "@/hooks/useLoading";
 import { Department, Research } from "@/types";
 import React, { useState } from "react";
 import { toast, Toaster } from "sonner";
-import Spinner from "./ui/spinner";
-import { Calendar } from "./ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/button";
+import Spinner from "../ui/spinner";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+
 type NewResearchProps = {
   departments: Department[];
   createResearch: (research: Research) => void;
@@ -29,7 +30,7 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
   const [title, setTitle] = useState("");
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState<Date | undefined>(new Date());
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File | undefined>();
   const { isLoading, startLoading, stopLoading } = useLoading();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -39,36 +40,38 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
       startLoading();
       const formData = new FormData();
       formData.set("file", file);
-      const response = await fetch("/api/upload", {
+      const response = await fetch(`/api/research/`, {
         method: "POST",
         body: formData,
       });
       if (!response.ok) {
         stopLoading();
-        toast.error("Failed to publish the research.", {
+        toast.error("Failed to upload the research.", {
           duration: 3000,
           description: response.statusText,
         });
         console.error(response);
         return;
       }
-      if (response.ok) {
-        await response.json().then((data) => {
-          if (data) {
-            var filePath = data.path;
-            const research: Research = {
-              title: title,
-              deptId: parseInt(department),
-              year: new Date(year),
-              path: filePath,
-            };
-            createResearch(research);
-            toast.success("Research added successfully", {
-              duration: 3000,
-            });
-            closeModal();
-          }
+
+      const data = await response.json();
+      if (data.success) {
+        const filePath = data.path;
+        const originalName = file.name;
+        const newResearch: Research = {
+          title: title,
+          deptId: parseInt(department),
+          year: year ? new Date(year) : new Date(),
+          path: JSON.stringify({
+            filePath,
+            originalName,
+          }),
+        };
+        createResearch(newResearch);
+        toast.success("Research uploaded successfully", {
+          duration: 3000,
         });
+        closeModal();
       }
     } catch (error) {
       stopLoading();
@@ -160,7 +163,7 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
                     onChange={(e) => {
                       setDepartment(e.target.value);
                     }}
-                    defaultValue={0}
+                    defaultValue={departments.length && departments[0].id}
                   >
                     <option selected disabled>
                       Select Department
@@ -215,7 +218,7 @@ const NewResearch = ({ departments, createResearch }: NewResearchProps) => {
                     accept=".pdf"
                     required
                     onChange={(e) => {
-                      setFile(e.target.files?.[0]);
+                      setFile(e.target?.files?.[0]);
                     }}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                   />

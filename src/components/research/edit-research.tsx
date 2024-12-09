@@ -1,13 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import { Department, Research } from "@/types";
 type EditResearchProps = {
   research: Research;
   departments: Department[];
   editResearch: (research: Research) => void;
 };
-const EditResearch = ({ departments, research, editResearch }: EditResearchProps) => {
+const EditResearch = ({
+  departments,
+  research,
+  editResearch,
+}: EditResearchProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -37,12 +40,24 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
         if (response.ok) {
           await response.json().then((data) => {
             if (data) {
-              editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: data.path });
+              editResearch({
+                id: research.id,
+                title: title,
+                deptId: +department,
+                year: new Date(year),
+                path: data.path,
+              });
             }
           });
         }
       } else {
-        editResearch({ id: research.id, title: title, deptId: +department, year: new Date(year), path: filePath });
+        editResearch({
+          id: research.id,
+          title: title,
+          deptId: +department,
+          year: new Date(year),
+          path: filePath,
+        });
       }
       closeModal();
     } catch (error) {
@@ -52,9 +67,19 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
   return (
     <>
       <button onClick={openModal}>
-        <svg className="h-8 w-8 text-yellow-500" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
+        <svg
+          className="h-8 w-8 text-yellow-500"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
         </svg>
       </button>
       <div>
@@ -64,17 +89,36 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
             <div className="fixed inset-60 w-2/4 mx-auto  items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Edit Research Details</h1>
+                <h1 className="text-slate-900 text-3xl relative ">
+                  Edit Research Details
+                </h1>
 
                 <form className="mt-8 relative">
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="title"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Title:
                     </label>
                     <input
@@ -89,7 +133,10 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="department" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="department"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Department:
                     </label>
                     {/* <input
@@ -112,14 +159,21 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                       }}
                     >
                       {departments.map((dept, index) => (
-                        <option selected={dept.id == research.deptId} value={dept.id} key={index}>
+                        <option
+                          selected={dept.id == research.deptId}
+                          value={dept.id}
+                          key={index}
+                        >
                           {dept.name}
                         </option>
                       ))}
                     </select>
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="year" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="year"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Year:
                     </label>
                     <input
@@ -134,7 +188,10 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="file" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="file"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       File:
                     </label>
                     <input
@@ -148,7 +205,10 @@ const EditResearch = ({ departments, research, editResearch }: EditResearchProps
                     />
                   </div>
                   <div className="flex justify-end">
-                    <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2" onClick={closeModal}>
+                    <button
+                      className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2"
+                      onClick={closeModal}
+                    >
                       Cancel
                     </button>
                     <button

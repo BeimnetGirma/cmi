@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ClientsSlider from "@/components/clients-slider";
 import { HomePageProps } from "@/types";
 import { useTranslation } from "@/app/i18n";
 import { FeaturedPosts, Post } from "@/types/featured-posts";
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/ui/carousel";
 
 const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;

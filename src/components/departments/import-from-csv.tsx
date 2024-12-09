@@ -15,9 +15,9 @@ import useLoading from "@/hooks/useLoading";
 import { toast, Toaster } from "sonner";
 import Papa from "papaparse";
 import { Button } from "../ui/button";
-import Spinner from "../ui/spinner";
 import { createDepartment } from "./Departments";
 import { Department } from "@/types";
+import Spinner from "../ui/spinner";
 
 const ImportFromCSV = () => {
   const { isLoading, startLoading, stopLoading } = useLoading();

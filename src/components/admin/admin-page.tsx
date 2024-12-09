@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ImageWithTextOverlay from "./image-overlay";
-import EditHomePage from "./EditHomePage";
+import ImageWithTextOverlay from "../ui/image-overlay";
+import EditHomePage from "../home-page/edit-home-page";
 
 interface AdminPageProps {
   pages: { [key: string]: React.ReactNode };

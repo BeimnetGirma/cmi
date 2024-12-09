@@ -1,5 +1,5 @@
 import { useState, useCallback, ReactNode } from "react";
-import DefaultLoading from "../components/loading";
+import DefaultLoading from "../components/ui/loading";
 import React from "react";
 
 // Define the useLoading hook

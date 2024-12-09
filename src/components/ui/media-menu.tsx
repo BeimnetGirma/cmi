@@ -4,15 +4,28 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
 
-const AdminMenu: React.FC<PageProps> = ({ params: { lng } }) => {
+const MediaMenu: React.FC<PageProps> = ({ params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const [openDropdown, setOpenDropdown] = useState(false);
-
+  const submenus = [
+    {
+      title: t("news"),
+      href: "/news",
+    },
+    {
+      title: t("gallery"),
+      href: "/gallery",
+    },
+    {
+      title: t("magazine"),
+      href: "/magazine",
+    },
+  ];
   return (
     <DropdownMenu
       open={openDropdown}
@@ -27,7 +40,7 @@ const AdminMenu: React.FC<PageProps> = ({ params: { lng } }) => {
         <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
           <li className="py-4">
             <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">
-              {t("controlPanel").toUpperCase()}
+              {t("media").toUpperCase()}
             </span>
           </li>
         </DropdownMenuTrigger>
@@ -35,15 +48,17 @@ const AdminMenu: React.FC<PageProps> = ({ params: { lng } }) => {
           className="w-56 "
           onMouseLeave={() => setOpenDropdown(false)}
         >
-          <DropdownMenuItem className="mt-2 hover:cursor-pointer">
-            <Link href="/admin" className="hover:text-slate-500 ">
-              {t("admin")}
-            </Link>
-          </DropdownMenuItem>
+          {submenus.map((submenu, index) => (
+            <DropdownMenuItem key={index} className="mt-2 hover:cursor-pointer">
+              <Link href={submenu.href} className="hover:text-slate-500 ">
+                {submenu.title}
+              </Link>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </section>
     </DropdownMenu>
   );
 };
 
-export default AdminMenu;
+export default MediaMenu;

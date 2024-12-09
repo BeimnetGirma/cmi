@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./dropdown-menu";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
@@ -25,13 +30,24 @@ const ResourcesMenu: React.FC<PageProps> = ({ params: { lng } }) => {
           setOpenDropdown(false);
         }}
       >
-        <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
-          <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
+        <section
+          onMouseEnter={() => setOpenDropdown(true)}
+          onMouseLeave={() => setOpenDropdown(false)}
+        >
+          <DropdownMenuTrigger
+            asChild
+            onMouseEnter={() => setOpenDropdown(true)}
+          >
             <li className="py-4">
-              <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">{t("resource").toUpperCase()}</span>
+              <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">
+                {t("resource").toUpperCase()}
+              </span>
             </li>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
+          <DropdownMenuContent
+            className="w-56 "
+            onMouseLeave={() => setOpenDropdown(false)}
+          >
             {submenus.map((submenu, index) => (
               <DropdownMenuItem key={index} className="mt-2">
                 <Link href={submenu.href} className="hover:text-slate-500 ">
