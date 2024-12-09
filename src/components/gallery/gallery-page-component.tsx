@@ -1,4 +1,5 @@
 "use client";
+import { Image as PrismaImage } from "@prisma/client";
 import Image from "next/image";
 // import { revalidatePath } from "next/cache";
 import React, { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ const GalleryPage = () => {
   const closeDeleteModal = () => {
     setIsDeleteOpen(false);
   };
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<PrismaImage[]>([]);
   useEffect(() => {
     const fetchImages = async () => {
       try {
