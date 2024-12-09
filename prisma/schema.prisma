@@ -25,9 +25,9 @@ model research {
 }
 
 model manual {
-  id Int @id @default(autoincrement())
+  id    String   @id @default(uuid())
   title String
-  path String
+  path  String
 }
 
 model Image {
