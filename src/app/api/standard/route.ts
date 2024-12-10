@@ -4,7 +4,16 @@ import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
 const STANDARD_UPLOAD_DIR = "public/uploads/standard";
-// Generate routes to upload pdf files and save them to the database.
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "50mb",
+    },
+  },
+};
+
+// Routes to upload pdf files and save them to the database.
 export async function POST(req: NextRequest) {
   const uploadDir = path.join(process.cwd(), STANDARD_UPLOAD_DIR);
   const data = await req.formData();
