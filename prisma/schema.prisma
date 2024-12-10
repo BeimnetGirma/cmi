@@ -41,13 +41,14 @@ model Image {
 }
 
 model Executive {
-  id             String   @id @default(uuid())
-  name           String   @db.VarChar(100)
-  title          String   @db.VarChar(100)
-  jobDescription String   @db.Text
-  imagePath      String   @db.VarChar(1000)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id                String   @id @default(uuid())
+  departmentName    String   @db.VarChar(100)
+  headName          String   @db.VarChar(100)
+  headTitle         String   @db.VarChar(100)
+  dutiesDescription String   @db.Text
+  imagePath         String   @db.VarChar(1000)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model ProfilePicture {

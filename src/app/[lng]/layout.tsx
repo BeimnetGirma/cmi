@@ -30,12 +30,18 @@ export default async function RootLayout({
   };
 }>) {
   const { lng = "en" } = params;
-  const departments = await prisma.department.findMany();
+  // const departments = await prisma.department.findMany();
+  const executives = await prisma.executive.findMany({
+    select: {
+      departmentName: true,
+      id: true,
+    },
+  });
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar departments={departments} params={{ lng }} />
+          <NavBar executives={executives} params={{ lng }} />
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {

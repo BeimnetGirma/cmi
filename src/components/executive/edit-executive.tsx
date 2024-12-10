@@ -3,6 +3,7 @@ import useLoading from "@/hooks/useLoading";
 import { Executive } from "@prisma/client";
 import React, { useState } from "react";
 import Spinner from "../ui/spinner";
+import { revalidatePath } from "next/cache";
 
 type EditProfileProps = {
   executive: Executive;
@@ -22,9 +23,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [name, setName] = useState(executive.name);
-  const [title, setTitle] = useState(executive.title);
-  const [jobDescription, setJobDescription] = useState(executive.jobDescription);
+  const [headName, setFullName] = useState(executive.headName);
+  const [headTitle, setTitle] = useState(executive.headTitle);
+  const [dutiesDescription, setDescription] = useState(executive.dutiesDescription);
+  const [departmentName, setDeptName] = useState(executive.departmentName);
   const [imagePath, setImagePath] = useState(executive.imagePath);
   const [image, setImage] = useState<File>();
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -43,9 +45,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
           await response.json().then((data) => {
             if (data) {
               editProfile({
-                name: name,
-                title: title,
-                jobDescription: jobDescription,
+                departmentName: departmentName,
+                dutiesDescription: dutiesDescription,
+                headName: headName,
+                headTitle: headTitle,
                 imagePath: data.image,
                 id: executive.id,
                 createdAt: executive.createdAt,
@@ -56,15 +59,17 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
         }
       } else {
         editProfile({
-          name: name,
-          title: title,
-          jobDescription: jobDescription,
+          departmentName: departmentName,
+          dutiesDescription: dutiesDescription,
+          headName: headName,
+          headTitle: headTitle,
           imagePath: imagePath,
           id: executive.id,
           createdAt: executive.createdAt,
           updatedAt: executive.updatedAt,
         });
       }
+      revalidatePath("/");
       closeModal();
     } catch (error) {
       console.log(error);
@@ -91,77 +96,97 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Update Profile</h1>
+                <h1 className="text-slate-900 text-3xl relative ">Update Excutive Profile</h1>
 
                 <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Full Name:
+                    <label htmlFor="deptName" className="block text-gray-700 text-sm font-bold mb-2">
+                      Executive Name
                     </label>
                     <input
                       required
                       type="text"
-                      id="name"
-                      value={name}
+                      id="deptName"
+                      value={departmentName}
                       onChange={(e) => {
-                        setName(e.target.value);
+                        setDeptName(e.target.value);
                       }}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
                       placeholder="Enter Full Name"
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Title
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      id="title"
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
-                      placeholder="Enter Title"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Job Description:
+                    <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                      Executive Description:
                     </label>
                     <textarea
                       required
-                      id="jobDescription"
+                      id="description"
+                      value={dutiesDescription}
                       rows={4}
-                      value={jobDescription}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       placeholder="Enter Job Description"
                       onChange={(e) => {
-                        setJobDescription(e.target.value);
+                        setDescription(e.target.value);
                       }}
                     />
                   </div>
-                  <div className="mb-4">
-                    <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
-                      Profile Picture:
-                    </label>
-                    <input
-                      type="file"
-                      id="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        setImage(e.target.files?.[0]);
-                      }}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-                    />
-                  </div>
+                  <fieldset className="m-5 p-2 border-2 ">
+                    <legend className="block text-gray-700 font-bold mb-2">Executive Head</legend>
+                    <div className="mb-4">
+                      <label htmlFor="headName" className="block text-gray-700 text-sm font-bold mb-2">
+                        Full Name
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="headName"
+                        value={headName}
+                        onChange={(e) => {
+                          setFullName(e.target.value);
+                        }}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                        placeholder="Enter Full Name"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                        Title
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="title"
+                        value={headTitle}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                        placeholder="Enter Title"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                        Profile Picture:
+                      </label>
+                      <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                        onChange={(e) => {
+                          setImage(e.target.files?.[0]);
+                        }}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+                      />
+                    </div>
+                  </fieldset>
 
                   <div className="flex justify-end">
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       <div className="flex space-x-2">
                         {isLoading && <Spinner />}
-                        <span>Update</span>
+                        <span>Update Profile</span>
                       </div>
                     </button>
                   </div>
