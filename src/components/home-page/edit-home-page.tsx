@@ -5,7 +5,12 @@ interface EditHomePageProp {
   lng: string;
 }
 const EditHomePage = ({ ...EditHomePageProp }) => {
-  const [data, setData] = useState<{ companyName?: any; companyIntro?: any; aboutUs?: any; aboutUsIntro?: any } | null>(null);
+  const [data, setData] = useState<{
+    companyName?: any;
+    companyIntro?: any;
+    aboutUs?: any;
+    aboutUsIntro?: any;
+  } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,11 +49,13 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
       </div>
       <Toaster position="top-right" richColors />
       <div className="justify-end w-2/3 mx-auto px-52">
-        {/* <button onClick={}></button> */}
         {data && (
           <form onSubmit={handleSubmit} className="mt-8 relative">
             <div className="mb-4">
-              <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                htmlFor="title"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
                 Home Page Title:
               </label>
               <input
@@ -63,11 +70,15 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="home-intro" className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                htmlFor="home-intro"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
                 Home Page Introduction
               </label>
               <textarea
                 id="home-intro"
+                rows={10}
                 value={data.companyIntro}
                 onChange={(e) => {
                   setData({ ...data, companyIntro: e.target.value });
@@ -77,7 +88,10 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="home-about-title" className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                htmlFor="home-about-title"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
                 About Section Title
               </label>
               <input
@@ -92,11 +106,15 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="home-about-content" className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                htmlFor="home-about-content"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
                 About Section Content
               </label>
               <textarea
                 id="home-about-content"
+                rows={10}
                 value={data.aboutUsIntro}
                 onChange={(e) => {
                   setData({ ...data, aboutUsIntro: e.target.value });
@@ -105,23 +123,14 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
                 placeholder="Enter Section Content"
               />
             </div>
-            {/* <div className="mb-4">
-                <label htmlFor="home-about-image" className="block text-gray-700 text-sm font-bold mb-2">
-                About Section Image
-                </label>
-                <input type="file" id="home-about-image" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 " placeholder="Enter Section Image" />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="home-services-title" className="block text-gray-700 text-sm font-bold mb-2">
-                Services Section Title
-                </label>
-                <input type="text" id="home-services-title" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 " placeholder="Enter Section Title" />
-            </div>
-             */}
-
             <div className="flex justify-end">
-              <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2">Cancel</button>
-              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 mx-2 rounded">
+              <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 mx-2 rounded"
+              >
                 Update Home Page
               </button>
             </div>
