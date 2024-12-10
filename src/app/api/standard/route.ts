@@ -5,13 +5,7 @@ import path from "path";
 
 const STANDARD_UPLOAD_DIR = "public/uploads/standard";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "50mb",
-    },
-  },
-};
+export const responseLimit = "50mb";
 
 // Routes to upload pdf files and save them to the database.
 export async function POST(req: NextRequest) {
