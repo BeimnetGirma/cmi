@@ -3,13 +3,7 @@ import fs from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "50mb",
-    },
-  },
-};
+export const responseLimit = "50mb";
 
 export async function GET(req: NextRequest) {
   const images = await prisma.image.findMany();
