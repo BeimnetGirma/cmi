@@ -1,5 +1,6 @@
 "use client";
 import { Executive } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 
 type DeleteExecutiveProps = {
@@ -16,10 +17,11 @@ const DeleteExecutive = ({ executive, deleteProfile }: DeleteExecutiveProps) => 
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [title, setTitle] = useState(executive.name);
+  const [title, setTitle] = useState(executive.departmentName);
   const handleClick = async (e: { preventDefault: () => void }) => {
     if (executive.id) {
       deleteProfile(executive.id);
+      revalidatePath("/");
       closeModal();
     }
   };
@@ -54,10 +56,10 @@ const DeleteExecutive = ({ executive, deleteProfile }: DeleteExecutiveProps) => 
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-2xl relative ">Delete Profile</h1>
+                <h1 className="text-slate-900 text-2xl relative ">Delete Excutive Profile</h1>
                 <hr className="relative" />
                 <div className="relative mx-10 px-10">
-                  <p className="text-red-600 text-l">Are you sure you want to delete the executive profile of &quot;{executive.name}&quot;? This action cannot be undone. </p>
+                  <p className="text-red-600 text-l">Are you sure you want to delete the executive named &quot;{executive.departmentName}&quot;? This action cannot be undone. </p>
                 </div>
                 <hr className="relative mt-10" />
                 <div className="flex relative justify-end mt-10">

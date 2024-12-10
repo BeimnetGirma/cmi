@@ -18,9 +18,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
+  const [headName, setFullName] = useState("");
+  const [headTitle, setTitle] = useState("");
+  const [dutiesDescription, setDescription] = useState("");
+  const [departmentName, setDeptName] = useState("");
   const [image, setFile] = useState<File>();
   const { isLoading, startLoading, stopLoading } = useLoading();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -55,13 +56,14 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
         console.log("Saving profile ", filePath);
 
         const newExecutive = {
-          name,
-          title,
-          jobDescription,
+          departmentName,
+          dutiesDescription,
+          headName,
+          headTitle,
           imagePath: filePath,
         };
         createExecutive(newExecutive);
-        toast.success("Profile added successfully", {
+        toast.success("Excutive added successfully", {
           duration: 3000,
         });
         closeModal();
@@ -69,7 +71,7 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
     } catch (error) {
       stopLoading();
       if (error instanceof Error) {
-        toast.error("Failed to create the profile.", {
+        toast.error("Failed to create the excutive profile.", {
           duration: 3000,
           description: error.message,
         });
@@ -105,65 +107,84 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
 
                 <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Full Name:
+                    <label htmlFor="deptName" className="block text-gray-700 text-sm font-bold mb-2">
+                      Executive Name
                     </label>
                     <input
                       required
                       type="text"
-                      id="name"
+                      id="deptName"
                       onChange={(e) => {
-                        setName(e.target.value);
+                        setDeptName(e.target.value);
                       }}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
                       placeholder="Enter Full Name"
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Title
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      id="title"
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
-                      placeholder="Enter Title"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
-                      Job Description:
+                    <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                      Executive Description:
                     </label>
                     <textarea
                       required
-                      id="jobDescription"
+                      id="description"
                       rows={4}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       placeholder="Enter Job Description"
                       onChange={(e) => {
-                        setJobDescription(e.target.value);
+                        setDescription(e.target.value);
                       }}
                     />
                   </div>
-                  <div className="mb-4">
-                    <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
-                      Profile Picture:
-                    </label>
-                    <input
-                      type="file"
-                      id="file"
-                      accept="image/*"
-                      required
-                      onChange={(e) => {
-                        setFile(e.target.files?.[0]);
-                      }}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-                    />
-                  </div>
+                  <fieldset className="m-5 p-2 border-2 ">
+                    <legend className="block text-gray-700 font-bold mb-2">Executive Head</legend>
+                    <div className="mb-4">
+                      <label htmlFor="headName" className="block text-gray-700 text-sm font-bold mb-2">
+                        Full Name
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="headName"
+                        onChange={(e) => {
+                          setFullName(e.target.value);
+                        }}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                        placeholder="Enter Full Name"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                        Title
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="title"
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                        placeholder="Enter Title"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                        Profile Picture:
+                      </label>
+                      <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                        required
+                        onChange={(e) => {
+                          setFile(e.target.files?.[0]);
+                        }}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+                      />
+                    </div>
+                  </fieldset>
 
                   <div className="flex justify-end">
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
