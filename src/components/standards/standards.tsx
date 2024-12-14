@@ -34,7 +34,7 @@ const Standard = async () => {
       console.error(error);
     }
   }
-  async function deleteStandard(standardId: number) {
+  async function deleteStandard(standardId: string) {
     "use server";
     try {
       await prisma.manual.delete({
@@ -66,24 +66,13 @@ const Standard = async () => {
             {standard.map((standard) => (
               <tr key={standard.id}>
                 <td className="p-6 border">{standard.title}</td>
-                <td className="p-6 border">
-                  {JSON.parse(standard.path)?.originalName}
-                </td>
+                <td className="p-6 border">{JSON.parse(standard.path)?.originalName}</td>
                 <td className="p-6 border">
                   <div className="flex flex-row gap-3">
                     {" "}
-                    <FileOpen
-                      apiUrl={FILE_MODULE.STANDARD}
-                      filePath={JSON.parse(standard.path)?.filePath}
-                    />
-                    <EditStandard
-                      standard={standard}
-                      editStandard={editStandard}
-                    />
-                    <DeleteStandard
-                      standard={standard}
-                      deleteStandard={deleteStandard}
-                    />
+                    <FileOpen apiUrl={FILE_MODULE.STANDARD} filePath={JSON.parse(standard.path)?.filePath} />
+                    <EditStandard standard={standard} editStandard={editStandard} />
+                    <DeleteStandard standard={standard} deleteStandard={deleteStandard} />
                   </div>
                 </td>
               </tr>
