@@ -1,13 +1,11 @@
 "use client";
-import { Standard } from "@/types";
+import { Magazine } from "@/types";
 import React, { useState } from "react";
-
-type DeleteStandardProps = {
-  standard: Standard;
-  deleteStandard: (standard_id: string) => void;
+type DeleteMagazineProps = {
+  magazine: Magazine;
+  deleteMagazine: (magazine_id: string) => void;
 };
-
-const DeleteStandard = ({ standard, deleteStandard }: DeleteStandardProps) => {
+const DeleteMagazine = ({ magazine, deleteMagazine }: DeleteMagazineProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -17,15 +15,14 @@ const DeleteStandard = ({ standard, deleteStandard }: DeleteStandardProps) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const [title, setTitle] = useState(standard.title);
+  const [title, setTitle] = useState(magazine.title);
 
   const handleClick = async (e: { preventDefault: () => void }) => {
-    if (standard.id) {
-      deleteStandard(standard.id);
+    if (magazine.id) {
+      deleteMagazine(magazine.id);
       closeModal();
     }
   };
-
   return (
     <>
       <button onClick={openModal}>
@@ -57,12 +54,12 @@ const DeleteStandard = ({ standard, deleteStandard }: DeleteStandardProps) => {
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-2xl relative ">Delete Standard</h1>
+                <h1 className="text-slate-900 text-2xl relative ">Delete Magazine</h1>
                 <hr className="relative" />
                 <div className="relative mx-10 px-10">
                   <p className="text-red-600 text-l">
-                    Are you sure you want to delete standard titled &quot;
-                    {standard.title}&quot;? This action cannot be undone.{" "}
+                    Are you sure you want to delete magazine titled &quot;
+                    {magazine.title}&quot;? This action cannot be undone.{" "}
                   </p>
                 </div>
                 <hr className="relative mt-10" />
@@ -76,7 +73,7 @@ const DeleteStandard = ({ standard, deleteStandard }: DeleteStandardProps) => {
                       handleClick(e);
                     }}
                   >
-                    Delete Standard
+                    Delete Magazine
                   </button>
                 </div>
               </div>
@@ -88,4 +85,4 @@ const DeleteStandard = ({ standard, deleteStandard }: DeleteStandardProps) => {
   );
 };
 
-export default DeleteStandard;
+export default DeleteMagazine;

@@ -14,3 +14,8 @@ export type Standard = {
   title: string;
   path: string;
 };
+export type Magazine = {
+  id?: string;
+  title: string;
+  path: string;
+};

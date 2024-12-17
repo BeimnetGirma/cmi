@@ -56,3 +56,9 @@ model ProfilePicture {
   imagePath String   @db.VarChar(1000)
   createdAt DateTime @default(now())
 }
+
+model magazine {
+  id    String @id @default(uuid())
+  title String
+  path  String
+}

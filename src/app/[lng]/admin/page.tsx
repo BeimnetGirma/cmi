@@ -8,6 +8,7 @@ import GalleryPage from "@/components/gallery/gallery-page-component";
 import Standard from "@/components/standards/standards";
 import EditHomePage from "@/components/home-page/edit-home-page";
 import Executives from "@/components/executive/executives";
+import Magazine from "@/components/magazines/magazines";
 
 const Admin = ({ params }: PageProps) => {
   const { lng } = params;
@@ -18,12 +19,13 @@ const Admin = ({ params }: PageProps) => {
         pages={{
           researches: <Researches key="research" />,
           standards: <Standard key="standard" />,
+          magazines: <Magazine key="magazine" />,
           departments: <Departments key="department" />,
           gallery: <GalleryPage key="gallery" />,
           homepage: <EditHomePage key="homePage" lng={lng} />,
           executives: <Executives key="executives" />,
         }}
-        tabs={["Researches", "Standards", "Departments", "Gallery", "Home Page", "Executives"]}
+        tabs={["Researches", "Standards", "Magazines", "Departments", "Gallery", "Home Page", "Executives"]}
         lng={lng}
       />
     </>
