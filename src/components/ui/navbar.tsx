@@ -54,15 +54,13 @@ const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: s
       <div className="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
         <ul className="text-xl text-center items-center gap-x-5 py-6 md:gap-x-4 lg:text-lg lg:flex ">
           {navLinks.map((link) => (
-            <li key={link.href} className="py-4">
-              <Link
-                href={link.href}
-                className={` hover:text-secondary-highlight transition-colors ${
-                  pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main " : "font-normal text-secondary-light"
-                }`}
-              >
-                {link.title.toUpperCase()}
-              </Link>
+            <li
+              key={link.href}
+              className={`py-4 px-2 hover:bg-slate-200 hover:text-primary-main ${
+                pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main bg-slate-200 " : "font-normal text-secondary-light"
+              }`}
+            >
+              <Link href={link.href}>{link.title.toUpperCase()}</Link>
             </li>
           ))}
           <MediaMenu params={{ lng }} />
