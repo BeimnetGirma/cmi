@@ -29,7 +29,7 @@ const ExecutiveMenu: React.FC<PageProps & { executives: { departmentName: string
                 <Link
                   key={index}
                   href={{
-                    pathname: `/${lng}/coe`,
+                    pathname: `/${lng}/executive`,
                     query: { exec: submenu.id }, // Pass query as an object
                   }}
                   className="hover:text-slate-500 "
