@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "../ui/dropdown-menu";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
@@ -33,21 +28,13 @@ const MediaMenu: React.FC<PageProps> = ({ params: { lng } }) => {
         setOpenDropdown(false);
       }}
     >
-      <section
-        onMouseEnter={() => setOpenDropdown(true)}
-        onMouseLeave={() => setOpenDropdown(false)}
-      >
+      <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
         <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
-          <li className="py-4">
-            <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">
-              {t("media").toUpperCase()}
-            </span>
+          <li className="py-4 px-2 hover:bg-slate-200 hover:text-primary-main transition-colors cursor-pointer">
+            <span className="">{t("media").toUpperCase()}</span>
           </li>
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          className="w-56 "
-          onMouseLeave={() => setOpenDropdown(false)}
-        >
+        <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
           {submenus.map((submenu, index) => (
             <DropdownMenuItem key={index} className="mt-2 hover:cursor-pointer">
               <Link href={submenu.href} className="hover:text-slate-500 ">

@@ -19,8 +19,8 @@ const ExecutiveMenu: React.FC<PageProps & { executives: { departmentName: string
       >
         <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
           <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
-            <li className="py-4">
-              <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">{t("executive").toUpperCase()}</span>
+            <li className="py-4 px-2 hover:bg-slate-200 hover:text-primary-main transition-colors cursor-pointer">
+              <span className="  ">{t("executive").toUpperCase()}</span>
             </li>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
@@ -29,7 +29,7 @@ const ExecutiveMenu: React.FC<PageProps & { executives: { departmentName: string
                 <Link
                   key={index}
                   href={{
-                    pathname: `/${lng}/coe`,
+                    pathname: `/${lng}/executive`,
                     query: { exec: submenu.id }, // Pass query as an object
                   }}
                   className="hover:text-slate-500 "

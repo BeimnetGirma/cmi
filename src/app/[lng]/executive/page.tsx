@@ -5,7 +5,7 @@ import prisma from "@/db";
 import { useSearchParams } from "next/navigation";
 import { Executive } from "@prisma/client";
 
-const COE = () => {
+const ExecutivePage = () => {
   const execId: any = useSearchParams().get("exec");
   const [executive, setExecutive] = useState<Executive>();
 
@@ -73,4 +73,4 @@ const COE = () => {
   );
 };
 
-export default COE;
+export default ExecutivePage;
