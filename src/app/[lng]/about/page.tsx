@@ -9,15 +9,15 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
   const boxes = [
     {
       title: t("mission"),
-      content: t("missionDetail") === "missionDetail" ? "" : t("missionDetail"),
+      content: t("missionContent"),
     },
     {
       title: t("vision"),
-      content: t("visionDetail") === "visionDetail" ? "" : t("visionDetail"),
+      content: t("visionContent"),
     },
     {
       title: t("values"),
-      content: t("valuesDetail") === "valuesDetail" ? "" : t("valuesDetail"),
+      content: t("valuesContent"),
     },
   ];
 
