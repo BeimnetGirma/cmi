@@ -82,7 +82,7 @@ const Carousel = ({ posts }: CarouselProps) => {
                   width={800}
                   height={500}
                   src={post.feature_image}
-                  className="relative block w-3/4 mx-auto py-10 object-center transition-transform duration-300 ease-in-out transform hover:scale-125 hover:shadow-lg"
+                  className="relative block mx-auto py-10 object-contain transition-transform duration-300 ease-in-out transform hover:scale-125 hover:shadow-lg"
                   alt="..."
                 />
               </div>
