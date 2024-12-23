@@ -19,3 +19,10 @@ export type Magazine = {
   title: string;
   path: string;
 };
+export type Service = {
+  id?: string;
+  title: string;
+  content?: string | null;
+  image: string;
+  link?: string | null;
+};
