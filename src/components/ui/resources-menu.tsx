@@ -31,7 +31,7 @@ const ResourcesMenu: React.FC<PageProps> = ({ params: { lng } }) => {
               <span className="">{t("resource").toUpperCase()}</span>
             </li>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
+          <DropdownMenuContent className="w-56 fixed top-0 left-0 -ml-14" onMouseLeave={() => setOpenDropdown(false)}>
             {submenus.map((submenu, index) => (
               <DropdownMenuItem key={index} className="mt-2">
                 <Link href={submenu.href} className="hover:text-slate-500 ">
