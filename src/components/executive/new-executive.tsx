@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import { toast, Toaster } from "sonner";
 import Spinner from "../ui/spinner";
 import { Executive } from "@prisma/client";
+import "react-quill/dist/quill.snow.css"; // For Quill's Snow theme
+import dynamic from "next/dynamic";
+import DOMPurify from "dompurify";
+
 type NewExecutiveProps = {
   createExecutive: (executive: any) => void;
 };
-
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,6 +28,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
   const [departmentName, setDeptName] = useState("");
   const [image, setFile] = useState<File>();
   const { isLoading, startLoading, stopLoading } = useLoading();
+
+  const handleDescriptionChange = (value: string) => {
+    setDescription(value);
+  };
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -57,7 +65,7 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
 
         const newExecutive = {
           departmentName,
-          dutiesDescription,
+          dutiesDescription: DOMPurify.sanitize(dutiesDescription),
           headName,
           headTitle,
           imagePath: filePath,
@@ -125,15 +133,12 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                     <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
                       Executive Description:
                     </label>
-                    <textarea
-                      required
+                    <ReactQuill
                       id="description"
-                      rows={4}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       placeholder="Enter Job Description"
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
+                      onChange={handleDescriptionChange}
+                      value={dutiesDescription}
                     />
                   </div>
                   <fieldset className="m-5 p-2 border-2 ">

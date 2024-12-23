@@ -4,6 +4,7 @@ import Image from "next/image";
 import prisma from "@/db";
 import { useSearchParams } from "next/navigation";
 import { Executive } from "@prisma/client";
+import DOMPurify from "dompurify";
 
 const ExecutivePage = () => {
   const execId: any = useSearchParams().get("exec");
@@ -68,7 +69,13 @@ const ExecutivePage = () => {
               <div className="flex-col w-3/4">
                 <div className="flex-row">
                   <h1 className="text-slate-600 font-semibold text-2xl">Department Duties </h1>
-                  <p className="text-slate-600 text-justify">{executive.dutiesDescription}</p>
+                  {/* <p className="text-slate-600 text-justify">{executive.dutiesDescription}</p> */}
+                  <div
+                    className="text-slate-600 text-justify text-lg"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(executive.dutiesDescription),
+                    }}
+                  />
                 </div>
               </div>
             </div>
