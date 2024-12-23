@@ -52,7 +52,13 @@ const ExecutivePage = () => {
               <div className="flex-col w-1/4 border-r border-gray-300 mr-20">
                 {" "}
                 <div className="flex-row justify-center ">
-                  <Image className="m-auto" src={executive?.imagePath || "/default/path/to/image.png"} alt="Department Head Photo" width={350} height={550}></Image>
+                  <Image
+                    className="m-auto rounded-full p-4"
+                    src={executive?.imagePath || "/default/path/to/image.png"}
+                    alt="Department Head Photo"
+                    width={350}
+                    height={350}
+                  ></Image>
                 </div>
                 <div className="flex-row">
                   <h1 className="text-center mt-5"> {executive.headName}</h1>
