@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "./dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./dropdown-menu";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
@@ -20,21 +15,13 @@ const AdminMenu: React.FC<PageProps> = ({ params: { lng } }) => {
         setOpenDropdown(false);
       }}
     >
-      <section
-        onMouseEnter={() => setOpenDropdown(true)}
-        onMouseLeave={() => setOpenDropdown(false)}
-      >
+      <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
         <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
           <li className="py-4">
-            <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">
-              {t("controlPanel").toUpperCase()}
-            </span>
+            <span className="hover:text-secondary-highlight transition-colors cursor-pointer ">{t("controlPanel").toUpperCase()}</span>
           </li>
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          className="w-56 "
-          onMouseLeave={() => setOpenDropdown(false)}
-        >
+        <DropdownMenuContent className="w-56 fixed top-0 left-0 -ml-20" onMouseLeave={() => setOpenDropdown(false)}>
           <DropdownMenuItem className="mt-2 hover:cursor-pointer">
             <Link href="/admin" className="hover:text-slate-500 ">
               {t("admin")}
