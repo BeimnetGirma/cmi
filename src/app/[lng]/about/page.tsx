@@ -9,15 +9,15 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
   const boxes = [
     {
       title: t("mission"),
-      content: t("missionDetail") === "missionDetail" ? "" : t("missionDetail"),
+      content: t("missionContent"),
     },
     {
       title: t("vision"),
-      content: t("visionDetail") === "visionDetail" ? "" : t("visionDetail"),
+      content: t("visionContent"),
     },
     {
       title: t("values"),
-      content: t("valuesDetail") === "valuesDetail" ? "" : t("valuesDetail"),
+      content: t("valuesContent"),
     },
   ];
 
@@ -36,6 +36,23 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
           </p>
         </div>
       </div>
+      {boxes[0].content !== "" && (
+        <div className="py-20">
+          <div className="grid grid-cols-3 gap-x-10 text-center container mx-auto ">
+            {boxes.map((box, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center border-2 border-primary-light p-5 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-primary-light"
+              >
+                <h4 className="font-semibold text-primary-main text-xl border-b-2 border-primary-main pb-2 ">
+                  {box.title}
+                </h4>
+                <p className="text-justify">{box.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div>
         <div className="flex flex-col justify-center py-20">
           <h1 className="text-primary-main text-xl md:text-xl font-bold text-center">
@@ -48,23 +65,6 @@ const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
           </div>
         </div>
       </div>
-      {boxes[0].content !== "" && (
-        <div className="py-20">
-          <div className="grid grid-cols-3 gap-x-10 text-center container mx-auto ">
-            {boxes.map((box, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center border-2 border-primary-light p-5 rounded-lg"
-              >
-                <h4 className="font-semibold text-primary-main text-xl border-b-2 border-primary-main pb-2 ">
-                  {box.title}
-                </h4>
-                <p className="text-justify">{box.content}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
