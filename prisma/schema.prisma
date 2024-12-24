@@ -62,3 +62,11 @@ model magazine {
   title String
   path  String
 }
+
+model service {
+  id      String  @id @default(uuid())
+  title   String
+  content String? @db.Text
+  image   String
+  link    String?
+}

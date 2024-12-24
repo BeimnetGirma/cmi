@@ -3,12 +3,14 @@ import useLoading from "@/hooks/useLoading";
 import { Executive } from "@prisma/client";
 import React, { useState } from "react";
 import Spinner from "../ui/spinner";
-import { revalidatePath } from "next/cache";
+import dynamic from "next/dynamic";
+import DOMPurify from "dompurify";
 
 type EditProfileProps = {
   executive: Executive;
   editProfile: (executive: Executive) => void;
 };
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +32,9 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
   const [imagePath, setImagePath] = useState(executive.imagePath);
   const [image, setImage] = useState<File>();
   const { isLoading, startLoading, stopLoading } = useLoading();
+  const handleDescriptionChange = (value: string) => {
+    setDescription(value);
+  };
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -46,7 +51,7 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
             if (data) {
               editProfile({
                 departmentName: departmentName,
-                dutiesDescription: dutiesDescription,
+                dutiesDescription: DOMPurify.sanitize(dutiesDescription),
                 headName: headName,
                 headTitle: headTitle,
                 imagePath: data.image,
@@ -60,7 +65,7 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
       } else {
         editProfile({
           departmentName: departmentName,
-          dutiesDescription: dutiesDescription,
+          dutiesDescription: DOMPurify.sanitize(dutiesDescription),
           headName: headName,
           headTitle: headTitle,
           imagePath: imagePath,
@@ -69,7 +74,6 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
           updatedAt: executive.updatedAt,
         });
       }
-      revalidatePath("/");
       closeModal();
     } catch (error) {
       console.log(error);
@@ -119,16 +123,12 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                     <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
                       Executive Description:
                     </label>
-                    <textarea
-                      required
+                    <ReactQuill
                       id="description"
                       value={dutiesDescription}
-                      rows={4}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       placeholder="Enter Job Description"
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
+                      onChange={handleDescriptionChange}
                     />
                   </div>
                   <fieldset className="m-5 p-2 border-2 ">

@@ -23,7 +23,7 @@ const ExecutiveMenu: React.FC<PageProps & { executives: { departmentName: string
               <span className="  ">{t("executive").toUpperCase()}</span>
             </li>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 " onMouseLeave={() => setOpenDropdown(false)}>
+          <DropdownMenuContent className="w-56 fixed top-0 left-0 -ml-14" onMouseLeave={() => setOpenDropdown(false)}>
             {executives.map((submenu, index) => (
               <DropdownMenuItem key={index} className="mt-2">
                 <Link
