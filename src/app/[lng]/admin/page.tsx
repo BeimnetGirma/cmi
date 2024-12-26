@@ -10,6 +10,7 @@ import EditHomePage from "@/components/home-page/edit-home-page";
 import Executives from "@/components/executive/executives";
 import Magazine from "@/components/magazines/magazines";
 import Services from "@/components/services/services";
+import NewsLink from "@/components/news/news-link";
 
 const Admin = ({ params }: PageProps) => {
   const { lng } = params;
@@ -21,13 +22,24 @@ const Admin = ({ params }: PageProps) => {
           researches: <Researches key="research" />,
           standards: <Standard key="standard" />,
           magazines: <Magazine key="magazine" />,
+          news: <NewsLink key="news" />,
           departments: <Departments key="department" />,
           gallery: <GalleryPage key="gallery" />,
           homepage: <EditHomePage key="homePage" lng={lng} />,
           executives: <Executives key="executives" />,
           services: <Services key="services" />,
         }}
-        tabs={["Researches", "Standards", "Magazines", "Departments", "Gallery", "Home Page", "Executives", "Services"]}
+        tabs={[
+          "Researches",
+          "Standards",
+          "Magazines",
+          "News",
+          "Departments",
+          "Gallery",
+          "Home Page",
+          "Executives",
+          "Services",
+        ]}
         lng={lng}
       />
     </>
