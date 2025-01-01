@@ -8,6 +8,10 @@ import React from "react";
 import Footer from "@/components/ui/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import prisma from "@/db";
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +33,10 @@ export default async function RootLayout({
     lng: string;
   };
 }>) {
-  const { lng = "en" } = params;
+  const { lng } = params;
+  if (!routing.locales.includes(lng as any)) {
+    notFound();
+  }
   // const departments = await prisma.department.findMany();
   const executives = await prisma.executive.findMany({
     select: {
@@ -37,20 +44,25 @@ export default async function RootLayout({
       id: true,
     },
   });
+  const messages = await getMessages();
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar executives={executives} params={{ lng }} />
-          {React.Children.map(children, (child) => {
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child, {
-                params: { lng },
-              } as React.Attributes);
-            }
-            return child;
-          })}
-          <Footer params={{ lng }} />
+          <NextIntlClientProvider messages={messages}>
+            <NavBar executives={executives} params={{ lng }} />
+            <div className="min-h-screen">
+              {React.Children.map(children, (child) => {
+                if (React.isValidElement(child)) {
+                  return React.cloneElement(child, {
+                    params: { lng },
+                  } as React.Attributes);
+                }
+                return child;
+              })}
+            </div>
+            <Footer params={{ lng }} />
+          </NextIntlClientProvider>
         </body>
       </html>
     </ClerkProvider>
