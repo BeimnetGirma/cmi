@@ -37,11 +37,13 @@ export default async function RootLayout({
       id: true,
     },
   });
+  const announcements = await prisma.announcement.findMany();
+
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar executives={executives} params={{ lng }} />
+          <NavBar executives={executives} announcements={announcements} params={{ lng }} />
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {
