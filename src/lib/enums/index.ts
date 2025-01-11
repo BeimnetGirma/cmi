@@ -3,6 +3,7 @@ enum FILE_MODULE {
   STANDARD = "standard",
   IMAGE = "image",
   MAGAZINE = "magazine",
+  ANNOUNCEMENT = "announcement",
 }
 
 export { FILE_MODULE };
