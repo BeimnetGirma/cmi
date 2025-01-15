@@ -54,7 +54,7 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                 dutiesDescription: DOMPurify.sanitize(dutiesDescription),
                 headName: headName,
                 headTitle: headTitle,
-                imagePath: data.image,
+                imagePath: data.imagePath,
                 id: executive.id,
                 createdAt: executive.createdAt,
                 updatedAt: executive.updatedAt,
