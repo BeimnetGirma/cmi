@@ -20,11 +20,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate a unique filename for the image (you could use a UUID or timestamp for uniqueness)
-    const filename = `${Date.now()}-${file.name}`;
-    const filePath = path.join(process.cwd(), "public/uploads/profile", filename); // Save to the 'uploads' folder in 'public'
+    const filename = `${Date.now()}-${file.name}`.replace(" ", "");
+    const filePath = path.join(process.cwd(), "uploads/profile", filename); // Save to the 'uploads' folder in 'public'
 
     // Make sure the 'uploads' directory exists, otherwise create it
-    const uploadsDir = path.join(process.cwd(), "public/uploads/profile");
+    const uploadsDir = path.join(process.cwd(), "uploads/profile");
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     // Store the file path in the database
     const image = await prisma.profilePicture.create({
       data: {
-        imagePath: `/uploads/profile/${filename}`, // Store the relative path to the file
+        imagePath: `/api/file/profile/${filename}`, // Store the relative path to the file
       },
     });
 
