@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NavBar from "@/components/navbar";
+import NavBar from "@/components/ui/navbar";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "../globals.css";
 import React from "react";
-import Footer from "@/components/footer";
+import Footer from "@/components/ui/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import prisma from "@/db";
 
@@ -30,12 +30,20 @@ export default async function RootLayout({
   };
 }>) {
   const { lng = "en" } = params;
-  const departments = await prisma.department.findMany();
+  // const departments = await prisma.department.findMany();
+  const executives = await prisma.executive.findMany({
+    select: {
+      departmentName: true,
+      id: true,
+    },
+  });
+  const announcements = await prisma.announcement.findMany();
+
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar departments={departments} params={{ lng }} />
+          <NavBar executives={executives} announcements={announcements} params={{ lng }} />
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {

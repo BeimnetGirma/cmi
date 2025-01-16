@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
 import { PostOrPage } from "@tryghost/content-api";
-import ImageWithTextOverlay from "@/components/image-overlay";
-import SocialLinks from "@/components/social-icons";
+import SocialLinks from "@/components/ui/social-icons";
 import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
 import { getSinglePost } from "@/app/ghost/posts";
 import dayjs from "dayjs";
-import SafeHTML from "@/components/safe-html";
+import SafeHTML from "@/components/ui/safe-html";
 import Link from "next/link";
+import ImageWithTextOverlay from "@/components/ui/image-overlay";
 
 export const NewsPage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;

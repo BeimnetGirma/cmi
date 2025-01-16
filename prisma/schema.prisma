@@ -25,18 +25,58 @@ model research {
 }
 
 model manual {
-  id Int @id @default(autoincrement())
-
+  id    String @id @default(uuid())
   title String
-
-  path String
+  path  String
 }
+
 model Image {
-  id          String   @id @default(uuid())
-  caption     String   @db.VarChar(255)
-  tags        String   @db.Text
-  uploadedAt  DateTime @default(now())
-  imageData   Bytes    @db.LongBlob
+  id         String   @id @default(uuid())
+  caption    String   @db.VarChar(255)
+  tags       String   @db.Text
+  uploadedAt DateTime @default(now())
+  imagePath  String   @db.VarChar(1000)
 
   @@index([tags(length: 255)], map: "tags_idx")
+}
+
+model Executive {
+  id                String   @id @default(uuid())
+  departmentName    String   @db.VarChar(100)
+  headName          String   @db.VarChar(100)
+  headTitle         String   @db.VarChar(100)
+  dutiesDescription String   @db.Text
+  imagePath         String   @db.VarChar(1000)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model ProfilePicture {
+  id        String   @id @default(uuid())
+  imagePath String   @db.VarChar(1000)
+  createdAt DateTime @default(now())
+}
+
+model magazine {
+  id    String @id @default(uuid())
+  title String
+  path  String
+}
+
+model service {
+  id      String  @id @default(uuid())
+  title   String
+  content String? @db.Text
+  image   String
+  link    String?
+}
+
+model announcement {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text
+  attachment  String?
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-import AdminPage from "@/components/AdminPage";
-import Researches from "@/components/Researches";
+import AdminPage from "@/components/admin/admin-page";
+import Researches from "@/components/research/research";
 import Departments from "@/components/departments/Departments";
 import { PageProps } from "@/types";
-import GalleryPage from "@/components/pages/gallery-page-component";
+import GalleryPage from "@/components/gallery/gallery-page-component";
+import Standard from "@/components/standards/standards";
+import EditHomePage from "@/components/home-page/edit-home-page";
+import Executives from "@/components/executive/executives";
+import Magazine from "@/components/magazines/magazines";
+import Services from "@/components/services/services";
+import Announcements from "@/components/announcement/announcements";
 
 const Admin = ({ params }: PageProps) => {
   const { lng } = params;
@@ -14,10 +20,16 @@ const Admin = ({ params }: PageProps) => {
       <AdminPage
         pages={{
           researches: <Researches key="research" />,
+          standards: <Standard key="standard" />,
+          magazines: <Magazine key="magazine" />,
           departments: <Departments key="department" />,
           gallery: <GalleryPage key="gallery" />,
+          homepage: <EditHomePage key="homePage" lng={lng} />,
+          executives: <Executives key="executives" />,
+          services: <Services key="services" />,
+          announcements: <Announcements key="announcements" />,
         }}
-        tabs={["Researches", "Departments", "Gallery", "Home Page"]}
+        tabs={["Researches", "Standards", "Magazines", "Departments", "Gallery", "Home Page", "Executives", "Services", "Announcements"]}
         lng={lng}
       />
     </>

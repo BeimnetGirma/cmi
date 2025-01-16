@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ClientsSlider from "@/components/clients-slider";
 import { HomePageProps } from "@/types";
 import { useTranslation } from "@/app/i18n";
 import { FeaturedPosts, Post } from "@/types/featured-posts";
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/ui/carousel";
 
 const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;
@@ -24,12 +23,8 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     });
 
   return (
-    <>
-      {!!featuredPosts?.posts?.length && (
-        <div className="p-5">
-          <Carousel posts={featuredPosts} />
-        </div>
-      )}
+    <div className="p-4 space-y-20">
+      {!!featuredPosts?.posts?.length && <Carousel posts={featuredPosts} />}
       {/* Hero */}
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">
         <Image
@@ -54,8 +49,15 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         </div>
       </div>
       {/* About Us Section */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center p-8 my-20 ">
-        <div className="md:w-1/2">
+      <div className="container mx-auto flex flex-col lg:flex-row-reverse  items-center justify-center  mt-20 ">
+        <Image
+          src="/assets/imgs/5.jpg"
+          alt="About Us Image"
+          className="rounded-lg justify-end"
+          width={800}
+          height={530}
+        />
+        <div className="py-8">
           <h3 className="text-xl font-bold mb-4 text-primary-main">
             {t("aboutUs")}
           </h3>
@@ -64,17 +66,8 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
             <Link href={`${lng}/about`}>{t("readMore")}</Link>
           </button>
         </div>
-        <div className="md:w-1/2 mt-4 md:mt-0 flex justify-center">
-          <Image
-            src="/assets/imgs/5.jpg"
-            alt="About Us Image"
-            className="rounded-lg justify-end"
-            width={500}
-            height={330}
-          />
-        </div>
       </div>
-    </>
+    </div>
   );
 };
 
