@@ -47,14 +47,16 @@ export default async function RootLayout({
             announcements={announcements}
             params={{ lng }}
           />
-          {React.Children.map(children, (child) => {
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child, {
-                params: { lng },
-              } as React.Attributes);
-            }
-            return child;
-          })}
+          <div className="min-h-screen">
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                  params: { lng },
+                } as React.Attributes);
+              }
+              return child;
+            })}
+          </div>
           <Footer params={{ lng }} />
         </body>
       </html>
