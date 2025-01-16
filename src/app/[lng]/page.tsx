@@ -23,7 +23,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     });
 
   return (
-    <div className="p-4 space-y-20">
+    <div className=" space-y-20">
       {!!featuredPosts?.posts?.length && <Carousel posts={featuredPosts} />}
       {/* Hero */}
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">

@@ -28,8 +28,6 @@ export async function POST(req: NextRequest) {
       else resolve();
     });
   });
-  console.log("File uploaded successfully");
-  console.log(filePath);
   return NextResponse.json({
     success: true,
     path: fileName,
@@ -114,8 +112,6 @@ export async function PUT(req: NextRequest) {
       else resolve();
     });
   });
-  console.log("File uploaded successfully");
-  console.log(filePath);
   return NextResponse.json({
     success: true,
     path: filename,

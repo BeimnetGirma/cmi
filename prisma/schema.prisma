@@ -70,3 +70,13 @@ model service {
   image   String
   link    String?
 }
+
+model announcement {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text
+  attachment  String?
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

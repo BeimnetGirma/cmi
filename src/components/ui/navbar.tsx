@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSelector from "./language-selector";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageProps, Department } from "@/types";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname } from "next/navigation";
@@ -12,8 +12,10 @@ import DepartmentMenu from "../departments/department-menu";
 import ExecutiveMenu from "../ui/executive-menu";
 import MediaMenu from "./media-menu";
 import AdminMenu from "../ui/admin-menu";
+import AnnouncementMenu from "./announcement-menu";
+import { announcement } from "@prisma/client";
 
-const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: string }[] }> = ({ executives, params: { lng } }) => {
+const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: string }[]; announcements: announcement[] }> = ({ executives, announcements, params: { lng } }) => {
   const pathname = usePathname();
   const { t } = useTranslation(lng, "navbar");
   const { user, isLoaded } = useUser();
@@ -36,6 +38,7 @@ const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: s
       href: "/contact",
     },
   ];
+
   return (
     <nav className="bg-primary-light shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
       <div className="flex-1 flex justify-between items-center">
@@ -66,6 +69,7 @@ const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: s
           <MediaMenu params={{ lng }} />
           <ResourcesMenu params={{ lng }} />
           <ExecutiveMenu executives={executives} params={{ lng }} />
+          <AnnouncementMenu params={{ lng }} announcements={announcements} />
           {/* <DepartmentMenu params={{ lng }} departments={departments} /> */}
           {user && <AdminMenu params={{ lng }} />}
           <li className="py-4">
