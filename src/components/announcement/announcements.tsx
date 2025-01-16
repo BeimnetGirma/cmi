@@ -8,18 +8,29 @@ import prisma from "@/db";
 import { revalidatePath } from "next/cache";
 import EditAnnouncement from "./editAnnouncement";
 import DeleteAnnouncement from "./deleteAnnouncement";
-import { announcement } from "@prisma/client";
+import { announcement, Prisma } from "@prisma/client";
 export async function createAnnouncement(newAnnouncement: IAnnouncement) {
   "use server";
   try {
-    await prisma.announcement.create({ data: newAnnouncement });
+    await prisma.announcement.create({
+      data: newAnnouncement,
+    });
     revalidatePath("/admin");
   } catch (error) {
-    console.error(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        throw new Error(
+          "One or more fields exceed the maximum allowed length."
+        );
+      }
+    }
+    throw error;
   }
 }
 const Announcements = async () => {
-  const announcements: announcement[] = await prisma.announcement.findMany({ orderBy: { createdAt: "desc" } });
+  const announcements: announcement[] = await prisma.announcement.findMany({
+    orderBy: { createdAt: "desc" },
+  });
   async function editAnnouncement(announcement: IAnnouncement) {
     "use server";
     try {
@@ -72,16 +83,28 @@ const Announcements = async () => {
                 <tr key={announcement.id}>
                   <td className="p-6 border">{index + 1}</td>
                   <td className="p-6 border w-1/4">{announcement.title}</td>
-                  <td className="p-6 border whitespace-nowrap">{new Date(announcement.createdAt).toDateString()}</td>
+                  <td className="p-6 border whitespace-nowrap">
+                    {new Date(announcement.createdAt).toDateString()}
+                  </td>
                   <td className="p-6 border">
-                    {announcement.description ? (announcement.description.length > 200 ? announcement.description.substring(0, 200) + "..." : announcement.description) : ""}
+                    {announcement.description
+                      ? announcement.description.length > 200
+                        ? announcement.description.substring(0, 200) + "..."
+                        : announcement.description
+                      : ""}
                   </td>
                   {/* <td className="p-6 border">{JSON.parse(announcement.attachment || "")?.originalName ?? ""}</td> */}
                   <td className="p-6 border">
                     <div className="flex flex-row gap-3 justify-center">
                       {" "}
-                      <EditAnnouncement announcement={announcement} editAnnouncement={editAnnouncement} />
-                      <DeleteAnnouncement announcement={announcement} deleteAnnouncement={deleteAnnouncement} />
+                      <EditAnnouncement
+                        announcement={announcement}
+                        editAnnouncement={editAnnouncement}
+                      />
+                      <DeleteAnnouncement
+                        announcement={announcement}
+                        deleteAnnouncement={deleteAnnouncement}
+                      />
                     </div>
                   </td>
                 </tr>
