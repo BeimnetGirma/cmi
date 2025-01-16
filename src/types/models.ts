@@ -26,3 +26,11 @@ export type Service = {
   image: string;
   link?: string | null;
 };
+
+export type Announcement = {
+  id?: string;
+  title: string;
+  description?: string | null;
+  attachment?: string | null;
+  link?: string | null;
+};

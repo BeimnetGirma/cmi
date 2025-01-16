@@ -93,5 +93,6 @@
   "lms_service_content": "Our Learning Management System (LMS) is a software application for the administration, documentation, tracking, reporting, automation, and delivery of educational courses, training programs, or learning and development programs. The LMS provides a platform for learners to access learning materials, submit assignments, and communicate with instructors and peers. It also allows instructors to create and manage courses, track student progress, and assess student performance.",
 
   "ems_service": "Exam Management System",
-  "ems_service_content": "Our Exam Management System (EMS) is a software application for the administration, documentation, tracking, reporting, automation, and delivery of exams and assessments. The EMS provides a platform for instructors to create and manage exams, track student performance, and generate reports. It also allows students to access exams, submit answers, and receive feedback on their performance."
+  "ems_service_content": "Our Exam Management System (EMS) is a software application for the administration, documentation, tracking, reporting, automation, and delivery of exams and assessments. The EMS provides a platform for instructors to create and manage exams, track student performance, and generate reports. It also allows students to access exams, submit answers, and receive feedback on their performance.",
+  "announcements": "Announcements"
 }

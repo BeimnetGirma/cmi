@@ -30,7 +30,7 @@ const Magazine = async () => {
 
                     <td className="p-6 border">
                       <div className="flex  justify-center">
-                        <FileOpen apiUrl={FILE_MODULE.STANDARD} filePath={JSON.parse(magazine.path)?.filePath} />
+                        <FileOpen apiUrl={FILE_MODULE.MAGAZINE} filePath={JSON.parse(magazine.path)?.filePath} />
                       </div>
                     </td>
                   </tr>
