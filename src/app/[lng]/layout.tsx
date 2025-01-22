@@ -8,7 +8,6 @@ import React from "react";
 import Footer from "@/components/ui/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import prisma from "@/db";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ export default async function RootLayout({
   };
 }>) {
   const { lng = "en" } = params;
-  // const departments = await prisma.department.findMany();
+
   const executives = await prisma.executive.findMany({
     select: {
       departmentName: true,
@@ -43,15 +42,21 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar executives={executives} announcements={announcements} params={{ lng }} />
-          {React.Children.map(children, (child) => {
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child, {
-                params: { lng },
-              } as React.Attributes);
-            }
-            return child;
-          })}
+          <NavBar
+            executives={executives}
+            announcements={announcements}
+            params={{ lng }}
+          />
+          <div className="min-h-screen">
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child)) {
+                return React.cloneElement(child, {
+                  params: { lng },
+                } as React.Attributes);
+              }
+              return child;
+            })}
+          </div>
           <Footer params={{ lng }} />
         </body>
       </html>

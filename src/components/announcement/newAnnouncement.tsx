@@ -66,7 +66,7 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
           originalName,
         }),
       };
-      createAnnouncement(newAnnouncement);
+      await createAnnouncement(newAnnouncement);
       toast.success("Announcement posted successfully", {
         duration: 3000,
       });
@@ -88,7 +88,10 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
     <div>
       <Toaster position="top-right" richColors />
       <div className="flex flex-row justify-end">
-        <button className="bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center" onClick={openModal}>
+        <button
+          className="bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center"
+          onClick={openModal}
+        >
           New
         </button>
       </div>
@@ -98,17 +101,36 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
           <div className="fixed inset-60 w-2/4 mx-auto items-center bg-black justify-center">
             <div className="absolute inset-0 bg-white "></div>
             <div className=" bg-white p-4 rounded-lg">
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-3xl relative ">Add New Announcement</h1>
+              <h1 className="text-slate-900 text-3xl relative ">
+                Add New Announcement
+              </h1>
 
               <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-4">
-                  <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="title"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Title:
                   </label>
                   <input
@@ -123,7 +145,10 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="description"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Description:
                   </label>
                   <textarea
@@ -138,12 +163,16 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="link" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="link"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Link:
                   </label>
                   <input
                     type="text"
                     id="link"
+                    maxLength={200}
                     onChange={(e) => {
                       setLink(e.target.value);
                     }}
@@ -151,9 +180,14 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
                     placeholder="Enter Link"
                   />
                 </div>
-                <label className="block text-gray-500 text-sm font-semibold mb-2 ml-3">OR</label>
+                <label className="block text-gray-500 text-sm font-semibold mb-2 ml-3">
+                  OR
+                </label>
                 <div className="mb-4">
-                  <label htmlFor="file" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="file"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Attachment:
                   </label>
                   <input
@@ -167,7 +201,10 @@ const NewAnnouncement = ({ createAnnouncement }: NewAnnouncementProps) => {
                   />
                 </div>
                 <div className="flex justify-end">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
                     <div className="flex space-x-2">
                       {isLoading && <Spinner />}
                       <span>Post Announcement</span>

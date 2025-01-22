@@ -1,7 +1,7 @@
 import prisma from "@/db";
+import fs from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
-import fs from "fs";
 
 export async function GET(req: NextRequest) {
   const images = await prisma.profilePicture.findMany();
@@ -15,12 +15,19 @@ export async function POST(req: NextRequest) {
     const file: File | null = data.get("image") as File;
 
     if (!file) {
-      return NextResponse.json({ error: "Image file is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Image file is required" },
+        { status: 400 }
+      );
     }
 
     // Generate a unique filename for the image (you could use a UUID or timestamp for uniqueness)
     const filename = `${Date.now()}-${file.name}`;
-    const filePath = path.join(process.cwd(), "public/uploads/images", filename); // Save to the 'uploads' folder in 'public'
+    const filePath = path.join(
+      process.cwd(),
+      "public/uploads/images",
+      filename
+    ); // Save to the 'uploads' folder in 'public'
 
     // Make sure the 'uploads' directory exists, otherwise create it
     const uploadsDir = path.join(process.cwd(), "public/uploads/images");
@@ -28,10 +35,13 @@ export async function POST(req: NextRequest) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
 
-    // Convert file to buffer and write to the file system
+    // Convert file to buffer and write to the file system in chunks
     const fileStream = fs.createWriteStream(filePath);
-    const buffer = Buffer.from(await file.arrayBuffer());
-    fileStream.write(buffer);
+    const reader = file.stream().getReader();
+    let chunk;
+    while (!(chunk = await reader.read()).done) {
+      fileStream.write(Buffer.from(chunk.value));
+    }
     fileStream.end();
 
     // Store the file path in the database
@@ -45,6 +55,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, imagePath: image.imagePath });
   } catch (error) {
     console.error("Error saving image:", error);
-    return NextResponse.json({ error: "Failed to save image" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to save image" },
+      { status: 500 }
+    );
   }
 }
