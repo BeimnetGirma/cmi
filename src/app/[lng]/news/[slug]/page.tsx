@@ -63,11 +63,15 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
                 <div className="flex flex-col space-y-5">
                   <div className="aspect-auto">
                     <Image
-                      src={news?.feature_image!}
+                      src={
+                        news?.feature_image || "/assets/icons/default-image.png"
+                      }
                       className="!relative object-cover w-full h-96"
-                      alt="Featured Image 1"
+                      alt="Featured Image"
                       layout="fill"
-                      onError={() => console.log("Image not found")}
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/icons/default-image.png";
+                      }}
                     />
                   </div>
                   {<SafeHTML html={news?.html} />}

@@ -50,7 +50,6 @@ const ImportFromCSV = () => {
       startLoading();
       const reader = new FileReader();
       reader.onload = (e) => {
-        console.log(file);
         const text = e.target?.result as string;
         Papa.parse<Department>(text, {
           header: true,

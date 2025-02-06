@@ -18,7 +18,7 @@ const Carousel = ({ posts }: CarouselProps) => {
   return (
     <div
       id="carouselExampleCaptions"
-      className="relative"
+      className="relative w-full overflow-hidden h-[50vh]" // Updated height
       data-twe-carousel-init
       data-twe-ride="carousel"
     >
@@ -51,27 +51,31 @@ const Carousel = ({ posts }: CarouselProps) => {
         ></button>
       </div>
 
-      <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+      <div className="relative w-full overflow-hidden h-[50vh] after:clear-both after:block after:content-['']">
+        {" "}
         {posts?.posts?.map((post: Post, index) => (
           <div
             key={index}
-            className={`relative float-left -mr-[100%] w-full transition-transform duration-[100ms] ease-in-out motion-reduce:transition-none ${
+            className={`relative float-left -mr-[100%] w-full h-[50vh] transition-transform duration-[100ms] ease-in-out motion-reduce:transition-none ${
               index != 0 ? "hidden" : ""
             }`}
             {...(index === 0 ? { "data-twe-carousel-active": "" } : {})}
             data-twe-carousel-item
-            style={{ backfaceVisibility: "hidden", height: "600px" }}
+            style={{ backfaceVisibility: "hidden" }}
           >
             <div
-              className="absolute top-0 bottom-0 right-0 left-0"
+              className="absolute top-0 bottom-0 right-0 left-0 h-full"
               style={{
                 backgroundImage: `url(${post.feature_image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 filter: "blur(10px)",
+                backfaceVisibility: "hidden",
                 zIndex: -1,
               }}
             />
-            <Link href={`news/${post.slug}`} className="">
-              <div className="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-30 z-1"></div>
+            <Link href={`news/${post.slug}`}>
+              <div className="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-30 z-1 "></div>
               <div
                 className="flex justify-center items-center"
                 style={{
@@ -79,7 +83,7 @@ const Carousel = ({ posts }: CarouselProps) => {
                 }}
               >
                 <Image
-                  width={800}
+                  width={1000}
                   height={500}
                   src={post.feature_image}
                   className="relative block mx-auto py-10 object-contain transition-transform duration-300 ease-in-out transform hover:scale-125 hover:shadow-lg"

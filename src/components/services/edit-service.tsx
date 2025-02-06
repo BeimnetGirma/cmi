@@ -59,15 +59,25 @@ const EditService = ({ service, editService }: EditServiceProps) => {
       }
       closeModal();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
     <>
       <button onClick={openModal}>
-        <svg className="h-8 w-8 text-yellow-500" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
+        <svg
+          className="h-8 w-8 text-yellow-500"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
         </svg>
       </button>
       <div>
@@ -77,17 +87,39 @@ const EditService = ({ service, editService }: EditServiceProps) => {
             <div className="fixed inset-60 w-2/4 mx-auto  items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Edit Service Details</h1>
+                <h1 className="text-slate-900 text-3xl relative ">
+                  Edit Service Details
+                </h1>
 
-                <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
+                <form
+                  className="mt-8 relative"
+                  onSubmit={(e) => handleSubmit(e)}
+                >
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="title"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Title:
                     </label>
                     <input
@@ -103,7 +135,10 @@ const EditService = ({ service, editService }: EditServiceProps) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="content"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Content:
                     </label>
                     <textarea
@@ -118,7 +153,10 @@ const EditService = ({ service, editService }: EditServiceProps) => {
                     ></textarea>
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="file" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="file"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Cover Image:
                     </label>
                     <input
@@ -132,7 +170,10 @@ const EditService = ({ service, editService }: EditServiceProps) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="link" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="link"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Link:
                     </label>
                     <input
@@ -147,7 +188,10 @@ const EditService = ({ service, editService }: EditServiceProps) => {
                     />
                   </div>
                   <div className="flex justify-end">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
                       <div className="flex space-x-2">
                         {isLoading && <Spinner />}
                         <span>Update Service</span>

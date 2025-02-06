@@ -13,8 +13,6 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
   const toggleLanguage = () => {
     const currentLanguage = lng;
 
-    console.log("currentLanguage", currentLanguage);
-
     if (currentLanguage === "en") {
       window.location.href = "/am";
     } else {

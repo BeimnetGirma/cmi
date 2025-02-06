@@ -33,7 +33,7 @@ const EditHomePage = ({ ...EditHomePageProp }) => {
         toast.success("Translation Updated Successfully");
       })
       .catch((err) => {
-        console.log("error");
+        console.error("error");
         toast.error("Error Updating Translation");
       });
   };

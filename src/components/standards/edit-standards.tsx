@@ -52,7 +52,7 @@ const EditStandard = ({ standard, editStandard }: EditStandardProps) => {
       }
       closeModal();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
