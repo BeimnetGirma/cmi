@@ -15,8 +15,10 @@ export async function POST(req: NextRequest) {
     const file: File | null = data.get("image") as File;
 
     if (!file) {
-      console.log("**********************************");
-      return NextResponse.json({ error: "Image file is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Image file is required" },
+        { status: 400 }
+      );
     }
 
     // Generate a unique filename for the image (you could use a UUID or timestamp for uniqueness)
@@ -46,6 +48,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, imagePath: image.imagePath });
   } catch (error) {
     console.error("Error saving image:", error);
-    return NextResponse.json({ error: "Failed to save image" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to save image" },
+      { status: 500 }
+    );
   }
 }

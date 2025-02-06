@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { NextApiResponse } from "next";
-import path from "path";
 import fs from "fs";
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
 
 export async function GET(req: NextRequest) {
   //   const { filename } = req.query;
@@ -9,7 +8,6 @@ export async function GET(req: NextRequest) {
   const id = url.pathname.split("/").pop(); // Extract the 'id' from the URL
   const p = url.pathname.split("/");
 
-  //   console.log(path.join(process.cwd(), "uploads", p[3], p[4]));
   const filePath = path.join(process.cwd(), "uploads", p[3], p[4]);
 
   if (fs.existsSync(filePath)) {
