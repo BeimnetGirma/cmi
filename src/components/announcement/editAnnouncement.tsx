@@ -6,7 +6,10 @@ type EditAnnouncementProps = {
   announcement: Announcement;
   editAnnouncement: (announcement: Announcement) => void;
 };
-const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementProps) => {
+const EditAnnouncement = ({
+  announcement,
+  editAnnouncement,
+}: EditAnnouncementProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(announcement.title);
   const [link, setLink] = useState(announcement.link);
@@ -57,15 +60,25 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
       }
       closeModal();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
     <>
       <button onClick={openModal}>
-        <svg className="h-8 w-8 text-yellow-500" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
+        <svg
+          className="h-8 w-8 text-yellow-500"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
         </svg>
       </button>
       <div>
@@ -75,17 +88,36 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
             <div className="fixed inset-60 w-2/4 mx-auto  items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Edit Annoucement Details</h1>
+                <h1 className="text-slate-900 text-3xl relative ">
+                  Edit Annoucement Details
+                </h1>
 
                 <form className="mt-8 relative">
                   <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="title"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Title:
                     </label>
                     <input
@@ -100,7 +132,10 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="description"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Description:
                     </label>
                     <textarea
@@ -116,7 +151,10 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="link" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="link"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Link:
                     </label>
                     <input
@@ -132,7 +170,10 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="department" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="department"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Attachement:
                     </label>
                   </div>
@@ -151,7 +192,10 @@ const EditAnnouncement = ({ announcement, editAnnouncement }: EditAnnouncementPr
                     />
                   </div>
                   <div className="flex justify-end">
-                    <button className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2" onClick={closeModal}>
+                    <button
+                      className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2"
+                      onClick={closeModal}
+                    >
                       Cancel
                     </button>
                     <button

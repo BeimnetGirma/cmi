@@ -61,8 +61,6 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
       if (data.success) {
         const filePath = data.imagePath;
 
-        console.log("Saving profile ", filePath);
-
         const newExecutive = {
           departmentName,
           dutiesDescription: DOMPurify.sanitize(dutiesDescription),
@@ -95,7 +93,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
       <div>
         <Toaster position="top-right" richColors />
         <div className="flex flex-row justify-end">
-          <button className="bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center" onClick={openModal}>
+          <button
+            className="bg-green-600 text-white rounded-md py-4  m-2 px-10 item-center"
+            onClick={openModal}
+          >
             New
           </button>
         </div>
@@ -105,17 +106,39 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
             <div className="fixed inset-60 w-2/4 mx-auto items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Add New Executive</h1>
+                <h1 className="text-slate-900 text-3xl relative ">
+                  Add New Executive
+                </h1>
 
-                <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
+                <form
+                  className="mt-8 relative"
+                  onSubmit={(e) => handleSubmit(e)}
+                >
                   <div className="mb-4">
-                    <label htmlFor="deptName" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="deptName"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Executive Name
                     </label>
                     <input
@@ -130,7 +153,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="description"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Executive Description:
                     </label>
                     <ReactQuill
@@ -142,9 +168,14 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                     />
                   </div>
                   <fieldset className="m-5 p-2 border-2 ">
-                    <legend className="block text-gray-700 font-bold mb-2">Executive Head</legend>
+                    <legend className="block text-gray-700 font-bold mb-2">
+                      Executive Head
+                    </legend>
                     <div className="mb-4">
-                      <label htmlFor="headName" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="headName"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Full Name
                       </label>
                       <input
@@ -159,7 +190,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                       />
                     </div>
                     <div className="mb-4">
-                      <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="title"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Title
                       </label>
                       <input
@@ -175,7 +209,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="image"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Profile Picture:
                       </label>
                       <input
@@ -192,7 +229,10 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
                   </fieldset>
 
                   <div className="flex justify-end">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
                       <div className="flex space-x-2">
                         {isLoading && <Spinner />}
                         <span>Add Executive</span>
