@@ -37,16 +37,13 @@ export default async function RootLayout({
     },
   });
   const announcements = await prisma.announcement.findMany();
+  const resourceTypes = await prisma.resourceType.findMany();
 
   return (
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar
-            executives={executives}
-            announcements={announcements}
-            params={{ lng }}
-          />
+          <NavBar executives={executives} announcements={announcements} resourceTypes={resourceTypes} params={{ lng }} />
           <div className="min-h-screen">
             {React.Children.map(children, (child) => {
               if (React.isValidElement(child)) {
