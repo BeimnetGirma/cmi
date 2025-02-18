@@ -8,7 +8,6 @@ import { Department as DepartmentType } from "@/types";
 export async function createDepartment(newDepartment: DepartmentType) {
   "use server";
 
-  console.log(newDepartment);
   try {
     await prisma.department.create({ data: newDepartment });
     revalidatePath("/admin");

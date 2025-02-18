@@ -16,9 +16,6 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
-    console.log("open");
-    console.log(executive);
-
     setIsOpen(true);
   };
 
@@ -27,7 +24,9 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
   };
   const [headName, setFullName] = useState(executive.headName);
   const [headTitle, setTitle] = useState(executive.headTitle);
-  const [dutiesDescription, setDescription] = useState(executive.dutiesDescription);
+  const [dutiesDescription, setDescription] = useState(
+    executive.dutiesDescription
+  );
   const [departmentName, setDeptName] = useState(executive.departmentName);
   const [imagePath, setImagePath] = useState(executive.imagePath);
   const [image, setImage] = useState<File>();
@@ -76,15 +75,25 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
       }
       closeModal();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
     <>
       <button onClick={openModal}>
-        <svg className="h-8 w-8 text-yellow-500" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
+        <svg
+          className="h-8 w-8 text-yellow-500"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
         </svg>
       </button>
       <div>
@@ -94,17 +103,39 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
             <div className="fixed inset-60 w-2/4 mx-auto items-center bg-black justify-center">
               <div className="absolute inset-0 bg-white "></div>
               <div className=" bg-white p-4 rounded-lg">
-                <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <button
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                  onClick={closeModal}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
                 {/* Add your modal content here */}
-                <h1 className="text-slate-900 text-3xl relative ">Update Excutive Profile</h1>
+                <h1 className="text-slate-900 text-3xl relative ">
+                  Update Excutive Profile
+                </h1>
 
-                <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
+                <form
+                  className="mt-8 relative"
+                  onSubmit={(e) => handleSubmit(e)}
+                >
                   <div className="mb-4">
-                    <label htmlFor="deptName" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="deptName"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Executive Name
                     </label>
                     <input
@@ -120,7 +151,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="description"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Executive Description:
                     </label>
                     <ReactQuill
@@ -132,9 +166,14 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                     />
                   </div>
                   <fieldset className="m-5 p-2 border-2 ">
-                    <legend className="block text-gray-700 font-bold mb-2">Executive Head</legend>
+                    <legend className="block text-gray-700 font-bold mb-2">
+                      Executive Head
+                    </legend>
                     <div className="mb-4">
-                      <label htmlFor="headName" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="headName"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Full Name
                       </label>
                       <input
@@ -150,7 +189,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                       />
                     </div>
                     <div className="mb-4">
-                      <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="title"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Title
                       </label>
                       <input
@@ -167,7 +209,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label
+                        htmlFor="image"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
                         Profile Picture:
                       </label>
                       <input
@@ -183,7 +228,10 @@ const EditExecutive = ({ executive, editProfile }: EditProfileProps) => {
                   </fieldset>
 
                   <div className="flex justify-end">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
                       <div className="flex space-x-2">
                         {isLoading && <Spinner />}
                         <span>Update Profile</span>

@@ -4,11 +4,13 @@ import Image from "next/image";
 // import { revalidatePath } from "next/cache";
 import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
+import Spinner from "../ui/spinner";
 
 const GalleryPage = () => {
   const [image, setFile] = useState<File>();
   const [caption, setCaption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
@@ -57,6 +59,7 @@ const GalleryPage = () => {
     e.preventDefault();
     if (!image) return;
     try {
+      setLoading(true);
       const formData = new FormData();
       formData.set("image", image);
       formData.set("caption", caption);
@@ -92,6 +95,8 @@ const GalleryPage = () => {
         });
         console.error(error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +111,6 @@ const GalleryPage = () => {
             duration: 3000,
             description: response.statusText,
           });
-          console.error(response);
           return;
         }
         setImages(images.filter((image) => image.id !== selectedImageId));
@@ -221,6 +225,7 @@ const GalleryPage = () => {
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       <div className="flex space-x-2">
+                        {loading && <Spinner />}
                         <span>Save</span>
                       </div>
                     </button>
