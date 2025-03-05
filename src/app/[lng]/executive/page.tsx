@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import prisma from "@/db";
 import { useSearchParams } from "next/navigation";
 import { Executive } from "@prisma/client";
 import DOMPurify from "dompurify";
@@ -58,7 +57,6 @@ const ExecutivePage = () => {
                   <h1 className="text-slate-600 font-semibold text-2xl">
                     Department Duties{" "}
                   </h1>
-                  {/* <p className="text-slate-600 text-justify">{executive.dutiesDescription}</p> */}
                   <div
                     className="text-slate-600 text-justify text-lg"
                     dangerouslySetInnerHTML={{
