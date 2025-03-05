@@ -90,8 +90,8 @@ const Carousel = ({ posts }: CarouselProps) => {
                   alt="..."
                 />
               </div>
-              <div className="absolute inset-x-[15%] bottom-40 top-72 hidden  text-center w-1/2 mx-auto text-black md:block bg-black opacity-30 z-10"></div>
-              <div className="absolute inset-x-[15%] bottom-40 py-5 text-center w-1/2 mx-auto text-white md:block z-20  ">
+              <div className="absolute inset-x-[15%] bottom-40 top-60 hidden text-center w-1/2 mx-auto text-black md:block bg-black opacity-30 z-10"></div>
+              <div className="absolute inset-x-[15%] bottom-40 py-5 text-center w-1/2 mx-auto text-white md:block z-20">
                 <h5 className="text-3xl font-bold py-4">{post.title}</h5>
               </div>
             </Link>
