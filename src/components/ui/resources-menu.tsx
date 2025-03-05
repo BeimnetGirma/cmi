@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./dropdown-menu";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
-import { PageProps } from "@/types";
+import { PageProps, ResourceType } from "@/types";
 
-const ResourcesMenu: React.FC<PageProps> = ({ params: { lng } }) => {
+const ResourcesMenu: React.FC<PageProps & { resourceTypes: ResourceType[] }> = ({ resourceTypes, params: { lng } }) => {
   const { t } = useTranslation(lng, "navbar");
   const [openDropdown, setOpenDropdown] = useState(false);
   const submenus = [
@@ -36,6 +36,20 @@ const ResourcesMenu: React.FC<PageProps> = ({ params: { lng } }) => {
               <DropdownMenuItem key={index} className="mt-2">
                 <Link href={submenu.href} className="hover:text-slate-500 ">
                   {submenu.title}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+            {resourceTypes.map((type, index) => (
+              <DropdownMenuItem key={index} className="mt-2">
+                <Link
+                  key={index}
+                  href={{
+                    pathname: `/${lng}/resources`,
+                    query: { type: type.name }, // Pass query as an object
+                  }}
+                  className="hover:text-slate-500 "
+                >
+                  {type.name}
                 </Link>
               </DropdownMenuItem>
             ))}
