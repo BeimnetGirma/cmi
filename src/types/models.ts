@@ -14,6 +14,16 @@ export type Standard = {
   title: string;
   path: string;
 };
+export type Resource = {
+  id?: string;
+  title: string;
+  type: string;
+  path: string;
+};
+export type ResourceType = {
+  id?: string;
+  name: string;
+};
 export type Magazine = {
   id?: string;
   title: string;

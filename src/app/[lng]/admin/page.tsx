@@ -12,6 +12,7 @@ import Magazine from "@/components/magazines/magazines";
 import Services from "@/components/services/services";
 import NewsLink from "@/components/news/news-link";
 import Announcements from "@/components/announcement/announcements";
+import Resources from "@/components/resources/resources";
 
 const Admin = ({ params }: PageProps) => {
   const { lng } = params;
@@ -22,6 +23,7 @@ const Admin = ({ params }: PageProps) => {
         pages={{
           researches: <Researches key="research" />,
           standards: <Standard key="standard" />,
+          resources: <Resources key="resources" />,
           magazines: <Magazine key="magazine" />,
           news: <NewsLink key="news" />,
           departments: <Departments key="department" />,
@@ -31,18 +33,7 @@ const Admin = ({ params }: PageProps) => {
           services: <Services key="services" />,
           announcements: <Announcements key="announcements" />,
         }}
-        tabs={[
-          "Researches",
-          "Standards",
-          "Magazines",
-          "News",
-          "Departments",
-          "Gallery",
-          "Home Page",
-          "Executives",
-          "Services",
-          "Announcements",
-        ]}
+        tabs={["Researches", "Standards", "Resources", "Magazines", "News", "Departments", "Gallery", "Home Page", "Executives", "Services", "Announcements"]}
         lng={lng}
       />
     </>
