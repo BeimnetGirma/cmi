@@ -20,6 +20,7 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
     getSinglePost(slug)
       .then((data: void | PostOrPage) => {
         if (data) {
+          console.log({ data });
           setNews(data as unknown as PostOrPage);
         }
       })
@@ -64,17 +65,19 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
                   <div className="aspect-auto">
                     <Image
                       src={
-                        news?.feature_image || "/assets/icons/default-image.png"
+                        news?.feature_image || "/assets/imgs/default-image.png"
                       }
                       className="!relative object-cover w-full h-96"
                       alt="Featured Image"
                       layout="fill"
                       onError={(e) => {
-                        e.currentTarget.src = "/assets/icons/default-image.png";
+                        e.currentTarget.src = "/assets/imgs/default-image.png";
                       }}
                     />
                   </div>
-                  {<SafeHTML html={news?.html} />}
+                  <div className="text-secondary-main text-sm">
+                    {<SafeHTML html={news?.html || ""} />}
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,31 +104,6 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
                   </div>
                 </div>
                 {/* line */}
-                <div className="border-1 border-b-2 border-bg-secondary-main"></div>
-                <div>
-                  <div className="text-black font-bold text-2xl py-4">
-                    Categories
-                  </div>
-                  {/* categories */}
-                  <div className="flex flex-col space-y-5">
-                    {categories.map((category, indx) => (
-                      <div
-                        key={indx}
-                        className="flex justify-between border-2 rounded-lg py-2 px-4 text-md cursor-pointer hover:bg-gray-200 transition duration-300 ease-in-out "
-                      >
-                        <div className="text-secondary-main text-sm">
-                          {category}
-                        </div>
-                        <Image
-                          src="/assets/icons/arrow-right.svg"
-                          width={24}
-                          height={24}
-                          alt="arrow right icon"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
                 <div className="border-1 border-b-2 border-bg-secondary-main"></div>
                 <div className="font-semibold text-lg">Follow us on </div>
                 <SocialLinks />
