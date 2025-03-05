@@ -72,7 +72,6 @@ const News = () => {
               {/* implement search articles */}
               <div className="flex flex-col space-y-10">
                 <div>
-                  {/* <div className="font-bold text-2xl">Search Articles</div> */}
                   {/* search input */}
                   <div className="flex items-center align-middle w-min-[270px] space-y-2  border-2 border-gray-300 rounded-lg  ">
                     <form className="w-full" onSubmit={handleSearch}>

@@ -30,6 +30,18 @@ model manual {
   path  String
 }
 
+model resource {
+  id    String @id @default(uuid())
+  title String
+  path  String
+  type  String
+}
+
+model resourceType {
+  id   String @id @default(uuid())
+  name String
+}
+
 model Image {
   id         String   @id @default(uuid())
   caption    String   @db.VarChar(255)
