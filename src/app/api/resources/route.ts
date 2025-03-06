@@ -3,7 +3,7 @@ import fs, { writeFile } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
-const RESOURCE_UPLOAD_DIR = "public/uploads/resources";
+const RESOURCE_UPLOAD_DIR = "/public/uploads/resources";
 
 export const responseLimit = "50mb";
 export const maxDuration = 60; // Set max execution time to 60 seconds
