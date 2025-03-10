@@ -15,11 +15,10 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | undefined>();
   const { isLoading, startLoading, stopLoading } = useLoading();
-  const [resourceType, setResourceType] = useState(resourceTypes[0].name);
-  // const resourceTypes = [
-  //   { id: "1", name: "Project" },
-  //   { id: "2", name: "Manual" },
-  // ];
+  const [resourceType, setResourceType] = useState<string>(
+    resourceTypes?.[0]?.name ?? ""
+  );
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -40,15 +39,38 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
       });
       if (!response.ok) {
         stopLoading();
+        let errorMessage = response.statusText;
+        try {
+          const errorData = await response.text();
+          console.error("Server response:", errorData);
+          errorMessage = errorData || response.statusText;
+        } catch (e) {
+          console.error("Failed to read error response:", e);
+        }
+
         toast.error("Failed to upload the resource.", {
           duration: 3000,
-          description: response.statusText,
+          description: errorMessage.substring(0, 100), // Limit description length
         });
         console.error(response);
         return;
       }
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        stopLoading();
+        console.error("JSON parsing error:", jsonError);
+        const rawResponse = await response.text();
+        console.error("Raw server response:", rawResponse);
+        toast.error("Server returned invalid response format", {
+          duration: 3000,
+          description: "Check console for details",
+        });
+        return;
+      }
+
       if (data.success) {
         const filePath = data.path;
         const originalName = file.name;
@@ -60,7 +82,6 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
             originalName,
           }),
         };
-        console.log(newResource);
 
         createResource(newResource);
         toast.success("Resource uploaded successfully", {
@@ -84,7 +105,10 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
   };
   return (
     <>
-      <button className="bg-green-600 hover:bg-green-700 text-white rounded-md py-2  m-2 px-8 item-center" onClick={openModal}>
+      <button
+        className="bg-green-600 hover:bg-green-700 text-white rounded-md py-2  m-2 px-8 item-center"
+        onClick={openModal}
+      >
         Add Resource
       </button>
 
@@ -98,17 +122,36 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
               className=" fixed bg-white p-6 rounded-lg w-2/4 shadow-lg z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
               max-h-[80vh] overflow-y-auto"
             >
-              <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={closeModal}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               {/* Add your modal content here */}
-              <h1 className="text-slate-900 text-3xl relative ">Add New Resource</h1>
+              <h1 className="text-slate-900 text-3xl relative ">
+                Add New Resource
+              </h1>
 
               <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-4">
-                  <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="title"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Title:
                   </label>
                   <input
@@ -123,7 +166,10 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="type"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Resource Type:
                   </label>
 
@@ -133,9 +179,14 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
                     id="department"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                     onChange={(e) => {
-                      setResourceType(e.target.value);
+                      const selectedTypeName = e.target.value;
+                      const selectedType = resourceTypes.find(
+                        (type) => type.name === selectedTypeName
+                      );
+                      if (selectedType) {
+                        setResourceType(selectedType.name);
+                      }
                     }}
-                    defaultValue={resourceTypes[0].name}
                   >
                     <option selected disabled>
                       Select Type
@@ -148,7 +199,10 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
                   </select>
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="file" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="file"
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     File:
                   </label>
                   <input
@@ -163,7 +217,10 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
                   />
                 </div>
                 <div className="flex justify-end">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
                     <div className="flex space-x-2">
                       {isLoading && <Spinner />}
                       <span>Add Resource</span>
