@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import SafeHTML from "@/components/ui/safe-html";
 import Link from "next/link";
 import ImageWithTextOverlay from "@/components/ui/image-overlay";
+import { toast } from "sonner";
 
 export const NewsPage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
@@ -20,19 +21,17 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
     getSinglePost(slug)
       .then((data: void | PostOrPage) => {
         if (data) {
-          console.log({ data });
           setNews(data as unknown as PostOrPage);
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error("Error fetching news");
       })
       .finally(() => {
         stopLoading();
       });
   }, [slug, startLoading, stopLoading]);
 
-  const categories = ["All", "Quality System", "Safety System"];
   return (
     <div className="flex flex-col">
       <div className="w-full">
@@ -75,8 +74,8 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
                       }}
                     />
                   </div>
-                  <div className="text-secondary-main text-sm">
-                    {<SafeHTML html={news?.html || ""} />}
+                  <div className="text-secondary-main text-sm news-content">
+                    {news?.html && <SafeHTML html={news?.html || ""} />}
                   </div>
                 </div>
               </div>
