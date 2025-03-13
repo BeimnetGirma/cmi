@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.6",
@@ -62,6 +66,7 @@
     "postcss": "^8.4.44",
     "prisma": "^5.16.1",
     "tailwindcss": "^3.4.10",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "description": "ECMI Web application",
