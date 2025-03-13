@@ -53,3 +53,4 @@ next-env.d.ts
 file-server/node_modules
 dist/
 uploads/
+.qodo
