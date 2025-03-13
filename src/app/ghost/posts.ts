@@ -17,12 +17,11 @@ export async function getPosts() {
 }
 
 export async function searchPosts(query: string) {
-  const encodedQuery = encodeURIComponent(query);
   return await api.posts
     .browse({
       include: ["tags", "authors"],
       limit: "all",
-      filter: `title:${encodedQuery}`,
+      filter: `title:'${query}'`,
     })
     .catch((e) => {
       console.error(e);
