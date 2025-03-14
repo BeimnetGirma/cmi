@@ -2,6 +2,19 @@
   "name": "ecmi",
   "version": "0.1.0",
   "private": true,
+  "description": "ECMI Web application",
+  "keywords": [
+    "ECMI",
+    "Ethiopian Construction Management Institute"
+  ],
+  "author": "ECMI",
+  "bugs": {
+    "url": "https://github.com/rabira-hierpa/ecmi/issues"
+  },
+  "contributors": [
+    "Rabra Hierpa <rabira.hierpa@aau.edu.et>",
+    "Beimnet Girma <beimnet.girma@aau.edu.et"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -71,18 +84,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5"
   },
-  "description": "ECMI Web application",
-  "keywords": [
-    "ECMI",
-    "Ethiopian Construction Management Institute"
-  ],
-  "author": "ECMI",
-  "bugs": {
-    "url": "https://github.com/rabira-hierpa/ecmi/issues"
-  },
-  "contributors": [
-    "Rabra Hierpa <rabira.hierpa@aau.edu.et>",
-    "Beimnet Girma <beimnet.girma@aau.edu.et"
-  ],
   "license": "ISC"
 }
