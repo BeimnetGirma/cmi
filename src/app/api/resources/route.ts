@@ -12,16 +12,12 @@ export const maxDuration = 60; // Set max execution time to 60 seconds
 export async function POST(req: NextRequest) {
   try {
     const uploadDir = path.join(process.cwd(), RESOURCE_UPLOAD_DIR);
-    console.log(`Upload directory: ${uploadDir}`);
 
     const data = await req.formData();
     const file: File | null = data.get("file") as unknown as File;
 
     if (!file) {
-      return NextResponse.json(
-        { success: false, message: "No file found" },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: "No file found" }, { status: 400 });
     }
 
     const bytes = await file.arrayBuffer();
@@ -33,7 +29,6 @@ export async function POST(req: NextRequest) {
     if (!fs.existsSync(uploadDir)) {
       try {
         fs.mkdirSync(uploadDir, { recursive: true });
-        console.log(`Created directory: ${uploadDir}`);
       } catch (mkdirError) {
         console.error("Failed to create upload directory:", mkdirError);
         return NextResponse.json(
@@ -54,8 +49,6 @@ export async function POST(req: NextRequest) {
         });
       });
 
-      console.log(`File uploaded successfully: ${filePath}`);
-
       return NextResponse.json({
         success: true,
         path: fileName,
@@ -75,9 +68,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        message: `Unexpected error: ${
-          error instanceof Error ? error.message : String(error)
-        }`,
+        message: `Unexpected error: ${error instanceof Error ? error.message : String(error)}`,
       },
       { status: 500 }
     );
@@ -90,10 +81,7 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const filename = searchParams.get("filename");
     if (!filename) {
-      return NextResponse.json(
-        { success: false, message: "Filename query parameter is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
     }
 
     const uploadDir = path.join(process.cwd(), RESOURCE_UPLOAD_DIR);
@@ -109,19 +97,14 @@ export async function GET(req: NextRequest) {
       });
     } catch (error) {
       console.error(`File not found: ${filePath}`, error);
-      return NextResponse.json(
-        { success: false, message: "File not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, message: "File not found" }, { status: 404 });
     }
   } catch (error) {
     console.error("Unexpected error in resource download:", error);
     return NextResponse.json(
       {
         success: false,
-        message: `Unexpected error: ${
-          error instanceof Error ? error.message : String(error)
-        }`,
+        message: `Unexpected error: ${error instanceof Error ? error.message : String(error)}`,
       },
       { status: 500 }
     );
@@ -133,10 +116,7 @@ export async function DELETE(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const filename = searchParams.get("filename");
     if (!filename) {
-      return NextResponse.json(
-        { success: false, message: "Filename query parameter is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
     }
 
     const uploadDir = path.join(process.cwd(), RESOURCE_UPLOAD_DIR);
@@ -147,19 +127,14 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: true, message: "File deleted" });
     } catch (error) {
       console.error(`Failed to delete file: ${filePath}`, error);
-      return NextResponse.json(
-        { success: false, message: "File not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, message: "File not found" }, { status: 404 });
     }
   } catch (error) {
     console.error("Unexpected error in resource deletion:", error);
     return NextResponse.json(
       {
         success: false,
-        message: `Unexpected error: ${
-          error instanceof Error ? error.message : String(error)
-        }`,
+        message: `Unexpected error: ${error instanceof Error ? error.message : String(error)}`,
       },
       { status: 500 }
     );

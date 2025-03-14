@@ -28,8 +28,6 @@ export async function POST(req: NextRequest) {
       else resolve();
     });
   });
-  console.log("File uploaded successfully");
-  console.log(filePath);
   return NextResponse.json({
     success: true,
     path: fileName,
@@ -38,18 +36,14 @@ export async function POST(req: NextRequest) {
 
 // GET request to download the uploaded pdf files.
 export async function GET(req: NextRequest) {
-  console.log("GET request in standard");
-
   const { searchParams } = new URL(req.url);
   const filename = searchParams.get("filename");
-  console.log("Filename: ", filename);
 
   if (!filename) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
   const filePath = path.join(process.cwd(), STANDARD_UPLOAD_DIR, filename);
-  console.log("File path: ", filePath);
 
   try {
     const file = fs.readFileSync(filePath);
