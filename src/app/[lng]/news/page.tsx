@@ -6,7 +6,7 @@ import useLoading from "@/hooks/useLoading";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { Post } from "@/types/featured-posts";
-import adaptToPost from "@/helpers/adaptToPost";
+import adaptToPost from "@/helpers/adapt-to-post";
 
 const POSTS_PER_PAGE = 6; // Number of posts to display per page
 
