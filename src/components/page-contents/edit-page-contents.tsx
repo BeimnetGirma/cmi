@@ -52,7 +52,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
       powerAndDutiesDetail: { details: updatedPowerAndDuties },
     };
 
-    fetch("http://localhost:3000/api/" + EditPageContentProp.lng, {
+    fetch("/api/" + EditPageContentProp.lng, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
