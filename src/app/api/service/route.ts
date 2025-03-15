@@ -15,22 +15,15 @@ export async function POST(req: NextRequest) {
     const file: File | null = data.get("image") as File;
 
     if (!file) {
-      return NextResponse.json(
-        { error: "Image file is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Image file is required" }, { status: 400 });
     }
 
     // Generate a unique filename for the image (you could use a UUID or timestamp for uniqueness)
     const filename = `${Date.now()}-${file.name}`;
-    const filePath = path.join(
-      process.cwd(),
-      "public/uploads/images",
-      filename
-    ); // Save to the 'uploads' folder in 'public'
+    const filePath = path.join(process.cwd(), "uploads/images", filename); // Save to the 'uploads' folder in 'public'
 
     // Make sure the 'uploads' directory exists, otherwise create it
-    const uploadsDir = path.join(process.cwd(), "public/uploads/images");
+    const uploadsDir = path.join(process.cwd(), "uploads/images");
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
@@ -47,7 +40,7 @@ export async function POST(req: NextRequest) {
     // Store the file path in the database
     const image = await prisma.profilePicture.create({
       data: {
-        imagePath: `/uploads/images/${filename}`, // Store the relative path to the file
+        imagePath: `/api/file/images/${filename}`, // Store the relative path to the file
       },
     });
 
@@ -55,9 +48,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, imagePath: image.imagePath });
   } catch (error) {
     console.error("Error saving image:", error);
-    return NextResponse.json(
-      { error: "Failed to save image" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to save image" }, { status: 500 });
   }
 }
