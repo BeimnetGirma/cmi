@@ -4,6 +4,7 @@ import React from "react";
 import { trimExcerpt } from "@/helpers";
 import { bindDataUrl } from "@/helpers/blur-image";
 import { Post } from "@/types/featured-posts";
+
 const Card: React.FC<Post> = (props) => {
   const shadowStyle = {
     boxShadow: "0px 2px 1px 0px #00000040",
@@ -19,16 +20,15 @@ const Card: React.FC<Post> = (props) => {
     >
       <div className="h-56 relative">
         {feature_image && (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={feature_image!}
             className="object-cover rounded-t-md h-full w-full "
-            placeholder="blur"
             loading="lazy"
             width={500}
             height={220}
             sizes="(max-width: 768px) 100vw, 33vw"
             alt="featured image"
-            blurDataURL={bindDataUrl}
           />
         )}
       </div>
