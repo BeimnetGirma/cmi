@@ -69,9 +69,7 @@ export const NewsPage = ({ params }: { params: { slug: string } }) => {
                       className="!relative object-cover w-full h-96"
                       alt="Featured Image"
                       layout="fill"
-                      onError={(e) => {
-                        e.currentTarget.src = "/assets/imgs/default-image.png";
-                      }}
+                      priority
                     />
                   </div>
                   <div className="text-secondary-main text-sm news-content">
