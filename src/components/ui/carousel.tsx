@@ -82,7 +82,8 @@ const Carousel = ({ posts }: CarouselProps) => {
                   height: "-webkit-fill-available",
                 }}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   width={1000}
                   height={500}
                   src={post.feature_image}
