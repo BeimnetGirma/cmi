@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { Post } from "@/types/featured-posts";
 import adaptToPost from "@/helpers/adapt-to-post";
+import { toast } from "sonner";
 
 const POSTS_PER_PAGE = 6; // Number of posts to display per page
 
@@ -31,6 +32,7 @@ const News = () => {
       })
       .catch((error) => {
         console.error(error);
+        toast.error("Error fetching news");
       })
       .finally(() => {
         stopLoading();
