@@ -61,7 +61,6 @@ const NewResource = ({ createResource, resourceTypes }: NewResourceProps) => {
         data = await response.json();
       } catch (jsonError) {
         stopLoading();
-        console.error("JSON parsing error:", jsonError);
         const rawResponse = await response.text();
         console.error("Raw server response:", rawResponse);
         toast.error("Server returned invalid response format", {

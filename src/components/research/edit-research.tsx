@@ -1,17 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import { Department, Research } from "@/types";
+import { toast } from "sonner";
+
 type EditResearchProps = {
   research: Research;
   departments: Department[];
   editResearch: (research: Research) => void;
 };
+
 const EditResearch = ({
   departments,
   research,
   editResearch,
 }: EditResearchProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
@@ -20,18 +24,36 @@ const EditResearch = ({
   const closeModal = () => {
     setIsOpen(false);
   };
+
   const [title, setTitle] = useState(research.title);
-  var [department, setDepartment] = useState(research.deptId.toString());
+  const [department, setDepartment] = useState(research.deptId.toString());
   const [year, setYear] = useState(research.year);
   const [filePath, setFilePath] = useState(research.path);
   const [file, setFile] = useState<File>();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    // Validation
+    if (!title.trim()) {
+      toast.error("Please enter a title for the research");
+      return;
+    }
+
+    if (!department) {
+      toast.error("Please select a department");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       if (file) {
         const formData = new FormData();
         formData.set("file", file);
+
+        toast.loading("Uploading file...");
+
         const response = await fetch("/api/upload", {
           method: "POST",
           body: formData,
@@ -40,30 +62,43 @@ const EditResearch = ({
         if (response.ok) {
           await response.json().then((data) => {
             if (data) {
-              editResearch({
+              const updatedResearch = {
                 id: research.id,
                 title: title,
-                deptId: +department,
+                deptId: parseInt(department),
                 year: new Date(year),
                 path: data.path,
-              });
+              };
+
+              editResearch(updatedResearch);
+              toast.success("Research updated successfully");
             }
           });
+        } else {
+          throw new Error("File upload failed");
         }
       } else {
-        editResearch({
+        const updatedResearch = {
           id: research.id,
           title: title,
-          deptId: +department,
+          deptId: parseInt(department),
           year: new Date(year),
           path: filePath,
-        });
+        };
+
+        editResearch(updatedResearch);
+        toast.success("Research updated successfully");
       }
+
       closeModal();
     } catch (error) {
       console.error(error);
+      toast.error("Failed to update research. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <>
       <button onClick={openModal}>
@@ -92,6 +127,7 @@ const EditResearch = ({
                 <button
                   className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
                   onClick={closeModal}
+                  disabled={isLoading}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +166,7 @@ const EditResearch = ({
                       }}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
                       placeholder="Enter title"
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="mb-4">
@@ -139,31 +176,20 @@ const EditResearch = ({
                     >
                       Department:
                     </label>
-                    {/* <input
-                      type="text"
-                      id="department"
-                      value={department}
-                      onChange={(e) => {
-                        setDepartment(e.target.value);
-                      }}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-                      placeholder="Enter department"
-                    /> */}
                     <select
                       required
                       name="department"
                       id="department"
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       onChange={(e) => {
-                        department = e.target.value;
+                        setDepartment(e.target.value);
                       }}
+                      value={department}
+                      disabled={isLoading}
                     >
+                      <option value="">Select Department</option>
                       {departments.map((dept, index) => (
-                        <option
-                          selected={dept.id == research.deptId}
-                          value={dept.id}
-                          key={index}
-                        >
+                        <option value={dept.id} key={index}>
                           {dept.name}
                         </option>
                       ))}
@@ -185,6 +211,7 @@ const EditResearch = ({
                       }}
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
                       placeholder="Enter year"
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="mb-4">
@@ -202,22 +229,55 @@ const EditResearch = ({
                         setFile(e.target.files?.[0]);
                       }}
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="flex justify-end">
                     <button
-                      className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2"
+                      type="button"
+                      className="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded mx-2 disabled:opacity-50"
                       onClick={closeModal}
+                      disabled={isLoading}
                     >
                       Cancel
                     </button>
                     <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 mx-2 rounded"
+                      type="submit"
+                      className={`bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mx-2 rounded flex items-center justify-center disabled:opacity-50 ${
+                        isLoading ? "cursor-not-allowed" : ""
+                      }`}
                       onClick={(e) => {
                         handleSubmit(e);
                       }}
+                      disabled={isLoading}
                     >
-                      Update Research
+                      {isLoading ? (
+                        <>
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Updating...
+                        </>
+                      ) : (
+                        "Update Research"
+                      )}
                     </button>
                   </div>
                 </form>

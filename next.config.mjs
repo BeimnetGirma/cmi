@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 import { config } from "dotenv";
+import fs from "fs";
+import path from "path";
 config();
 
 const nextConfig = {
@@ -27,17 +29,38 @@ const nextConfig = {
         hostname: "img.icons8.com",
       },
       {
-        protocol: "http",
-        hostname: String(process.env.NEXT_PUBLIC_GHOST_URL).replace(
-          "http://",
+        protocol: process.env.NEXT_PUBLIC_GHOST_URL?.startsWith("https")
+          ? "https"
+          : "http",
+        hostname: process.env.NEXT_PUBLIC_GHOST_URL?.replace(
+          /^https?:\/\//,
           ""
         ),
+        pathname: "/**", // Allow all paths under the Ghost domain
       },
     ],
   },
   typescript: {
     // Ignore TypeScript errors during the build process
     ignoreBuildErrors: true,
+  },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Cache-Control", value: "no-store, must-revalidate" }, // 🔥 Prevent caching issues
+        ],
+      },
+    ];
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      console.log("🔄 Clearing Next.js Cache...");
+      const cacheDir = path.resolve(".next/cache");
+      fs.rmSync(cacheDir, { recursive: true, force: true });
+    }
+    return config;
   },
 };
 
