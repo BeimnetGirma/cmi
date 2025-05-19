@@ -29,7 +29,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
       {!!featuredPosts?.posts?.length && <Carousel posts={featuredPosts} />}
       {/* Hero */}
 
-      <div>ECMI - Deploy to test</div>
+      <div className="text-center font-bold text-2xl">
+        ECMI - Deploy to test
+      </div>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">
         <Image
           src="/assets/imgs/1.jpg"
