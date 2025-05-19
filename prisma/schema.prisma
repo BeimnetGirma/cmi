@@ -37,6 +37,7 @@ model resource {
   type  String
 }
 
+// Resource Type
 model resourceType {
   id   String @id @default(uuid())
   name String

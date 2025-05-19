@@ -16,7 +16,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
       cache: "no-cache",
     }
   )
-    .then((res) => res.json() as Promise<FeaturedPosts>)
+    .then((res) => {
+      return res.json() as Promise<FeaturedPosts>;
+    })
     .catch((err) => {
       console.error(err);
       return null;
@@ -26,6 +28,10 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     <div className=" space-y-20">
       {!!featuredPosts?.posts?.length && <Carousel posts={featuredPosts} />}
       {/* Hero */}
+
+      <div className="text-center font-bold text-2xl">
+        ECMI - Deploy to test
+      </div>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">
         <Image
           src="/assets/imgs/1.jpg"
