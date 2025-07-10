@@ -1,0 +1,62 @@
+name: Deploy Staging Next.js App
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Staging
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      NEXT_PUBLIC_GHOST_URL: ${{ secrets.NEXT_PUBLIC_GHOST_URL }}
+      NEXT_PUBLIC_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_PUBLIC_GHOST_CONTENT_API_KEY }}
+      APP_PORT: 3001
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prisma migrations
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+        run: npx prisma migrate deploy
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Upload build artifacts to staging server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: ".next,public,package.json,ecosystem.config.js,prisma"
+          target: "/var/www/ecmi-staging"
+
+      - name: Run app on staging port
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            cd /var/www/ecmi-staging
+            npm install --omit=dev
+            npx prisma migrate deploy
+            PORT=3002 pm2 start npm --name ecmi_staging -- run start || pm2 restart ecmi_staging
