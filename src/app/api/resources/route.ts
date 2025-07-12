@@ -23,7 +23,11 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const fileName = renameFile(file);
-    const filePath = path.join(uploadDir, fileName);
+    const filePath = path.resolve(uploadDir, path.basename(fileName));
+    // Check if the file path is valid and does not escape the upload directory
+    if (!filePath.startsWith(uploadDir)) {
+      return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+    }
 
     // Ensure the uploads folder exists
     if (!fs.existsSync(uploadDir)) {
@@ -84,8 +88,12 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), RESOURCE_UPLOAD_DIR);
-    const filePath = path.join(uploadDir, filename);
+    const uploadDir = path.resolve(process.cwd(), RESOURCE_UPLOAD_DIR);
+    const filePath = path.resolve(uploadDir, path.basename(filename));
+    // Check if the file path is valid and does not escape the upload directory
+    if (!filePath.startsWith(uploadDir)) {
+      return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+    }
 
     try {
       const file = fs.readFileSync(filePath);
@@ -119,8 +127,12 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), RESOURCE_UPLOAD_DIR);
-    const filePath = path.join(uploadDir, filename);
+    const uploadDir = path.resolve(process.cwd(), RESOURCE_UPLOAD_DIR);
+    const filePath = path.resolve(uploadDir, path.basename(filename));
+    // Check if the file path is valid and does not escape the upload directory
+    if (!filePath.startsWith(uploadDir)) {
+      return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+    }
 
     try {
       fs.rmSync(filePath);
