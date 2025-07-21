@@ -42,7 +42,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
+
+  // const filePath = path.join(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR, filename);
 
   try {
     const file = fs.readFileSync(filePath);
@@ -64,7 +71,13 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR, filename);
+  // const filePath = path.join(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), ANNOUNCEMENT_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
 
   try {
     fs.rmSync(filePath);

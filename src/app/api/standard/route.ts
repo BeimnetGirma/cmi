@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
   const fileName = renameFile(file);
-  const filePath = path.join(process.cwd(), STANDARD_UPLOAD_DIR, fileName);
+  const filePath = path.join(process.cwd(), STANDARD_UPLOAD_DIR, path.basename(fileName));
   // Ensure the uploads folder exists;
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
@@ -43,7 +43,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), STANDARD_UPLOAD_DIR, filename);
+  // const filePath = path.join(process.cwd(), STANDARD_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), STANDARD_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
 
   try {
     const file = fs.readFileSync(filePath);

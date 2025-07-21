@@ -41,7 +41,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  // const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), RESEARCH_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
+
   try {
     const file = fs.readFileSync(filePath);
     return new NextResponse(file, {
@@ -63,7 +69,12 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ success: false, message: "Filename query parameter is required" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  // const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), RESEARCH_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
 
   try {
     fs.rmSync(filePath);
@@ -86,7 +97,12 @@ export async function PUT(req: NextRequest) {
 
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-  const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  // const filePath = path.join(process.cwd(), RESEARCH_UPLOAD_DIR, filename);
+  const baseDir = path.resolve(process.cwd(), RESEARCH_UPLOAD_DIR);
+  const filePath = path.resolve(baseDir, path.basename(filename));
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ success: false, message: "Invalid file path" }, { status: 400 });
+  }
   await new Promise<void>((resolve, reject) => {
     writeFile(filePath, new Uint8Array(buffer), (err) => {
       if (err) reject(err);
