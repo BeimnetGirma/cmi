@@ -115,6 +115,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
+      - ./data/mysql/cmi:/var/lib/mysql
       - ./data/department.sql:/docker-entrypoint-initdb.d/department.sql
       - ./data/research.sql:/docker-entrypoint-initdb.d/research.sql
       - ./data/manual.sql:/docker-entrypoint-initdb.d/manual.sql
@@ -140,6 +141,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
+      - ./data/mysql/cmidev:/var/lib/mysql
       - ./data/department.sql:/docker-entrypoint-initdb.d/department.sql
       - ./data/research.sql:/docker-entrypoint-initdb.d/research.sql
       - ./data/manual.sql:/docker-entrypoint-initdb.d/manual.sql

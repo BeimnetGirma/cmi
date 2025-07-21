@@ -45,6 +45,9 @@ next-env.d.ts
 # ghost data
 /ghost
 
+# database
+/data/mysql
+
 #prisma
 /prisma/migrations
 
