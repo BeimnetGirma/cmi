@@ -32,8 +32,8 @@ jobs:
           DATABASE_URL: ${{ env.DATABASE_URL }}
         run: npx prisma migrate deploy
 
-      - name: Build Next.js app
-        run: npm run build
+      # - name: Build Next.js app
+      #   run: npm run build
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@v0.1.6
@@ -52,5 +52,5 @@ jobs:
             prisma migrate deploy
             export PATH=$PATH:/var/www/ecmi/node_modules/.bin 
             npm run build
-            PORT=${{env.APP_PORT}} pm2 restart ecmi_production
+            PORT=${{env.APP_PORT}} pm2 start npm --name cmi_production -- run start || pm2 restart cmi_production
           debug: true
