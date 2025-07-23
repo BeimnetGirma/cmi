@@ -35,7 +35,13 @@ jobs:
           echo "Checking if Prisma migration history exists..."
           if ! mysql -u ${{ secrets.DEV_DATABASE_USER }} -h cmi.gov.et -P 3350 -e "USE cmi_dev_db; SHOW TABLES LIKE '_prisma_migrations';" | grep _prisma_migrations; then
             echo "No migration table found. Resolving baseline..."
-            npx prisma migrate resolve --applied baseline
+            mkdir -p prisma/migrations/20250721120000_baseline
+
+            npx prisma migrate diff \
+              --from-url="${{ secrets.DEV_DATABASE_URL }}" \
+              --to-empty \
+              --script > prisma/migrations/20250721120000_baseline/migration.sql
+            npx prisma migrate resolve --applied 20250721120000_baseline
           else
             echo "Migration table exists. Skipping baseline."
           fi
