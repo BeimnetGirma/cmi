@@ -27,6 +27,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Baseline Prisma DB if needed
+        env:
+          DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+          MYSQL_PWD: ${{ secrets.DEV_DATABASE_PASSWORD }}
+        run: |
+          echo "Checking if Prisma migration history exists..."
+          if ! mysql -u ${{ secrets.DEV_DATABASE_USER }} -h cmi.gov.et -P 3350 -e "USE cmi_dev_db; SHOW TABLES LIKE '_prisma_migrations';" | grep _prisma_migrations; then
+            echo "No migration table found. Resolving baseline..."
+            npx prisma migrate resolve --applied baseline
+          else
+            echo "Migration table exists. Skipping baseline."
+          fi
+
       - name: Run Prisma migrations
         env:
           DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
