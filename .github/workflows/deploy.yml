@@ -80,5 +80,6 @@ jobs:
 
             cd /var/www/ecmi-staging
             npm install --omit=dev
+            npm install @prisma/client
             npx prisma migrate deploy
             PORT=3001 pm2 start npm --name cmi_dev -- run start || pm2 restart cmi_dev
