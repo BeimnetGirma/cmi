@@ -55,6 +55,7 @@ jobs:
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
         run: npm run build
 
       - name: Upload build artifacts to staging server
@@ -77,6 +78,8 @@ jobs:
           script: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            export DATABASE_URL="${{ secrets.DEV_DATABASE_URL }}"
 
             cd /var/www/ecmi-staging
             npm install --omit=dev
