@@ -46,10 +46,14 @@ jobs:
             echo "Migration table exists. Skipping baseline."
           fi
 
-      - name: Run Prisma migrations
+      # - name: Run Prisma migrations
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+      #   run: npx prisma migrate deploy
+      - name: Push Prisma schema without migrations
         env:
           DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
-        run: npx prisma migrate deploy
+        run: npx prisma db push
 
       - name: Build Next.js app
         env:
