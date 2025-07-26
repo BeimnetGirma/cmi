@@ -15,12 +15,9 @@ import AdminMenu from "../ui/admin-menu";
 import AnnouncementMenu from "./announcement-menu";
 import { announcement } from "@prisma/client";
 
-const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: string }[]; announcements: announcement[]; resourceTypes: ResourceType[] }> = ({
-  executives,
-  announcements,
-  resourceTypes,
-  params: { lng },
-}) => {
+const NavBar: React.FC<
+  PageProps & { executives: { departmentName: string; departmentName_am: string | null; id: string }[]; announcements: announcement[]; resourceTypes: ResourceType[] }
+> = ({ executives, announcements, resourceTypes, params: { lng } }) => {
   const pathname = usePathname();
   const { t } = useTranslation(lng, "navbar");
   const { user, isLoaded } = useUser();
@@ -48,27 +45,29 @@ const NavBar: React.FC<PageProps & { executives: { departmentName: string; id: s
     <nav className="bg-primary-light shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
       <div className="flex-1 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <Image src="/assets/imgs/logo.png" alt="Logo" width={50} height={140} className="block lg:hidden" />
-          <Image src="/assets/imgs/logo-no-bg.png" alt="Logo" width={380} height={480} className="hidden lg:block" />
+          <Image src="/assets/imgs/logo.png" alt="Logo" width={50} height={140} className="block xl:hidden" />
+          <Image src="/assets/imgs/logo-no-bg.png" alt="Logo" width={380} height={480} className="hidden xl:block" />
         </Link>
       </div>
-      <label htmlFor="menu-toggle" className="cursor-pointer lg:hidden block">
+      <label htmlFor="menu-toggle" className="cursor-pointer xl:hidden block">
         <svg className="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
           <title>menu</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
         </svg>
       </label>
       <input className="hidden" type="checkbox" id="menu-toggle" />
-      <div className="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
-        <ul className="text-xl text-center items-center gap-x-5 py-6 md:gap-x-4 lg:text-lg lg:flex ">
+      <div className="hidden xl:flex lg:items-center xl:w-auto w-full" id="menu">
+        <ul className="text-lg text-center items-center gap-x-5 py-2 md:gap-x-4 lg:text-lg lg:flex ">
           {navLinks.map((link) => (
             <li
               key={link.href}
-              className={`py-4 px-2 hover:bg-slate-200 hover:text-primary-main ${
-                pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main bg-slate-200 " : "font-normal text-secondary-light"
+              className={`py-2 px-2 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
+                pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
               }`}
             >
-              <Link href={link.href}>{link.title.toUpperCase()}</Link>
+              <Link href={link.href} className="text-base">
+                {link.title.toUpperCase()}
+              </Link>
             </li>
           ))}
           <MediaMenu params={{ lng }} />
