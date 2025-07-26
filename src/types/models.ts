@@ -23,6 +23,7 @@ export type Resource = {
 export type ResourceType = {
   id?: string;
   name: string;
+  name_am?: string | null;
 };
 export type Magazine = {
   id?: string;
@@ -41,6 +42,8 @@ export type Announcement = {
   id?: string;
   title: string;
   description?: string | null;
+  title_am?: string | null;
+  description_am?: string | null;
   attachment?: string | null;
   link?: string | null;
 };

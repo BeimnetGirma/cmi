@@ -3,6 +3,7 @@ import { useTranslation } from "@/app/i18n/client";
 import { languages } from "@/app/i18n/settings";
 import { PageProps } from "@/types";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
@@ -10,16 +11,35 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
   const [isOpen, setOpen] = useState(false);
   const toggelMenu = () => setOpen(!isOpen);
   const [language] = useState(lng);
-  const toggleLanguage = () => {
-    const currentLanguage = lng;
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams().toString();
+  // const toggleLanguage = () => {
+  //   const currentLanguage = lng;
 
-    if (currentLanguage === "en") {
-      window.location.href = "/am";
+  //   if (currentLanguage === "en") {
+  //     window.location.href = "/am";
+  //   } else {
+  //     window.location.href = "/en";
+  //   }
+
+  //   // currentLanguage === "en" ? setCurrentLanguage("am") : setCurrentLanguage("en");
+  // };
+
+  const toggleLanguage = () => {
+    // Extract segments: ["", "en", "about"]
+    const segments = pathname.split("/");
+
+    // Replace the language segment
+    if (segments[1] === "en") {
+      segments[1] = "am";
     } else {
-      window.location.href = "/en";
+      segments[1] = "en";
     }
 
-    // currentLanguage === "en" ? setCurrentLanguage("am") : setCurrentLanguage("en");
+    const newPath = segments.join("/") || "/";
+    const fullPath = newPath + "?" + params;
+    router.push(fullPath);
   };
 
   useEffect(() => {
@@ -54,10 +74,7 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
   return (
     <div className="relative flex justify-center">
       {/* <button className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600" onClick={toggelMenu}> */}
-      <button
-        className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600"
-        onClick={toggleLanguage}
-      >
+      <button className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600" onClick={toggleLanguage}>
         {getLang(language)}
         {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
           {isOpen ? (
@@ -77,10 +94,7 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
                 return (
                   <li key={l}>
                     {index > 0 && " or "}
-                    <Link
-                      href={`/${l}`}
-                      className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
+                    <Link href={`/${l}`} className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       {getLang(l)}
                     </Link>
                   </li>

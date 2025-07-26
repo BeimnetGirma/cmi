@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import { toast, Toaster } from "sonner";
 import { Image as PrismaImage } from "@prisma/client";
 import Image from "next/image";
+import { PageProps } from "@/types";
 
-const Gallery = () => {
+const Gallery: React.FC<PageProps> = ({ params: { lng } }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<PrismaImage | null>(null);
 
@@ -49,7 +50,7 @@ const Gallery = () => {
     <div className="justify-center">
       <div className="w-full">
         <div className="flex justify-center">
-          <h1 className="text-primary-main font-bold text-2xl ml-28 pt-6">Gallery</h1>
+          <h1 className="text-primary-main font-bold text-2xl ml-28 pt-6">{lng == "am" ? "የምስል ገፅ" : "Gallery"}</h1>
         </div>
       </div>
       <Toaster position="top-right" richColors />

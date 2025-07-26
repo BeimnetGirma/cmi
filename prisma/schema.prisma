@@ -37,10 +37,10 @@ model resource {
   type  String
 }
 
-// Resource Type
 model resourceType {
-  id   String @id @default(uuid())
-  name String
+  id      String  @id @default(uuid())
+  name    String
+  name_am String? @db.VarChar(255)
 }
 
 model Image {
@@ -54,14 +54,18 @@ model Image {
 }
 
 model Executive {
-  id                String   @id @default(uuid())
-  departmentName    String   @db.VarChar(100)
-  headName          String   @db.VarChar(100)
-  headTitle         String   @db.VarChar(100)
-  dutiesDescription String   @db.Text
-  imagePath         String   @db.VarChar(1000)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                   String   @id @default(uuid())
+  departmentName       String   @db.VarChar(100)
+  headName             String   @db.VarChar(100)
+  headTitle            String   @db.VarChar(100)
+  dutiesDescription    String   @db.Text
+  imagePath            String   @db.VarChar(1000)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  departmentName_am    String?  @db.VarChar(100)
+  dutiesDescription_am String?  @db.Text
+  headName_am          String?  @db.VarChar(100)
+  headTitle_am         String?  @db.VarChar(100)
 }
 
 model ProfilePicture {
@@ -85,11 +89,14 @@ model service {
 }
 
 model announcement {
-  id          String   @id @default(uuid())
-  title       String
-  description String?  @db.Text
-  attachment  String?
-  link        String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(uuid())
+  title          String
+  description    String?  @db.Text
+  //Amharic
+  title_am       String?
+  description_am String?  @db.Text
+  attachment     String?
+  link           String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

@@ -30,8 +30,8 @@ const MediaMenu: React.FC<PageProps> = ({ params: { lng } }) => {
     >
       <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
         <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
-          <li className="py-4 px-2 hover:bg-slate-200 hover:text-primary-main transition-colors cursor-pointer">
-            <span className="">{t("media").toUpperCase()}</span>
+          <li className="py-2 px-2 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer">
+            <span className="text-base">{t("media").toUpperCase()}</span>
           </li>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 fixed top-0 left-0 -ml-10" onMouseLeave={() => setOpenDropdown(false)}>

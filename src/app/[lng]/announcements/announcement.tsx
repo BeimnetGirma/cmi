@@ -8,7 +8,12 @@ interface AnnouncementProps {
   announcement: announcement;
 }
 
-const Announcement = ({ announcement }: AnnouncementProps) => {
+interface AnnouncementProps {
+  announcement: announcement;
+  lng: string;
+}
+
+const Announcement = ({ announcement, lng }: AnnouncementProps) => {
   const getLastVisit = () => {
     return localStorage.getItem("lastVisit");
   };
@@ -21,17 +26,18 @@ const Announcement = ({ announcement }: AnnouncementProps) => {
         <CardHeader className="flex flex-row">
           <div className="flex flex-col w-3/4">
             <CardTitle>
-              {announcement.title} {isNew && <span className="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm">New</span>}
+              {lng == "en" ? announcement.title : announcement.title_am}{" "}
+              {isNew && <span className="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm">{lng === "en" ? "New" : "አዲስ"}</span>}
             </CardTitle>
-            <CardDescription>{announcement.description}</CardDescription>
+            <CardDescription>{lng == "en" ? announcement.description : announcement.description_am}</CardDescription>
           </div>
           <div className="flex flex-row ml-auto items-end">
             <div className="mr-4">
-              <span className="font-semibold">Posted On:</span>
+              <span className="font-semibold"> {lng == "en" ? "Posted On:" : "የወጣበት ቀን:"} </span>
               <span>{new Date(announcement.createdAt).toDateString()}</span>
             </div>
             <Link className="btn btn-primary bg-primary-main px-5 py-2 rounded-md text-slate-50" href={`/announcements/${announcement.id}`}>
-              Details
+              {lng == "en" ? "Details" : "ዝርዝር"}
             </Link>
           </div>
         </CardHeader>

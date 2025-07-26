@@ -33,6 +33,7 @@ export default async function RootLayout({
   const executives = await prisma.executive.findMany({
     select: {
       departmentName: true,
+      departmentName_am: true,
       id: true,
     },
   });
