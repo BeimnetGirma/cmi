@@ -8,10 +8,11 @@ import React, { useEffect } from "react";
 import { Post } from "@/types/featured-posts";
 import adaptToPost from "@/helpers/adapt-to-post";
 import { toast } from "sonner";
+import { PageProps } from "@/types";
 
 const POSTS_PER_PAGE = 6; // Number of posts to display per page
 
-const News = () => {
+const News: React.FC<PageProps> = ({ params: { lng } }) => {
   const [allNews, setAllNews] = React.useState<Post[]>([]);
   const [filteredNews, setFilteredNews] = React.useState<Post[]>([]);
   const [displayedNews, setDisplayedNews] = React.useState<Post[]>([]);
@@ -52,22 +53,12 @@ const News = () => {
         }
 
         // Check tags
-        if (
-          post.tags?.some((tag) =>
-            tag.name?.toLowerCase().includes(searchLower)
-          )
-        ) {
+        if (post.tags?.some((tag) => tag.name?.toLowerCase().includes(searchLower))) {
           return true;
         }
 
         // Check authors
-        if (
-          post.authors?.some(
-            (author) =>
-              typeof author === "string" &&
-              author.toLowerCase().includes(searchLower)
-          )
-        ) {
+        if (post.authors?.some((author) => typeof author === "string" && author.toLowerCase().includes(searchLower))) {
           return true;
         }
 
@@ -116,11 +107,7 @@ const News = () => {
         key="prev"
         onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className={`px-4 py-2 mx-1 rounded ${
-          currentPage === 1
-            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-primary-main text-white hover:bg-primary-dark"
-        }`}
+        className={`px-4 py-2 mx-1 rounded ${currentPage === 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-primary-main text-white hover:bg-primary-dark"}`}
       >
         &laquo; Prev
       </button>
@@ -132,11 +119,7 @@ const News = () => {
     pagesToShow.push(1); // Always show first page
 
     // Add pages around current page
-    for (
-      let i = Math.max(2, currentPage - 1);
-      i <= Math.min(totalPages - 1, currentPage + 1);
-      i++
-    ) {
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
       if (!pagesToShow.includes(i)) {
         pagesToShow.push(i);
       }
@@ -165,11 +148,7 @@ const News = () => {
         <button
           key={page}
           onClick={() => handlePageChange(page)}
-          className={`px-4 py-2 mx-1 rounded ${
-            currentPage === page
-              ? "bg-primary-main text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className={`px-4 py-2 mx-1 rounded ${currentPage === page ? "bg-primary-main text-white" : "bg-gray-200 hover:bg-gray-300"}`}
         >
           {page}
         </button>
@@ -184,11 +163,7 @@ const News = () => {
         key="next"
         onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className={`px-4 py-2 mx-1 rounded ${
-          currentPage === totalPages
-            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-            : "bg-primary-main text-white hover:bg-primary-dark"
-        }`}
+        className={`px-4 py-2 mx-1 rounded ${currentPage === totalPages ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-primary-main text-white hover:bg-primary-dark"}`}
       >
         Next &raquo;
       </button>
@@ -200,12 +175,7 @@ const News = () => {
   return (
     <div className="flex flex-col">
       <div className="w-full">
-        <ImageWithTextOverlay
-          imgUrl="/assets/imgs/blog-cover.png"
-          width={1920}
-          height={300}
-          text="News"
-        />
+        <ImageWithTextOverlay imgUrl="/assets/imgs/blog-cover.png" width={1920} height={300} text={lng == "am" ? "ዜና" : "News"} />
       </div>
       <div className="container mx-auto">
         <div className="flex-col py-10">
@@ -227,13 +197,7 @@ const News = () => {
                         onChange={(e) => setSearch(e.target.value)}
                       />
                     </form>
-                    <Image
-                      className="cursor-pointer mr-2"
-                      src="/assets/icons/search.svg"
-                      alt="search logo"
-                      width={24}
-                      height={24}
-                    />
+                    <Image className="cursor-pointer mr-2" src="/assets/icons/search.svg" alt="search logo" width={24} height={24} />
                   </div>
                 </div>
               </div>
@@ -250,18 +214,14 @@ const News = () => {
               {/* Pagination controls */}
               {filteredNews.length > 0 && (
                 <div className="flex justify-center mt-8 mb-4">
-                  <div className="flex flex-wrap justify-center">
-                    {renderPaginationButtons()}
-                  </div>
+                  <div className="flex flex-wrap justify-center">{renderPaginationButtons()}</div>
                 </div>
               )}
 
               {/* No results message */}
               {filteredNews.length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-lg text-gray-500">
-                    No posts found matching your search criteria.
-                  </p>
+                  <p className="text-lg text-gray-500">No posts found matching your search criteria.</p>
                 </div>
               )}
             </div>

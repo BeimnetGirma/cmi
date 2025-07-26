@@ -21,7 +21,6 @@ const DeleteExecutive = ({ executive, deleteProfile }: DeleteExecutiveProps) => 
   const handleClick = async (e: { preventDefault: () => void }) => {
     if (executive.id) {
       deleteProfile(executive.id);
-      revalidatePath("/");
       closeModal();
     }
   };

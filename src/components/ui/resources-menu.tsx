@@ -27,8 +27,8 @@ const ResourcesMenu: React.FC<PageProps & { resourceTypes: ResourceType[] }> = (
       >
         <section onMouseEnter={() => setOpenDropdown(true)} onMouseLeave={() => setOpenDropdown(false)}>
           <DropdownMenuTrigger asChild onMouseEnter={() => setOpenDropdown(true)}>
-            <li className="py-4 px-2 hover:bg-slate-200 hover:text-primary-main transition-colors cursor-pointer">
-              <span className="">{t("resource").toUpperCase()}</span>
+            <li className="py-2 px-2 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer">
+              <span className="text-base">{t("resource").toUpperCase()}</span>
             </li>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 fixed top-0 left-0 -ml-14" onMouseLeave={() => setOpenDropdown(false)}>
@@ -49,7 +49,7 @@ const ResourcesMenu: React.FC<PageProps & { resourceTypes: ResourceType[] }> = (
                   }}
                   className="hover:text-slate-500 "
                 >
-                  {type.name}
+                  {lng == "am" ? type.name_am : type.name}
                 </Link>
               </DropdownMenuItem>
             ))}

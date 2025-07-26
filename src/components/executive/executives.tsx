@@ -8,6 +8,8 @@ import DeleteExecutive from "./delete-executive";
 
 export async function createExecutives(newExecutive: any) {
   "use server";
+  console.log("Creating new executive:", newExecutive);
+
   try {
     await prisma.executive.create({ data: newExecutive });
     revalidatePath("/admin");
@@ -25,6 +27,10 @@ export async function editExective(executive: Executive) {
         headTitle: executive.headTitle,
         headName: executive.headName,
         dutiesDescription: executive.dutiesDescription,
+        departmentName_am: executive.departmentName_am,
+        headTitle_am: executive.headTitle_am,
+        headName_am: executive.headName_am,
+        dutiesDescription_am: executive.dutiesDescription_am,
         imagePath: executive.imagePath,
       },
     });
@@ -59,24 +65,28 @@ const Executives = async () => {
           <table className="table-auto mx-auto w-full my-4 border border-collapse text-justify ">
             <thead>
               <tr>
+                <th className="p-6 font-bold border">No.</th>
                 <th className="p-6 font-bold border">Excutive Name</th>
-                <th className="p-6 font-bold border w-1/2">Duties Description</th>
+                <th className="p-6 font-bold border w-1/3">Duties Description</th>
                 <th className="p-6 font-bold border">Headed By</th>
                 <th className="p-6 font-bold border">Head Title</th>
+                <th className="p-6 font-bold border">...</th>
               </tr>
             </thead>
             <tbody>
               {executives.map((exec, index) => (
                 <tr key={index}>
+                  <td className="p-6 border">{index + 1}</td>
                   <td className="p-6 border">{exec.departmentName}</td>
-                  <td className="p-6 border">{exec.dutiesDescription.length > 100 ? exec.dutiesDescription.substring(0, 100) + " ..." : exec.dutiesDescription}</td>
+                  <td className="p-6 border">{exec.dutiesDescription.length > 50 ? exec.dutiesDescription.substring(0, 50) + " ..." : exec.dutiesDescription}</td>
                   <td className="p-6 border">{exec.headName}</td>
                   <td className="p-6 border">{exec.headTitle}</td>
+                  <td className="p-6 border">...</td>
 
                   <td className="p-6 border">
                     <div className="flex flex-row gap-3">
-                      <EditExecutive key={index} executive={exec} editProfile={editExective} />
-                      <DeleteExecutive key={index} executive={exec} deleteProfile={deleteExecutive} />
+                      <EditExecutive executive={exec} editProfile={editExective} />
+                      <DeleteExecutive executive={exec} deleteProfile={deleteExecutive} />
                     </div>
                   </td>
                 </tr>

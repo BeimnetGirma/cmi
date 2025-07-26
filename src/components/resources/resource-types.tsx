@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Spinner from "../ui/spinner";
 import { ResourceType } from "@/types";
 import { toast, Toaster } from "sonner";
+import { set } from "date-fns";
 type NewResourceTypeProps = {
   createNewResourceType: (resourceType: ResourceType) => void;
   resourceTypes: ResourceType[];
@@ -14,6 +15,8 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
   const { isLoading, startLoading, stopLoading } = useLoading();
   const [resourceTypesState, setResourceTypesState] = useState(resourceTypes);
   const [name, setName] = useState("");
+  const [name_am, setNameAm] = useState("");
+  const [showAddForm, setShowAddForm] = useState(false);
   const openModal = () => {
     setIsOpen(true);
   };
@@ -29,6 +32,7 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
     startLoading();
     const newResourceType: ResourceType = {
       name: name,
+      name_am: name_am,
     };
     try {
       createNewResourceType(newResourceType);
@@ -37,6 +41,7 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
       });
       setResourceTypesState([...resourceTypesState, newResourceType]);
       setName("");
+      setNameAm("");
     } catch (error) {
       console.error(error);
       toast.error("Failed to create resource type", {
@@ -48,7 +53,11 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
   const handleDelete = async (id: any) => {
     if (id) {
       deleteResourceType(id);
-      setResourceTypesState(resourceTypesState.filter((rt) => rt.id !== id));
+      // Optionally, fetch updated resourceTypes from parent or API here
+      setResourceTypesState(resourceTypes.filter((rt) => rt.id !== id));
+      toast.success("Deleted resource type successfully", {
+        duration: 3000,
+      });
     }
   };
 
@@ -71,39 +80,57 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
               </button>
               {/* Add your modal content here */}
               <h1 className="text-slate-900 text-3xl relative ">Resource Types</h1>
-
-              <form className="mt-8 relative" onSubmit={(e) => handleSubmit(e)}>
-                <div className="mb-4 flex items-baseline">
-                  <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2 mr-4">
-                    Add New Resource Type:
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    id="name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    className="shadow border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
-                    placeholder="Enter Name"
-                  />
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 mx-4 px-4 rounded">
-                    <div className="flex space-x-2">
-                      {isLoading && <Spinner />}
-                      <span>Add</span>
+              <div className="flex items-end justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowAddForm((prev) => !prev)}
+                  className={`font-bold py-2 px-4 rounded mb-4 text-white ${showAddForm ? "bg-gray-500 hover:bg-gray-700" : "bg-green-500 hover:bg-green-700"}`}
+                >
+                  {showAddForm ? "Cancel" : "New Type"}
+                </button>
+              </div>
+              {showAddForm && (
+                <form className="mt-5 relative" onSubmit={(e) => handleSubmit(e)}>
+                  <fieldset className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                    <legend className="text-sm font-semibold mb-4">Add New Resource Type</legend>
+                    <div className="mb-4">
+                      <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                        Resource Type Name (English):
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+                        placeholder="e.g., Manuals"
+                      />
                     </div>
-                  </button>
-                </div>
 
-                {/* <div className="flex justify-end">
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    <div className="flex space-x-2">
-                      {isLoading && <Spinner />}
-                      <span>Add Standard</span>
+                    <div className="mb-4">
+                      <label htmlFor="nameAm" className="block text-gray-700 text-sm font-bold mb-2">
+                        የምንጭ አይነት ስም (አማርኛ):
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        id="nameAm"
+                        value={name_am}
+                        onChange={(e) => setNameAm(e.target.value)}
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+                        placeholder="ማኑዋል"
+                      />
                     </div>
-                  </button>
-                </div> */}
-              </form>
+
+                    <div className="flex justify-end">
+                      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
+                        {isLoading ? <Spinner /> : "Add Resource Type"}
+                      </button>
+                    </div>
+                  </fieldset>
+                </form>
+              )}
               <table className="table-auto mx-auto w-full my-4 border border-collapse z-10">
                 <thead>
                   <tr>
@@ -114,7 +141,7 @@ const ResourceTypes = ({ createNewResourceType, resourceTypes, deleteResourceTyp
                 </thead>
                 <tbody>
                   {resourceTypesState.map((resourceType, index) => (
-                    <tr key={resourceType.id}>
+                    <tr key={index}>
                       <td className="p-6 border text-center">{index + 1}</td>
                       <td className="p-6 border">{resourceType.name}</td>
 

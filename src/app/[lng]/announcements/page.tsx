@@ -20,18 +20,18 @@ const Announcements: React.FC<PageProps> = async ({ params: { lng } }) => {
       <div className="relative h-80 md:h-80 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-services.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="text-center z-10 text-sm">
-          <h1 className="text-xl md:text-3xl font-bold">{t("Announcements")}</h1>
+          <h1 className="text-xl md:text-3xl font-bold">{t("announcements")}</h1>
           <p className="text-sm md:text-lg pt-2">
             {" "}
             <Link href={"/"} className="hover:text-slate-300">
-              {t("homeLink")}
+              {t("home").toUpperCase()}
             </Link>{" "}
             / {t("announcements")}
           </p>
         </div>
       </div>
       {announcements.map((announcement, index) => {
-        return <Announcement key={index} announcement={announcement} />;
+        return <Announcement key={index} announcement={announcement} lng={lng} />;
       })}
     </div>
   );
