@@ -71,6 +71,12 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: ".next,public,package.json,ecosystem.config.js,prisma"
           target: "/var/www/ecmi-staging"
+      - name: Copy translation files to public
+        run: |
+          mkdir -p src/app/i18n/locales/en
+          mkdir -p src/app/i18n/locales/am
+          cp src/app/i18n/locales/en/translation.json src/app/i18n/locales/en/
+          cp src/app/i18n/locales/am/translation.json src/app/i18n/locales/am/
 
       - name: Run app on staging port
         uses: appleboy/ssh-action@v0.1.6
