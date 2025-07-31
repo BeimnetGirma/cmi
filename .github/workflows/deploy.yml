@@ -74,6 +74,8 @@ jobs:
 
       - name: Seed database on server
         uses: appleboy/ssh-action@master
+        env:
+          DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
