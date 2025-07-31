@@ -69,9 +69,20 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: ".next,public,package.json,ecosystem.config.js,prisma,src/app/i18n/locales"
+          source: ".next,public,package.json,ecosystem.config.js,prisma,dist/scripts/import-translations.js"
           target: "/var/www/ecmi-staging"
-          
+
+      - name: Seed database on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /var/www/ecmi-staging
+            node dist/scripts/seed-translations.js
+
       - name: Run app on staging port
         uses: appleboy/ssh-action@v0.1.6
         with:
