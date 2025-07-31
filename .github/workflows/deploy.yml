@@ -61,9 +61,6 @@ jobs:
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
         run: npm run build
-        
-      - name: Compile translations seed script
-        run: npx tsc
 
       - name: Upload build artifacts to staging server
         uses: appleboy/scp-action@v0.1.4
