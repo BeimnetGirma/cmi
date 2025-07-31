@@ -18,30 +18,30 @@ async function importFromJson(lang: string) {
   }
 }
 
-// importFromJson("en").then(() => {
-//   console.log("Imported EN translations");
-//   process.exit();
-// });
-// importFromJson("am").then(() => {
-//   console.log("Imported AM translations");
-//   process.exit();
-// });
-async function main() {
-  const existing = await prisma.translation.count();
-  if (existing > 0) {
-    console.log("Translations already seeded. Skipping...");
-    return;
-  }
-  await importFromJson("en");
-  await importFromJson("am");
-  // Add more if needed
-}
+importFromJson("en").then(() => {
+  console.log("Imported EN translations");
+  process.exit();
+});
+importFromJson("am").then(() => {
+  console.log("Imported AM translations");
+  process.exit();
+});
+// async function main() {
+//   const existing = await prisma.translation.count();
+//   if (existing > 0) {
+//     console.log("Translations already seeded. Skipping...");
+//     return;
+//   }
+//   await importFromJson("en");
+//   await importFromJson("am");
+//   // Add more if needed
+// }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// main()
+//   .catch((e) => {
+//     console.error(e);
+//     process.exit(1);
+//   })
+//   .finally(async () => {
+//     await prisma.$disconnect();
+//   });
