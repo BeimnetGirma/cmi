@@ -6,6 +6,8 @@ import { useTranslation } from "@/app/i18n";
 import { FeaturedPosts, Post } from "@/types/featured-posts";
 import Carousel from "@/components/ui/carousel";
 
+export const dynamic = "force-dynamic";
+
 const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;
   const { t } = await useTranslation(lng, "translation");
