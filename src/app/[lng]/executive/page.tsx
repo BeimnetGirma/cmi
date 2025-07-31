@@ -16,7 +16,6 @@ const ExecutivePage = ({ params }: ExecutivePageProps) => {
   const execId: any = useSearchParams().get("exec");
   const [executive, setExecutive] = useState<Executive>();
   const pathname = usePathname();
-  console.log("*************************", pathname + "/" + useSearchParams().toString());
 
   useEffect(() => {
     if (execId) {

@@ -12,9 +12,6 @@ export const initI18next = async (lng: string, ns: string = "translation"): Prom
       : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Server-side → Use absolute
 
   const loadPath = `${baseUrl}/api/{{lng}}?t=${new Date().getTime()}`;
-  console.log("****************");
-
-  console.log("i18next loadPath:", loadPath);
 
   await i18nInstance
     .use(initReactI18next)

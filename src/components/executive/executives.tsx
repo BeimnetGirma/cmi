@@ -8,7 +8,6 @@ import DeleteExecutive from "./delete-executive";
 
 export async function createExecutives(newExecutive: any) {
   "use server";
-  console.log("Creating new executive:", newExecutive);
 
   try {
     await prisma.executive.create({ data: newExecutive });

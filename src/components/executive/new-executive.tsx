@@ -102,7 +102,6 @@ const NewExecutive = ({ createExecutive }: NewExecutiveProps) => {
           headTitle_am: headTitleAm,
           imagePath: filePath,
         };
-        console.log("New Executive Data:", newExecutive);
 
         createExecutive(newExecutive);
         toast.success("Excutive added successfully", {

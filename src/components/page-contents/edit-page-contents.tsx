@@ -28,7 +28,6 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
 
   const fetchData = async () => {
     const response = await fetch("/api/" + language);
-    console.log("Fetching data for language:");
 
     const data = await response.json();
     setData(data);

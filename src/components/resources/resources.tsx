@@ -63,7 +63,6 @@ const Resources = async () => {
   async function deleteResourceType(resourceTypeId: string) {
     "use server";
     try {
-      console.log("Deleting resource type");
       await prisma.resourceType.delete({
         where: { id: resourceTypeId },
       });
