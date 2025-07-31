@@ -23,6 +23,18 @@ export const initI18next = async (lng: string, ns: string = "translation"): Prom
       ...getOptions(lng, ns),
       backend: {
         loadPath,
+        request: async (options: any, url: any, payload: any, callback: any) => {
+          try {
+            const res = await fetch(url);
+            const data = await res.json();
+            callback(null, {
+              status: res.status,
+              data,
+            });
+          } catch (error) {
+            callback(error as Error, { status: 500 });
+          }
+        },
       },
       ns: ["translation", "navbar", "services"], // Ensure all namespaces are listed
       defaultNS: "translation",
