@@ -81,7 +81,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /var/www/ecmi-staging
-            node dist/scripts/seed-translations.js
+            /home/cmiuser/.nvm/versions/node/v20.16.0/bin/node dist/scripts/seed-translations.js
 
       - name: Run app on staging port
         uses: appleboy/ssh-action@v0.1.6
