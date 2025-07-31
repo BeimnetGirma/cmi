@@ -28,6 +28,8 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
 
   const fetchData = async () => {
     const response = await fetch("/api/" + language);
+    console.log("Fetching data for language:");
+
     const data = await response.json();
     setData(data);
 
@@ -79,9 +81,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
   return (
     <div className="flex flex-col justify-center ">
       <div className="text-center">
-        <h1 className="text-3xl text-blue-400  my-12">
-          Update Static Page Contents
-        </h1>
+        <h1 className="text-3xl text-blue-400  my-12">Update Static Page Contents</h1>
       </div>
       <div className="flex justify-center mb-4">
         <select
@@ -116,10 +116,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     <h1 className="text-2xl text-blue-400  my-5">Home Page</h1>
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
                       Home Page Title:
                     </label>
                     <input
@@ -134,10 +131,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="home-intro"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="home-intro" className="block text-gray-700 text-sm font-bold mb-2">
                       Home Page Introduction
                     </label>
                     <textarea
@@ -152,10 +146,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="home-about-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="home-about-title" className="block text-gray-700 text-sm font-bold mb-2">
                       About Section Title
                     </label>
                     <input
@@ -170,10 +161,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="home-about-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="home-about-content" className="block text-gray-700 text-sm font-bold mb-2">
                       About Section Content
                     </label>
                     <textarea
@@ -192,15 +180,10 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
               <TabsContent value="about">
                 <div>
                   <div className="text-left">
-                    <h1 className="text-2xl text-blue-400  my-5">
-                      About Us Page
-                    </h1>
+                    <h1 className="text-2xl text-blue-400  my-5">About Us Page</h1>
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box1-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box1-title" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 1 Title:
                     </label>
                     <input
@@ -215,10 +198,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box-1-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box-1-content" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 1 Content
                     </label>
                     <textarea
@@ -233,10 +213,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box2-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box2-title" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 2 Title:
                     </label>
                     <input
@@ -251,10 +228,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box-2-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box-2-content" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 2 Content
                     </label>
                     <textarea
@@ -269,10 +243,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box3-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box3-title" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 3 Title:
                     </label>
                     <input
@@ -287,10 +258,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="box-3-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="box-3-content" className="block text-gray-700 text-sm font-bold mb-2">
                       Box 3 Content
                     </label>
                     <textarea
@@ -305,10 +273,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="background-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="background-title" className="block text-gray-700 text-sm font-bold mb-2">
                       Background Title:
                     </label>
                     <input
@@ -323,10 +288,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="background-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="background-content" className="block text-gray-700 text-sm font-bold mb-2">
                       Background Content
                     </label>
                     <textarea
@@ -342,10 +304,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                   </div>
 
                   <div className="mb-4">
-                    <label
-                      htmlFor="powersandduties-title"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="powersandduties-title" className="block text-gray-700 text-sm font-bold mb-2">
                       Powers and Duties Title:
                     </label>
                     <input
@@ -363,10 +322,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="powersandduties-content"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="powersandduties-content" className="block text-gray-700 text-sm font-bold mb-2">
                       Powers and Duties Introduction
                     </label>
                     <textarea
@@ -385,19 +341,12 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                   </div>
 
                   <div className="mb-4">
-                    <label
-                      htmlFor="powersandduties-details"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="powersandduties-details" className="block text-gray-700 text-sm font-bold mb-2">
                       Powers and Duties Details
                     </label>
                     <textarea
                       id="powersandduties-details"
-                      rows={
-                        data.powerAndDutiesDetail
-                          ? data.powerAndDutiesDetail.details.length
-                          : 5
-                      }
+                      rows={data.powerAndDutiesDetail ? data.powerAndDutiesDetail.details.length : 5}
                       value={powerAndDutiesDetailText}
                       onChange={handlePowerAndDutiesDetailChange}
                       className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
@@ -419,10 +368,7 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
               >
                 Cancel
               </button>
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 mx-2 rounded"
-              >
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 mx-2 rounded">
                 Save Changes
               </button>
             </div>

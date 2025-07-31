@@ -11,13 +11,18 @@ export const initI18next = async (lng: string, ns: string = "translation"): Prom
       ? "" // Client-side → Use relative
       : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"; // Server-side → Use absolute
 
+  const loadPath = `${baseUrl}/api/{{lng}}?t=${new Date().getTime()}`;
+  console.log("****************");
+
+  console.log("i18next loadPath:", loadPath);
+
   await i18nInstance
     .use(initReactI18next)
     .use(HttpBackend)
     .init({
       ...getOptions(lng, ns),
       backend: {
-        loadPath: `${baseUrl}/api/{{lng}}?t=${new Date().getTime()}`,
+        loadPath,
       },
       ns: ["translation", "navbar", "services"], // Ensure all namespaces are listed
       defaultNS: "translation",
