@@ -69,7 +69,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: ".next,public,package.json,ecosystem.config.js,prisma,dist/scripts/import-translations.js"
+          source: ".next,public,package.json,ecosystem.config.js,prisma,dist"
           target: "/var/www/ecmi-staging"
 
       - name: Seed database on server
