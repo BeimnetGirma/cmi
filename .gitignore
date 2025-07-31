@@ -54,6 +54,6 @@ next-env.d.ts
 # uploaded test files
 /public/uploads
 file-server/node_modules
-dist/
+# dist/
 uploads/
 .qodo
