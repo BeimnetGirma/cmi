@@ -30,16 +30,13 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
     // Extract segments: ["", "en", "about"]
     const segments = pathname.split("/");
 
-    // Replace the language segment
-    if (segments[1] === "en") {
-      segments[1] = "am";
-    } else {
-      segments[1] = "en";
-    }
+    const newLang = segments[1] === "en" ? "am" : "en";
+    segments[1] = newLang;
 
     const newPath = segments.join("/") || "/";
-    const fullPath = newPath + "?" + params;
-    router.push(fullPath);
+    const fullPath = newPath + (params ? `?${params}` : "");
+    // router.push(fullPath);
+    window.location.href = fullPath;
   };
 
   useEffect(() => {
