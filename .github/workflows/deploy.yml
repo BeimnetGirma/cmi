@@ -33,7 +33,7 @@ jobs:
           MYSQL_PWD: ${{ secrets.DEV_DATABASE_PASSWORD }}
         run: |
           echo "Checking if Prisma migration history exists..."
-          if ! mysql -u ${{ secrets.DEV_DATABASE_USER }} -h cmi.gov.et -P 3350 -e "USE cmi_dev_db; SHOW TABLES LIKE '_prisma_migrations';" | grep _prisma_migrations; then
+          if ! mysql -u ${{ secrets.DEV_DATABASE_USER }} -h cmi.gov.et -P 3350 -e "USE cmi; SHOW TABLES LIKE '_prisma_migrations';" | grep _prisma_migrations; then
             echo "No migration table found. Resolving baseline..."
             mkdir -p prisma/migrations/20250721120000_baseline
 
