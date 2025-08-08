@@ -22,13 +22,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     }
   )
     .then((res) => {
-      console.log("****************************************************** Fetched featured posts:", res);
-
       return res.json() as Promise<FeaturedPosts>;
     })
     .catch((err) => {
-      console.log("****************************************************** Error fetching featured posts:", err);
-
       console.error(err);
       return null;
     });
