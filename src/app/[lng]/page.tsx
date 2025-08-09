@@ -85,9 +85,8 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
             <div className="flex flex-col items-center justify-center  w-10/12 mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 w-full">
                 {Array.from({ length: 5 }).map((_, i) => {
-                  // calculate total columns and rows
-                  const totalColumns = Math.ceil(5 / 3);
-                  const totalRows = Math.floor(5 / 3);
+                  // calculate total rows
+                  const totalRows = Math.ceil(5 / 3);
                   const col = i % 3; // 0, 1, 2
                   const row = Math.floor(i / 3); // 0, 1, 2
 
@@ -95,9 +94,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
                   let borders = "";
 
                   // Add right border unless it's the last column
-                  if (col < totalColumns) borders += " border-r-2";
+                  if (col < 2) borders += " border-r-2";
                   // Add bottom border unless it's the last row
-                  if (row < totalRows) borders += " border-b-2";
+                  if (row < totalRows - 1) borders += " border-b-2";
 
                   return (
                     <div className={`relative  group overflow-hidden h-64${borders}`} key={i}>
