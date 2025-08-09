@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import NavBar from "@/components/ui/navbar";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";

@@ -42,11 +42,11 @@ const NavBar: React.FC<
   ];
 
   return (
-    <nav className="bg-primary-light shadow-md flex flex-wrap items-center  px-6 lg:px-16 py-4 lg:py-0 ">
+    <nav className="bg-shadedbg-main shadow-md z-50 flex flex-wrap items-center px-6 lg:px-16 py-4 lg:py-0">
       <div className="flex-1 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <Image src="/assets/imgs/logo.png" alt="Logo" width={50} height={140} className="block xl:hidden" />
-          <Image src="/assets/imgs/logo-no-bg.png" alt="Logo" width={380} height={480} className="hidden xl:block" />
+          <Image src="/assets/imgs/logo.png" alt="Logo" width={60} height={140} />
+          <Image src="/assets/imgs/logo-text.png" alt="Logo" width={380} height={480} className="hidden xl:block" />
         </Link>
       </div>
       <label htmlFor="menu-toggle" className="cursor-pointer xl:hidden block">
