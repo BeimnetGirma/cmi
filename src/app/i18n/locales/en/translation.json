@@ -19,6 +19,7 @@
   "viewServices": "View Services",
   "readMore": "Read More",
   "ourServices": "Our Services",
+  "subServices": "Sub Services",
   "ourClients": "Our Clients",
   "faq": "Frequently Asked Questions",
   "news": "News",
@@ -107,5 +108,8 @@
   "research": "Research",
   "no.": "No.",
   "title": "Title",
-  "action": "Action"
+  "action": "Action",
+  "visitors": "Visitors",
+  "projects": "Projects",
+  "documents": "Documents"
 }

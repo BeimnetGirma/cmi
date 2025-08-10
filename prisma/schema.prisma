@@ -80,12 +80,43 @@ model magazine {
   path  String
 }
 
-model service {
-  id      String  @id @default(uuid())
-  title   String
-  content String? @db.Text
-  image   String
-  link    String?
+model Service {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  imageUrl     String?
+  translations ServiceTranslation[]
+  subservices  SubService[]
+}
+
+model ServiceTranslation {
+  id        String  @id @default(uuid())
+  language  String
+  title     String
+  summary   String?
+  content   Json?
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId String
+}
+
+model SubService {
+  id           String                  @id @default(uuid())
+  order        Int?
+  translations SubServiceTranslation[]
+  link         String?
+  service      Service                 @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId    String
+}
+
+model SubServiceTranslation {
+  id           String     @id @default(uuid())
+  language     String
+  title        String
+  description  String?
+  subservice   SubService @relation(fields: [subserviceId], references: [id], onDelete: Cascade)
+  subserviceId String
 }
 
 model announcement {
@@ -110,4 +141,9 @@ model Translation {
   updatedAt DateTime @updatedAt
 
   @@unique([key, language])
+}
+
+model VisitorCount {
+  id    Int @id @default(1)
+  count Int @default(0)
 }

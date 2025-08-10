@@ -71,7 +71,7 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
   return (
     <div className="relative flex justify-center">
       {/* <button className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600" onClick={toggelMenu}> */}
-      <button className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600" onClick={toggleLanguage}>
+      <button className="flex items-center space-x-1 text-slate-900 hover:text-primary-main" onClick={toggleLanguage}>
         {getLang(language)}
         {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
           {isOpen ? (
