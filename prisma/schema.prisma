@@ -142,3 +142,8 @@ model Translation {
 
   @@unique([key, language])
 }
+
+model VisitorCount {
+  id    Int @id @default(1)
+  count Int @default(0)
+}

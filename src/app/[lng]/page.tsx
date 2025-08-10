@@ -7,6 +7,8 @@ import { FeaturedPosts, Post } from "@/types/featured-posts";
 import Carousel from "@/components/ui/carousel";
 import prisma from "@/db";
 import ServiceGrid from "@/components/ui/service-grid";
+import StatsCard from "@/components/ui/stats-card";
+import { FaUsers, FaProjectDiagram, FaFileAlt } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +17,16 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
 
   const { t } = await useTranslation(lng, "translation");
   const filter = `featured:true+tag:'lng-${lng}'`;
+
+  await prisma.visitorCount.upsert({
+    where: { id: 1 },
+    update: { count: { increment: 1 } },
+    create: { id: 1, count: 1 },
+  });
+
+  const visitors_stat = await prisma.visitorCount.findUnique({ where: { id: 1 } });
+  const projects_stat = 18;
+  const documents_stat = 12;
 
   const featuredPosts = await fetch(
     `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=${encodeURIComponent(
@@ -82,13 +94,23 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
         </div>
         <Image src="/assets/imgs/right-wall.png" alt="Line Art" width={200} height={400} />
       </div>
-      <div>
-        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
-      </div>
 
       {/* Our Services */}
       <div className="w-[80vw] max-w-[80vw] mx-auto space-y-20">
         <ServiceGrid params={{ lng }} />
+      </div>
+      <div>
+        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
+      </div>
+      <div className="w-[70vw] max-w-[70vw] mx-auto space-y-20 mt-24">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <StatsCard params={{ lng }} title="Visitors" value={visitors_stat?.count || 0} icon={<FaUsers size={100} />} />
+          <StatsCard params={{ lng }} title="Projects" value={projects_stat} icon={<FaProjectDiagram size={100} />} />
+          <StatsCard params={{ lng }} title="Documents" value={documents_stat} icon={<FaFileAlt size={100} />} />
+        </div>
+      </div>
+      <div>
+        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
       </div>
     </>
   );
