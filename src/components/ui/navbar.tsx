@@ -14,10 +14,16 @@ import MediaMenu from "./media-menu";
 import AdminMenu from "../ui/admin-menu";
 import AnnouncementMenu from "./announcement-menu";
 import { announcement } from "@prisma/client";
+import ServiceMenu from "./service-menu";
 
 const NavBar: React.FC<
-  PageProps & { executives: { departmentName: string; departmentName_am: string | null; id: string }[]; announcements: announcement[]; resourceTypes: ResourceType[] }
-> = ({ executives, announcements, resourceTypes, params: { lng } }) => {
+  PageProps & {
+    services: { title_en: string; title_am: string | null; id: string; slug: string }[];
+    executives: { departmentName: string; departmentName_am: string | null; id: string }[];
+    announcements: announcement[];
+    resourceTypes: ResourceType[];
+  }
+> = ({ services, executives, announcements, resourceTypes, params: { lng } }) => {
   const pathname = usePathname();
   const { t } = useTranslation(lng, "navbar");
   const { user, isLoaded } = useUser();
@@ -31,14 +37,14 @@ const NavBar: React.FC<
       title: t("about"),
       href: "/about",
     },
-    {
-      title: t("services"),
-      href: "/services",
-    },
-    {
-      title: t("contactUs"),
-      href: "/contact",
-    },
+    // {
+    //   title: t("services"),
+    //   href: "/services",
+    // },
+    // {
+    //   title: t("contactUs"),
+    //   href: "/contact",
+    // },
   ];
 
   return (
@@ -70,10 +76,21 @@ const NavBar: React.FC<
               </Link>
             </li>
           ))}
+          <ServiceMenu services={services} params={{ lng }} />
           <MediaMenu params={{ lng }} />
           <ResourcesMenu resourceTypes={resourceTypes} params={{ lng }} />
           <ExecutiveMenu executives={executives} params={{ lng }} />
           <AnnouncementMenu params={{ lng }} announcements={announcements} />
+          <li
+            key="contact"
+            className={`py-2 px-2 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
+              pathname === `/${lng}/contact` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
+            }`}
+          >
+            <Link href="/contact" className="text-base">
+              {t("contactUs").toUpperCase()}
+            </Link>
+          </li>
           {/* <DepartmentMenu params={{ lng }} departments={departments} /> */}
           {user && <AdminMenu params={{ lng }} />}
           <li className="py-4">
@@ -81,7 +98,7 @@ const NavBar: React.FC<
           </li>
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
-              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">Sign Out</button>
+              <button className="g-gray-400 text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">{t("logOut")}</button>
             </SignOutButton>
           ) : (
             <Link href={"/login"} className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors">

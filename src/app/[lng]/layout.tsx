@@ -38,6 +38,35 @@ export default async function RootLayout({
       id: true,
     },
   });
+  async function getNavServices() {
+    const services = await prisma.service.findMany({
+      select: {
+        id: true,
+        slug: true,
+        translations: {
+          where: { language: { in: ["en", "am"] } },
+          select: {
+            language: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "asc" },
+    });
+
+    return services.map((service) => {
+      const title_am = service.translations.find((t) => t.language === "am")?.title || "";
+      const title_en = service.translations.find((t) => t.language === "en")?.title || "";
+
+      return {
+        id: service.id,
+        slug: service.slug,
+        title_am,
+        title_en,
+      };
+    });
+  }
+  const services = await getNavServices();
   const announcements = await prisma.announcement.findMany();
   const resourceTypes = await prisma.resourceType.findMany();
 
@@ -45,7 +74,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang={lng} dir={dir(lng)}>
         <body className={inter.className}>
-          <NavBar executives={executives} announcements={announcements} resourceTypes={resourceTypes} params={{ lng }} />
+          <NavBar services={services} executives={executives} announcements={announcements} resourceTypes={resourceTypes} params={{ lng }} />
           <div className="min-h-screen">
             {React.Children.map(children, (child) => {
               if (React.isValidElement(child)) {
