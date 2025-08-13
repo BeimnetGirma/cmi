@@ -104,6 +104,8 @@ const NavBar: React.FC<
             </Link>
           </li>
 
+          {user && <AdminMenu params={{ lng }} />}
+
           {/* Language */}
           <li className="py-4">
             <LanguageSelector params={{ lng }} />
@@ -151,6 +153,8 @@ const NavBar: React.FC<
                 {t("contactUs")}
               </Link>
             </li>
+
+            {user && <AdminMenu params={{ lng }} />}
 
             {/* Language Selector */}
             <LanguageSelector params={{ lng }} />
