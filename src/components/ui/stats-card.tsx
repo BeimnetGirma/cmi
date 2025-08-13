@@ -4,14 +4,14 @@
 import { PageProps } from "@/types";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
-
-interface StatsCardProps {
+interface StatsCardProps extends PageProps {
   title: string;
   value: number;
   icon?: React.ReactNode;
+  lng: string;
 }
-const StatsCard: React.FC<PageProps & StatsCardProps> = ({ title, value, icon }, params: { lng: string }) => {
-  const { lng = "en" } = params;
+const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon, lng }) => {
+  // const { lng = "en" } = params;
   const { t } = useTranslation(lng, "translation");
   const [count, setCount] = useState(0);
 
@@ -27,7 +27,7 @@ const StatsCard: React.FC<PageProps & StatsCardProps> = ({ title, value, icon },
     }, stepTime);
 
     return () => clearInterval(timer);
-  }, [value]);
+  }, []);
 
   return (
     <div className="bg-white shadow-md rounded-xl p-6 flex flex-col items-center justify-center">

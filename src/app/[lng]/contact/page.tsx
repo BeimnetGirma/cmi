@@ -5,13 +5,13 @@ import Link from "next/link";
 const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
   const { t } = await useTranslation(lng, "translation");
   return (
-    <div className="">
+    <div>
+      {/* Hero Section */}
       <div className="relative h-80 md:h-80 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white bg-[url('/assets/imgs/header-contact.svg')]">
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="text-center z-10 text-sm">
+        <div className="text-center z-10 text-sm px-2">
           <h1 className="text-xl md:text-3xl font-bold">{t("contactActionCall").toUpperCase()}</h1>
           <p className="text-sm md:text-lg pt-2">
-            {" "}
             <Link href={"/"} className="hover:text-slate-300">
               {t("home").toUpperCase()}
             </Link>{" "}
@@ -20,16 +20,15 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
         </div>
       </div>
 
-      <div className="p-2 flex flex-col items-center justify-center">
+      {/* Contact Info */}
+      <div className="p-4 flex flex-col items-center justify-center">
         <h2 className="text-xl font-bold text-primary-main text-center pt-10">{t("contactUs").toUpperCase()}</h2>
-        {/* <div className="flex justify-center ">
-          <p className="text-sm text-slate-800 text-center pt-5">Here you will find our contact information</p>
-        </div> */}
-        <div className="flex flex-col items-center justify-center p-10 w-1/2 m-auto 2">
-          <div className="grid grid-cols-1 md:grid-cols-3">
-            <div className="p-4 flex flex-col items-center justify-center border-r-2">
-              <div className="flex items-center mb-2 mt-5">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 mr-2">
+        <div className="flex flex-col items-center justify-center mt-8 w-full md:w-1/2">
+          <div className="grid grid-cols-1 md:grid-cols-3 border rounded-lg shadow-lg overflow-hidden w-full">
+            {/* Call Us */}
+            <div className="p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                     <path
                       strokeLinecap="round"
@@ -39,12 +38,14 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                   </svg>
                 </div>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 p-4">{t("callUs")}</h4>
-              <p className="justify-center text-center text-sm">+251 115 575 633</p>
+              <h4 className="text-sm font-bold text-slate-900">{t("callUs")}</h4>
+              <p className="text-center text-sm mt-2">+251 115 575 633</p>
             </div>
-            <div className="p-4 flex flex-col items-center justify-center border-r-2">
-              <div className="flex items-center mb-2 mt-5">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100 mr-2">
+
+            {/* Email Us */}
+            <div className="p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                     <path
                       strokeLinecap="round"
@@ -54,20 +55,22 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                   </svg>
                 </div>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 p-4">{t("emailUs")}</h4>
-              <p className="justify-center text-center text-sm">info@cmi.gov.et</p>
+              <h4 className="text-sm font-bold text-slate-900">{t("emailUs")}</h4>
+              <p className="text-center text-sm mt-2">info@cmi.gov.et</p>
             </div>
-            <div className="p-4 flex flex-col items-center justify-center ">
-              <div className="flex items-center mb-2 mt-5">
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 mr-2">
+
+            {/* Locate Us */}
+            <div className="p-6 flex flex-col items-center justify-center">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                   </svg>
                 </div>
               </div>
-              <h4 className="text-sm font-bold text-slate-900 p-4">{t("locateUs")}</h4>
-              <p className="justify-center text-center text-sm">{t("officeAddress")}</p>
+              <h4 className="text-sm font-bold text-slate-900">{t("locateUs")}</h4>
+              <p className="text-center text-sm mt-2">{t("officeAddress")}</p>
             </div>
           </div>
         </div>
