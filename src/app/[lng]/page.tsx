@@ -47,73 +47,77 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   return (
     <>
       {!!featuredPosts?.posts?.length && <Carousel posts={featuredPosts} />}
-      <div className="w-[80vw] max-w-[80vw] mx-auto space-y-20">
-        {/* Hero */}
 
-        {/* <div className="text-center font-bold text-2xl">
-            ECMI - Deploy to test
-          </div> */}
-        <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center mt-20">
-          <Image src="/assets/imgs/1-no-bg.png" className="rounded-lg" alt="Hero Image" width={700} height={500} />
-          <div className="flex flex-col pl-8 items-end justify-center ">
-            <h2 className="text-4xl text-center text-primary-main font-bold  mb-5">{t("companyName")}</h2>
-            <div className="text-slate-900 rounded-md mx-5 w-5/6">
-              <p className="text-justify text-lg">{t("companyIntro")}</p>
-              <div className="text-right">
-                <button className="bg-primary-main hover:scale-105  rounded-md  duration-200 text-white px-4 py-2 mt-2">
-                  <Link href={`${lng}/services`}>{t("viewServices")}</Link>
-                </button>
+      {/* Hero Section */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mt-10 lg:mt-20">
+          <Image src="/assets/imgs/1-no-bg.png" className="rounded-lg w-full max-w-lg h-auto" alt="Hero Image" width={700} height={500} />
+          <div className="flex flex-col lg:pl-8 items-center lg:items-end justify-center text-center lg:text-right">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl text-primary-main font-bold mb-5">{t("companyName")}</h2>
+            <div className="text-slate-900 rounded-md lg:mx-5 lg:w-5/6">
+              <p className="text-justify text-base sm:text-lg">{t("companyIntro")}</p>
+              <div className="mt-4">
+                <Link href={`${lng}/services`} className="bg-primary-main hover:scale-105 rounded-md duration-200 text-white px-4 py-2 inline-block">
+                  {t("viewServices")}
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
+
+      {/* Floor Image */}
+      <div className="w-full overflow-hidden">
+        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5 w-full h-auto" width={1700} height={430} />
       </div>
 
       {/* About Us Section */}
-      <div className="flex flex-row w-full mt-28 ">
-        <Image src="/assets/imgs/left-wall.png" alt="Line Art" width={200} height={400} />
-        <div className="flex-grow">
-          <div className="container mx-auto flex flex-col lg:flex-row-reverse  items-center justify-center  mt-20 ">
-            <Image src="/assets/imgs/5.jpg" alt="About Us Image" className="rounded-lg justify-end" width={700} height={430} />
-            <div className="flex flex-col py-8 px-4 pr-8">
-              <h3 className="text-xl font-bold mb-4 text-primary-main">{t("aboutUs")}</h3>
+      <div className="flex flex-col lg:flex-row w-full mt-20 lg:mt-28">
+        <Image src="/assets/imgs/left-wall.png" className="hidden lg:block " alt="Line Art" width={200} height={400} />
 
-              <div className="w-3/4">
-                <p className="text-justify text-lg mb-4">{t("aboutUsIntro")}</p>
-                <div className="flex justify-end">
-                  <button className="bg-primary-main hover:scale-105  rounded-md  duration-200 text-white px-4 py-2 mt-2">
-                    <Link href={`${lng}/about`}>{t("readMore")}</Link>
-                  </button>
+        <div className="flex-grow flex items-center justify-center">
+          <div className="container mx-2 flex flex-col lg:flex-row-reverse items-center justify-center gap-8 px-0 sm:px-6 lg:px-8 mt-10 lg:mt-20">
+            <Image src="/assets/imgs/5.jpg" alt="About Us Image" className="rounded-lg w-full max-w-lg h-auto" width={700} height={430} />
+            <div className="flex flex-col py-4 lg:py-8">
+              <h3 className="text-lg sm:text-xl font-bold mb-4 text-primary-main">{t("aboutUs")}</h3>
+              <div className="lg:w-3/4">
+                <p className="text-justify text-base sm:text-lg mb-4">{t("aboutUsIntro")}</p>
+                <div className="flex justify-center lg:justify-end">
+                  <Link href={`${lng}/about`} className="bg-primary-main hover:scale-105 rounded-md duration-200 text-white px-4 py-2 inline-block">
+                    {t("readMore")}
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Image src="/assets/imgs/right-wall.png" alt="Line Art" width={200} height={400} />
+        <Image src="/assets/imgs/right-wall.png" className="hidden lg:block " alt="Line Art" width={200} height={400} />
       </div>
 
       {/* Our Services */}
-      <div className="w-[80vw] max-w-[80vw] mx-auto space-y-20">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 space-y-20">
         <ServiceGrid params={{ lng }} />
       </div>
-      <div>
-        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
+
+      {/* Floor Image */}
+      <div className="w-full overflow-hidden">
+        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5 w-full h-auto" width={1700} height={430} />
       </div>
-      <div className="w-[70vw] max-w-[70vw] mx-auto space-y-20 mt-24">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <StatsCard params={{ lng }} title="Visitors" value={visitors_stat?.count || 0} icon={<FaUsers size={100} />} />
-          <StatsCard params={{ lng }} title="Projects" value={projects_stat} icon={<FaProjectDiagram size={100} />} />
-          <StatsCard params={{ lng }} title="Documents" value={documents_stat} icon={<FaFileAlt size={100} />} />
+
+      {/* Stats Section */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 space-y-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StatsCard lng={lng} title="Visitors" value={visitors_stat?.count || 0} icon={<FaUsers size={80} className="mx-auto" />} params={{ lng: "en" }} />
+          <StatsCard lng={lng} title="Projects" value={projects_stat} icon={<FaProjectDiagram size={80} className="mx-auto" />} params={{ lng: "en" }} />
+          <StatsCard lng={lng} title="Documents" value={documents_stat} icon={<FaFileAlt size={80} className="mx-auto" />} params={{ lng: "en" }} />
         </div>
       </div>
-      <div>
-        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5" width={1700} height={430} />
+
+      {/* Floor Image */}
+      <div className="w-full overflow-hidden">
+        <Image src="/assets/imgs/floor.png" alt="Floor" className="mt-5 w-full h-auto" width={1700} height={430} />
       </div>
     </>
   );
 };
-
 export default Home;
