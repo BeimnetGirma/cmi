@@ -52,15 +52,15 @@ const NavBar: React.FC<
     <nav className="bg-shadedbg-main shadow-md z-50 px-4 sm:px-6 lg:px-16">
       <div className="flex justify-between items-center">
         {/* Logo */}
-        <div className="flex-1 flex justify-between items-center">
+        <div className="flex items-center flex-shrink-0">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/assets/imgs/logo.png" alt="Logo" width={60} height={140} />
-            <Image src="/assets/imgs/logo-text.png" alt="Logo" width={380} height={480} className="hidden xl:block" />
+            <Image src="/assets/imgs/logo.png" alt="Logo" width={70} height={140} />
+            <Image src="/assets/imgs/logo-text.png" alt="Logo" width={480} height={580} className="w-3/4 md:w-full" />
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden p-2 text-gray-900 focus:outline-none">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="navbreak:hidden p-2 text-gray-900 focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {menuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -71,16 +71,16 @@ const NavBar: React.FC<
         </button>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex items-center gap-5 py-8 md:py-0">
+        <ul className="hidden navbreak:flex nav-lg:flex items-center gap-5 flex-wrap p-4">
           {navLinks.map((link) => (
             <li
               key={link.href}
-              className={`py-2 px-2 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
+              className={`py-2 px-1 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
                 pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
-              }`}
+              } ${lng === `en` ? " text-slate-700" : "font-normal"} `}
             >
               <Link href={link.href} className="text-base">
-                {link.title.toUpperCase()}
+                {link.title}
               </Link>
             </li>
           ))}
@@ -95,12 +95,12 @@ const NavBar: React.FC<
           {/* Contact */}
           <li
             key="contact"
-            className={`py-2 px-2 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
+            className={`px-1 transition-all duration-200 hover:scale-105 hover:text-primary-main hover:rounded-md ${
               pathname === `/${lng}/contact` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
             }`}
           >
             <Link href="/contact" className="text-base">
-              {t("contactUs").toUpperCase()}
+              {t("contactUs")}
             </Link>
           </li>
 
@@ -114,10 +114,10 @@ const NavBar: React.FC<
           {/* Auth */}
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
-              <button className="text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">{t("logOut")}</button>
+              <button className="text-base text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">{t("logOut")}</button>
             </SignOutButton>
           ) : (
-            <Link href={"/login"} className="text-white rounded-md px-4 py-2 bg-primary-main font-semibold hover:bg-gray-500 transition-colors">
+            <Link href={"/login"} className="text-base text-white rounded-md px-4 py-2 bg-primary-main  hover:bg-gray-500 transition-colors">
               {t("login")}
             </Link>
           )}
@@ -126,14 +126,14 @@ const NavBar: React.FC<
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="lg:hidden pb-4 space-y-3">
+        <div className="navbreak:hidden pb-4 space-y-3">
           <ul className="flex flex-col gap-3 text-secondary-light">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`block py-2 px-2 ${pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main" : "font-normal"}`}
+                  className={` text-base block px-1 ${pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main" : "font-normal"}`}
                 >
                   {link.title}
                 </Link>
@@ -149,7 +149,7 @@ const NavBar: React.FC<
 
             {/* Contact */}
             <li>
-              <Link href="/contact" onClick={() => setMenuOpen(false)} className="block py-2 px-2">
+              <Link href="/contact" onClick={() => setMenuOpen(false)} className="block py-2 px-2 text-base">
                 {t("contactUs")}
               </Link>
             </li>

@@ -56,7 +56,7 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                 </div>
               </div>
               <h4 className="text-sm font-bold text-slate-900">{t("emailUs")}</h4>
-              <p className="text-center text-sm mt-2">info@cmi.gov.et</p>
+              <p className="text-center text-sm mt-2">cmi@ecmi.gov.et</p>
             </div>
 
             {/* Locate Us */}
@@ -71,6 +71,21 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
               </div>
               <h4 className="text-sm font-bold text-slate-900">{t("locateUs")}</h4>
               <p className="text-center text-sm mt-2">{t("officeAddress")}</p>
+            </div>
+          </div>
+          <div className="w-full flex flex-col items-center mt-8">
+            <h3 className="text-xl font-bold text-primary-main text-center pt-10">{t("address")}</h3>
+            <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl aspect-video mt-4 rounded-lg overflow-hidden shadow">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.7019042305424!2d38.7715864!3d8.9995531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85881816c1f5%3A0x6f851054ffb4a16f!2sEthiopian%20Construction%20Management%20Institute!5e0!3m2!1sen!2set!4v1755256564027!5m2!1sen!2set"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-60 md:h-96"
+              ></iframe>
             </div>
           </div>
         </div>

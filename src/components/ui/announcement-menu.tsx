@@ -39,13 +39,13 @@ const AnnouncementMenu: React.FC<PageProps & { announcements: announcement[] }> 
   }, [announcements]);
   return (
     <li
-      className={`py-2 px-2 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer ${
+      className={`px-1 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer ${
         pathname === `/${lng}/announcements` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
       }`}
     >
       <Link href="announcements" onClick={saveLastVisit}>
         <span className="inline-flex items-start text-base">
-          {t("announcements").toUpperCase()}{" "}
+          {t("announcements")}{" "}
           {hasNew && (
             <svg width="10px" height="10px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1 -mt-1">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
