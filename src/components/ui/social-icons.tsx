@@ -7,6 +7,11 @@ const socialLinks = [
     icon: "/assets/icons/facebook.svg",
     link: "https://www.facebook.com/ECPMI/",
   },
+  {
+    id: 2,
+    icon: "/assets/icons/telegram-svgrepo-com.svg",
+    link: "https://t.me/Construction_Management_Institue",
+  },
 ];
 const SocialLinks = () => {
   return (
