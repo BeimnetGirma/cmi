@@ -1,10 +1,44 @@
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n";
 import { PageProps } from "@/types";
+import prisma from "@/db";
 
 const AboutUs: React.FC<PageProps> = async ({ params: { lng } }) => {
-  const { t } = await useTranslation(lng, "translation");
-  const powersAndDuties = t("powerAndDutiesDetail.details", { returnObjects: true });
+  // const { t } = await useTranslation(lng, "translation");
+
+  // prisma query
+  const translations = await prisma.translation.findMany({
+    where: { language: lng },
+  });
+
+  const dict: Record<string, string> = Object.fromEntries(translations.map((t) => [t.key, t.value as string]));
+  function createTranslator(dict: Record<string, string>) {
+    return (key: string) => dict[key] || key;
+  }
+
+  const t = createTranslator(dict);
+
+  // const powersAndDuties = t("powerAndDutiesDetail.details", { returnObjects: true });
+  type PowersAndDutiesObj = {
+    details?: any;
+    [key: string]: any;
+  };
+
+  let powersAndDutiesObj: PowersAndDutiesObj = {};
+  if (dict["powerAndDutiesDetail"]) {
+    if (typeof dict["powerAndDutiesDetail"] === "string") {
+      try {
+        powersAndDutiesObj = JSON.parse(dict["powerAndDutiesDetail"]);
+      } catch {
+        powersAndDutiesObj = {};
+      }
+    } else if (typeof dict["powerAndDutiesDetail"] === "object") {
+      powersAndDutiesObj = dict["powerAndDutiesDetail"];
+    }
+  }
+
+  const powersAndDuties = powersAndDutiesObj.details;
+
   const boxes = [
     {
       title: t("mission"),
