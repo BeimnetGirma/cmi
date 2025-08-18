@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { HomePageProps } from "@/types";
-import { useTranslation } from "@/app/i18n";
+// import { useTranslation } from "@/app/i18n";
 import { FeaturedPosts, Post } from "@/types/featured-posts";
 import Carousel from "@/components/ui/carousel";
 import prisma from "@/db";
@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 const Home: React.FC<HomePageProps> = async ({ params }) => {
   const { lng = "en" } = params;
 
-  const { t } = await useTranslation(lng, "translation");
+  // const { t } = await useTranslation(lng, "translation");
   const filter = `featured:true+tag:'lng-${lng}'`;
 
   await prisma.visitorCount.upsert({
@@ -23,6 +23,18 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
     update: { count: { increment: 1 } },
     create: { id: 1, count: 1 },
   });
+
+  // prisma query
+  const translations = await prisma.translation.findMany({
+    where: { language: lng },
+  });
+
+  const dict: Record<string, string> = Object.fromEntries(translations.map((t) => [t.key, t.value as string]));
+  function createTranslator(dict: Record<string, string>) {
+    return (key: string) => dict[key] || key;
+  }
+
+  const t = createTranslator(dict);
 
   const visitors_stat = await prisma.visitorCount.findUnique({ where: { id: 1 } });
   const projects_stat = 18;
