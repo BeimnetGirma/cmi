@@ -19,7 +19,9 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
 
   const [slug, setSlug] = useState(existingService?.slug ?? "");
   const [imageFile, setImageFile] = useState<File | undefined>();
+  const [backgroundFile, setBackgroundFile] = useState<File | undefined>();
   const [imagePreview, setImagePreview] = useState<string | undefined>(existingService?.imageUrl ?? undefined);
+  const [backgroundPreview, setBackgroundPreview] = useState<string | undefined>(existingService?.backgroundImageUrl ?? undefined);
 
   // Ensure translations array always contains en + am
   const buildInitialTranslations = (from?: ServiceTranslationInput[]) => {
@@ -72,6 +74,7 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
     if (existingService) {
       setSlug(existingService.slug ?? "");
       setImagePreview(existingService.imageUrl ?? undefined);
+      setBackgroundPreview(existingService.backgroundImageUrl ?? undefined);
       setTranslations(buildInitialTranslations(existingService.translations));
       setSubservices(buildInitialSubservices(existingService.subservices));
     }
@@ -88,6 +91,16 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(String(reader.result));
+    };
+    reader.readAsDataURL(file);
+  }
+  function handleBackgroundChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setBackgroundFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBackgroundPreview(String(reader.result));
     };
     reader.readAsDataURL(file);
   }
@@ -169,11 +182,36 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
         }
         imagePath = json.imagePath;
       }
+      // 2) Upload background image if a new file was chosen
+      let backgroundImagePath = backgroundPreview ?? null;
+      if (backgroundFile) {
+        const uploadFd = new FormData();
+        uploadFd.set("image", backgroundFile);
+        const res = await fetch(`/api/service/`, { method: "POST", body: uploadFd });
+        if (!res.ok) {
+          const text = await res.text();
+          toast.error("Background image upload failed: " + (text || res.statusText));
+          stopLoading?.();
+          return;
+        }
+        const json = await res.json();
+        if (!json?.success) {
+          toast.error("Background image upload failed.");
+          stopLoading?.();
+          return;
+        }
+        backgroundImagePath = json.imagePath;
+        console.log("************************************************************");
+        console.log("************************************************************");
+        console.log("************************************************************");
+        console.log(backgroundImagePath);
+      }
 
       // 2) Build payload that matches the Prisma nested create/update shape
       const payload: any = {
         slug: slug || undefined,
         imageUrl: imagePath ?? undefined,
+        backgroundImageUrl: backgroundImagePath ?? undefined,
         translations: translations.map((t) => ({
           language: t.language,
           title: t.title,
@@ -194,6 +232,8 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
       // If editing, include id
       if (existingService?.id && editService) {
         payload.id = existingService.id;
+        console.log(payload);
+
         const ok = await editService(payload);
         if (ok) {
           toast.success("Service updated.");
@@ -209,6 +249,8 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
           setSlug("");
           setImageFile(undefined);
           setImagePreview(undefined);
+          setBackgroundFile(undefined);
+          setBackgroundPreview(undefined);
           setTranslations(buildInitialTranslations([]));
           setSubservices(buildInitialSubservices([]));
           closeModal();
@@ -267,10 +309,17 @@ const NewService = ({ createService, editService, existingService }: NewServiceP
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Icon / Image</label>
-                  <input type="file" accept="image/*" onChange={handleImageChange} className="mt-1 block w-full" />
-                  {imagePreview && <img src={imagePreview} alt="preview" className="mt-2 w-20 h-20 object-contain" />}
+                <div className="flex-col">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Icon / Image</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} className="mt-1 block w-full" />
+                    {imagePreview && <img src={imagePreview} alt="preview" className="mt-2 w-20 h-20 object-contain" />}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Background Image</label>
+                    <input type="file" accept="image/*" onChange={handleBackgroundChange} className="mt-1 block w-full" />
+                    {backgroundPreview && <img src={backgroundPreview} alt="preview" className="mt-2 w-20 h-20 object-contain" />}
+                  </div>
                 </div>
               </div>
 

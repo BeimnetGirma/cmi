@@ -86,9 +86,10 @@ model Service {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  imageUrl     String?
-  translations ServiceTranslation[]
-  subservices  SubService[]
+  imageUrl           String?
+  backgroundImageUrl String?
+  translations       ServiceTranslation[]
+  subservices        SubService[]
 }
 
 model ServiceTranslation {

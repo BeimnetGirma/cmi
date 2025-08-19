@@ -56,6 +56,7 @@ export type ServiceFormInput = {
   id?: string;
   slug?: string;
   imageUrl?: string | null;
+  backgroundImageUrl?: string | null;
   translations: ServiceTranslationInput[];
   subservices: SubServiceInput[];
 };
