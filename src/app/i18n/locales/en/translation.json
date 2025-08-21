@@ -111,11 +111,12 @@
   "no.": "No.",
   "title": "Title",
   "action": "Action",
-  "visitors": "Visitors",
+  "visitors": "Site Visitors",
   "projects": "Projects",
   "documents": "Documents",
   "mui": "Ministry of Urban and Infrastructure",
-  "trainees": "Trainees",
-  "pmp": "PMP Certificates",
-  "bim": "BIM Trainees"
+  "trainees": "CMI Trainees",
+  "pmp": "PMP Certified",
+  "bim": "BIM  Certified",
+  "researches": "Researches"
 }

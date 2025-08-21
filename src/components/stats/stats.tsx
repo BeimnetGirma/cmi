@@ -7,6 +7,7 @@ const Stats = () => {
     traineeCount: 0,
     bimCount: 0,
     pmpCount: 0,
+    researchCount: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -20,6 +21,7 @@ const Stats = () => {
           traineeCount: data.traineeCount ?? 0,
           bimCount: data.bimCount ?? 0,
           pmpCount: data.pmpCount ?? 0,
+          researchCount: data.researchCount ?? 0,
         });
       } catch (err) {
         console.error(err);
@@ -97,6 +99,16 @@ const Stats = () => {
                   type="number"
                   name="pmpCount"
                   value={stats.pmpCount}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border px-3 py-2 focus:outline-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Research Count</label>
+                <input
+                  type="number"
+                  name="researchCount"
+                  value={stats.researchCount}
                   onChange={handleChange}
                   className="mt-1 block w-full rounded-md border px-3 py-2 focus:outline-blue-500"
                 />
