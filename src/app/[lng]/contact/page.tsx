@@ -1,9 +1,38 @@
-import { useTranslation } from "@/app/i18n";
+"use client";
+import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
-  const { t } = await useTranslation(lng, "translation");
+const Contact: React.FC<PageProps> = ({ params: { lng } }) => {
+  const { t } = useTranslation(lng, "translation");
+  const globalKeys = ["phoneNumber", "emailAddress", "googleAddress"];
+  const [contactData, setContactData] = useState<{
+    quickLinks: any[];
+    serviceLinks: any[];
+    phoneNumber: string;
+    emailAddress: string;
+    officeAddress: string;
+    googleAddress: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const [langResponse, globalResponse] = await Promise.all([fetch("/api/" + lng), fetch("/api/en")]);
+
+        const langData = await langResponse.json();
+        const globalData = await globalResponse.json();
+
+        const mergedData = { ...langData, ...pick(globalData, globalKeys) };
+
+        setContactData(mergedData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchContactData();
+  }, []);
   return (
     <div>
       {/* Hero Section */}
@@ -39,7 +68,7 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                 </div>
               </div>
               <h4 className="text-sm font-bold text-slate-900">{t("callUs")}</h4>
-              <p className="text-center text-sm mt-2">+251 115 575 633</p>
+              <p className="text-center text-sm mt-2">{contactData?.phoneNumber}</p>
             </div>
 
             {/* Email Us */}
@@ -56,7 +85,7 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                 </div>
               </div>
               <h4 className="text-sm font-bold text-slate-900">{t("emailUs")}</h4>
-              <p className="text-center text-sm mt-2">cmi@ecmi.gov.et</p>
+              <p className="text-center text-sm mt-2">{contactData?.emailAddress}</p>
             </div>
 
             {/* Locate Us */}
@@ -70,14 +99,14 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
                 </div>
               </div>
               <h4 className="text-sm font-bold text-slate-900">{t("locateUs")}</h4>
-              <p className="text-center text-sm mt-2">{t("officeAddress")}</p>
+              <p className="text-center text-sm mt-2">{contactData?.officeAddress}</p>
             </div>
           </div>
           <div className="w-full flex flex-col items-center mt-8">
             <h3 className="text-xl font-bold text-primary-main text-center pt-10">{t("address")}</h3>
             <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl aspect-video mt-4 rounded-lg overflow-hidden shadow">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.7019042305424!2d38.7715864!3d8.9995531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85881816c1f5%3A0x6f851054ffb4a16f!2sEthiopian%20Construction%20Management%20Institute!5e0!3m2!1sen!2set!4v1755256564027!5m2!1sen!2set"
+                src={contactData?.googleAddress}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -93,5 +122,13 @@ const Contact: React.FC<PageProps> = async ({ params: { lng } }) => {
     </div>
   );
 };
-
+function pick(globalData: any, globalKeys: string[]) {
+  const result: any = {};
+  for (const key of globalKeys) {
+    if (key in globalData) {
+      result[key] = globalData[key];
+    }
+  }
+  return result;
+}
 export default Contact;

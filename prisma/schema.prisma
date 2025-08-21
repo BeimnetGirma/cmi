@@ -164,6 +164,11 @@ model PMPCount {
   count Int @default(0)
 }
 
+model ResearchCount {
+  id    Int @id @default(1)
+  count Int @default(0)
+}
+
 model Event {
   id             Int      @id @default(autoincrement())
   title_en       String

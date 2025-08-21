@@ -6,6 +6,7 @@ interface EditPageContentProp {
   lng: string;
 }
 const EditPageContents = ({ ...EditPageContentProp }) => {
+  const globalKeys = ["phoneNumber", "emailAddress", "googleAddress"];
   const [data, setData] = useState<{
     companyName?: any;
     companyIntro?: any;
@@ -22,18 +23,27 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
     powerAndDutiesTitle?: any;
     powerAndDutiesContent?: any;
     powerAndDutiesDetail?: any;
+    phoneNumber?: any;
+    emailAddress?: any;
+    officeAddress?: any;
+    googleAddress?: any;
+    quickLinks?: any;
+    serviceLinks?: any;
   } | null>(null);
   const [powerAndDutiesDetailText, setPowerAndDutiesDetailText] = useState("");
   const [language, setLanguage] = useState(EditPageContentProp.lng);
 
   const fetchData = async () => {
-    const response = await fetch("/api/" + language);
+    const [langResponse, globalResponse] = await Promise.all([fetch("/api/" + language), fetch("/api/en")]);
 
-    const data = await response.json();
-    setData(data);
+    const langData = await langResponse.json();
+    const globalData = await globalResponse.json();
 
-    if (data.powerAndDutiesDetail) {
-      setPowerAndDutiesDetailText(data.powerAndDutiesDetail.details.join("\n"));
+    const mergedData = { ...langData, ...pick(globalData, globalKeys) };
+    setData(mergedData);
+
+    if (mergedData.powerAndDutiesDetail) {
+      setPowerAndDutiesDetailText(mergedData.powerAndDutiesDetail.details.join("\n"));
     }
   };
 
@@ -53,20 +63,64 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
       powerAndDutiesDetail: { details: updatedPowerAndDuties },
     };
 
-    fetch("/api/" + language, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => {
+    const globalData: Record<string, any> = {};
+    const localizedData: Record<string, any> = {};
+
+    //  Extract global vs localized updates
+    Object.entries(updatedData).forEach(([key, value]) => {
+      if (globalKeys.includes(key)) {
+        globalData[key] = value;
+      } else {
+        localizedData[key] = value;
+      }
+    });
+    // Build all fetch requests
+    const requests: Promise<Response>[] = [];
+
+    //always save global fields to EN
+    if (Object.keys(globalData).length > 0) {
+      requests.push(
+        fetch("/api/en", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(globalData),
+        })
+      );
+    }
+    // Save language-specific fields
+    if (Object.keys(localizedData).length > 0) {
+      requests.push(
+        fetch("/api/" + language, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(localizedData),
+        })
+      );
+    }
+    // 3. Run all requests
+    Promise.all(requests)
+      .then(() => {
         toast.success("Translation Updated Successfully");
       })
       .catch((err) => {
-        console.error("error");
+        console.error("error", err);
         toast.error("Error Updating Translation");
       });
+
+    // fetch("/api/" + language, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(updatedData),
+    // })
+    //   .then((res) => {
+    //     toast.success("Translation Updated Successfully");
+    //   })
+    //   .catch((err) => {
+    //     console.error("error");
+    //     toast.error("Error Updating Translation");
+    //   });
   };
   const handlePowerAndDutiesDetailChange = (e: any) => {
     setPowerAndDutiesDetailText(e.target.value);
@@ -107,6 +161,9 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                 </TabsTrigger>
                 <TabsTrigger value="about" className="p-3">
                   About Us Page
+                </TabsTrigger>
+                <TabsTrigger value="contact" className="p-3">
+                  Contact Details
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="home">
@@ -354,6 +411,105 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
                   </div>
                 </div>
               </TabsContent>
+              <TabsContent value="contact">
+                <div>
+                  <div className="text-left">
+                    <h1 className="text-2xl text-blue-400  my-5">Contact Details and Others</h1>
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="phone-number" className="block text-gray-700 text-sm font-bold mb-2">
+                      Phone No:
+                    </label>
+                    <input
+                      type="text"
+                      value={data.phoneNumber}
+                      onChange={(e) => {
+                        setData({ ...data, phoneNumber: e.target.value });
+                      }}
+                      id="phone-number"
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Phone Number"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="email-address" className="block text-gray-700 text-sm font-bold mb-2">
+                      Email Address:
+                    </label>
+                    <input
+                      type="email"
+                      value={data.emailAddress}
+                      onChange={(e) => {
+                        setData({ ...data, emailAddress: e.target.value });
+                      }}
+                      id="email-address"
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Email Address"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="office-location" className="block text-gray-700 text-sm font-bold mb-2">
+                      Office Location:
+                    </label>
+                    <input
+                      type="text"
+                      value={data.officeAddress}
+                      onChange={(e) => {
+                        setData({ ...data, officeAddress: e.target.value });
+                      }}
+                      id="office-location"
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Office Location"
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="google-address" className="block text-gray-700 text-sm font-bold mb-2">
+                      Google Address
+                    </label>
+                    <textarea
+                      id="google-address"
+                      rows={3}
+                      value={data.googleAddress}
+                      onChange={(e) => {
+                        setData({ ...data, googleAddress: e.target.value });
+                      }}
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Google Address"
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="quickLinks" className="block text-gray-700 text-sm font-bold mb-2">
+                      Quick Links
+                    </label>
+                    <textarea
+                      id="quickLinks"
+                      rows={3}
+                      value={data.quickLinks}
+                      onChange={(e) => {
+                        setData({ ...data, quickLinks: e.target.value });
+                      }}
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Quick Links"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="serviceLinks" className="block text-gray-700 text-sm font-bold mb-2">
+                      Service Links
+                    </label>
+                    <textarea
+                      id="serviceLinks"
+                      rows={3}
+                      value={data.serviceLinks}
+                      onChange={(e) => {
+                        setData({ ...data, serviceLinks: e.target.value });
+                      }}
+                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 "
+                      placeholder="Enter Service Links"
+                    />
+                  </div>
+                </div>
+              </TabsContent>
             </Tabs>
 
             <div className="flex justify-end">
@@ -377,5 +533,15 @@ const EditPageContents = ({ ...EditPageContentProp }) => {
     </div>
   );
 };
+
+function pick(globalData: any, globalKeys: string[]) {
+  const result: any = {};
+  for (const key of globalKeys) {
+    if (key in globalData) {
+      result[key] = globalData[key];
+    }
+  }
+  return result;
+}
 
 export default EditPageContents;

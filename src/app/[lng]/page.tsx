@@ -8,7 +8,7 @@ import Carousel from "@/components/ui/carousel";
 import prisma from "@/db";
 import ServiceGrid from "@/components/ui/service-grid";
 import StatsCard from "@/components/ui/stats-card";
-import { FaUsers, FaProjectDiagram, FaFileAlt, FaEye, FaCertificate, FaCubes } from "react-icons/fa";
+import { FaUsers, FaProjectDiagram, FaFileAlt, FaEye, FaCertificate, FaCubes, FaSearch } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
 
@@ -55,8 +55,7 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   const traineeCount = await prisma.traineeCount.findUnique({ where: { id: 1 } });
   const pmpCount = await prisma.pMPCount.findUnique({ where: { id: 1 } });
   const bIMCount = await prisma.bIMCount.findUnique({ where: { id: 1 } });
-  const projects_stat = 18;
-  const documents_stat = 12;
+  const researchCount = await prisma.researchCount.findUnique({ where: { id: 1 } });
 
   const featuredPosts = await fetch(
     `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=${encodeURIComponent(
@@ -150,11 +149,12 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
 
       {/* Stats Section */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 space-y-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           <StatsCard lng={lng} title="Visitors" value={visitors_stat?.count || 0} icon={<FaEye size={80} className="mx-auto" />} params={{ lng: "en" }} />
           <StatsCard lng={lng} title="Trainees" value={traineeCount?.count || 0} icon={<FaUsers size={80} className="mx-auto" />} params={{ lng: "en" }} />
           <StatsCard lng={lng} title="PMP" value={pmpCount?.count || 0} icon={<FaCertificate size={80} className="mx-auto" />} params={{ lng: "en" }} />
           <StatsCard lng={lng} title="BIM" value={bIMCount?.count || 0} icon={<FaCubes size={80} className="mx-auto" />} params={{ lng: "en" }} />
+          <StatsCard lng={lng} title="Research" value={researchCount?.count || 0} icon={<FaSearch size={80} className="mx-auto" />} params={{ lng: "en" }} />
         </div>
       </div>
 
