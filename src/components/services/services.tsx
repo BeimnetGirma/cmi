@@ -14,6 +14,7 @@ export async function createService(newService: Prisma.ServiceCreateInput) {
       data: {
         slug: newService.slug,
         imageUrl: newService.imageUrl,
+        backgroundImageUrl: newService.backgroundImageUrl,
         translations: {
           create: Array.isArray(newService.translations)
             ? newService.translations.map((t) => ({
@@ -61,6 +62,7 @@ export async function editService(updatedService: any) {
       data: {
         slug: updatedService.slug,
         imageUrl: updatedService.imageUrl,
+        backgroundImageUrl: updatedService.backgroundImageUrl,
 
         // Replace translations (cascade will handle child cleanup)
         translations: {

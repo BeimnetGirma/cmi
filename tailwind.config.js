@@ -66,6 +66,10 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      screens: {
+        navbreak: "1650px",
+        aboutbreak: "1515px",
+      },
     },
   },
   plugins: [require("tw-elements/plugin.cjs"), require("tailwindcss-animate")],

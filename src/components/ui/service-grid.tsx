@@ -45,33 +45,47 @@ const ServiceGrid: React.FC<PageProps> = async ({ params }) => {
 
                 return (
                   <Link href={`/${lng}/services/${service.slug}`} key={service.id} className={`relative group overflow-hidden h-64${borders}`}>
-                    <div className="flex flex-col items-center justify-center h-full">
-                      {service.imageUrl ? (
-                        <img src={service.imageUrl} alt={translation.title} className="w-12 h-12 rounded-full mb-2 object-cover" />
-                      ) : (
-                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mb-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                          </svg>
-                        </div>
-                      )}
-                      <h4 className="text-lg font-bold text-slate-900 p-4">{translation.title}</h4>
-                    </div>
-
-                    {/* Hover overlay */}
-                    <div className="m-3 shadow-3 absolute inset-0 bg-white translate-y-[110%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out flex flex-col items-center justify-center hover:cursor-pointer">
-                      {/* Keep title and icon visible on hover */}
-                      <div className="flex flex-col items-center justify-center h-full p-1">
+                    <div
+                      className="flex flex-col items-center justify-center h-full relative"
+                      style={{
+                        backgroundImage: service.backgroundImageUrl ? `url(${service.backgroundImageUrl})` : undefined,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                    >
+                      {/* Overlay for better text contrast */}
+                      {service.backgroundImageUrl && <div className="absolute inset-0 bg-black opacity-40 pointer-events-none" />}
+                      <div className="relative flex flex-col items-center justify-center h-full">
                         {service.imageUrl ? (
-                          <img src={service.imageUrl} alt={translation.title} className="w-12 h-12 rounded-full mb-2 object-cover" />
+                          <img src={service.imageUrl} alt={translation.title} className="w-16 h-16 rounded-t-full mb-0 object-cover bg-slate-50 p-2" />
                         ) : (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mb-2">
+                          <div className="w-16 h-16 flex items-center justify-center rounded-t-full bg-slate-50 mb-0 p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                           </div>
                         )}
-                        <h4 className="text-lg font-bold text-slate-900 ">{translation.title}</h4>
+                        <h4 className="text-lg font-bold text-slate-900 p-4 bg-slate-50">{translation.title}</h4>
+                      </div>
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="m-3 shadow-3 absolute inset-0 bg-white translate-y-[110%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out flex flex-col items-center justify-center hover:cursor-pointer">
+                      {/* Keep title and icon visible on hover */}
+                      <div className="flex flex-col items-center justify-center h-full p-0 mt-0">
+                        <div className="flex flex-col items-center justify-center bg-primary-main w-full -mt-4 pb-3">
+                          {service.imageUrl ? (
+                            <img src={service.imageUrl} alt={translation.title} className="w-12 h-12 rounded-full mb-2 object-cover mt-2" />
+                          ) : (
+                            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 mb-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-blue-500">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                            </div>
+                          )}
+                          <h4 className="text-lg font-bold text-slate-50 text-center">{translation.title}</h4>
+                        </div>
                         <p className="text-center text-sm">{translation.summary}</p>
                       </div>
                     </div>

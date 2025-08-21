@@ -40,8 +40,8 @@ const ServiceMenu: React.FC<PageProps & { services: { title_en: string; title_am
           onClick={toggleMobileDropdown} // mobile click opens menu
           onMouseEnter={() => !isMobile && setOpenDropdown(true)}
         >
-          <li className="py-2 px-2 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer">
-            <span className="text-base">{t("services").toUpperCase()}</span>
+          <li className="px-1 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer">
+            <span className="text-base">{t("services")}</span>
           </li>
         </DropdownMenuTrigger>
 

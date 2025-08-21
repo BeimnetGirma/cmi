@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Service as IService } from "@/types";
+
 type DeleteServiceProps = {
-  service: IService;
+  service: any;
   deleteService: (service_id: string) => void;
 };
 const DeleteService = ({ service, deleteService }: DeleteServiceProps) => {
@@ -57,10 +57,7 @@ const DeleteService = ({ service, deleteService }: DeleteServiceProps) => {
                 <h1 className="text-slate-900 text-2xl relative ">Delete Service</h1>
                 <hr className="relative" />
                 <div className="relative mx-10 px-10">
-                  <p className="text-red-600 text-l">
-                    Are you sure you want to delete &quot;
-                    {service.title}&quot; service? This action cannot be undone.{" "}
-                  </p>
+                  <p className="text-red-600 text-l">Are you sure you want to delete service? This action cannot be undone. </p>
                 </div>
                 <hr className="relative mt-10" />
                 <div className="flex relative justify-end mt-10">

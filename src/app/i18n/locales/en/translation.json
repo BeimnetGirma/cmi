@@ -6,6 +6,8 @@
   "contactUs": "Contact Us",
   "contactActionCall": "Get in Touch with Us",
   "callUs": "Make a Call",
+  "followUs": "Follow Us",
+  "quickLinks": "Quick Links",
   "emailUs": "Send an Email",
   "locateUs": "Locate Us",
   "officeAddress": "In front of Bole Printing Press, Hansem Office Park, 5-7th floor",
@@ -111,5 +113,9 @@
   "action": "Action",
   "visitors": "Visitors",
   "projects": "Projects",
-  "documents": "Documents"
+  "documents": "Documents",
+  "mui": "Ministry of Urban and Infrastructure",
+  "trainees": "Trainees",
+  "pmp": "PMP Certificates",
+  "bim": "BIM Trainees"
 }

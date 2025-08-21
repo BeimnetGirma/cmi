@@ -5,7 +5,9 @@
   "contactActionCall": "ከእኛ ጋር ይገናኙ",
   "callUs": "ይደውሉን",
   "emailUs": "ኢሜይል ይላኩልን",
+  "followUs": "ይከተሉን",
   "locateUs": "ይጎብኙን",
+  "quickLinks": "ተጨማሪ ሊንኮች",
   "officeAddress": "ቦሌ ማተሚያ ፊት ለፊት ሀንሰም ቢሮ ፓርክ 5-7ኛ ፎቅ",
   "login": "ይግቡ",
   "support": "ድጋፍ",
@@ -70,5 +72,9 @@
   "action": "ድርጊት",
   "visitors": "ጎብኚዎች",
   "projects": "ፕሮጀክቶች",
-  "documents": "ሰነዶች"
+  "documents": "ሰነዶች",
+  "mui": "የከተማ እና የመሠረተ ልማት ሚኒስቴር",
+  "trainees": "ሰልጣኞች",
+  "pmp": "የ PMP የምስክር ወረቀቶች",
+  "bim": "BIM ሰልጣኞች"
 }
