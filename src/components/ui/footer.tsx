@@ -50,7 +50,7 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
         <Image width={50} height={50} className="w-full" src="/assets/imgs/footer-line-art.svg" alt="Footer Image" />
       </div>
 
-      <div className="bg-primary-main text-white p-6 md:p-8">
+      <div className="bg-primary-main text-white p-6 pb-0 md:p-8 md:pb-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[auto_1fr_1fr_1fr_1fr] gap-6 items-start">
           {/* Logo */}
           <div className="flex flex-col items-center sm:items-start">
@@ -129,6 +129,9 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
               ></iframe>
             </div>
           </div>
+        </div>
+        <div className="w-full justify-center flex items-center p-0">
+          <p className="text-sm text-gray-100">&copy; {new Date().getFullYear()} Construction Management Institute. All rights reserved.</p>
         </div>
       </div>
     </footer>
