@@ -111,7 +111,7 @@ const NavBar: React.FC<
             <LanguageSelector params={{ lng }} />
           </li>
 
-          {/* Auth */}
+          {/* Auth
           {isLoaded && user ? (
             <SignOutButton redirectUrl="/">
               <button className="text-base text-white rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 transition-colors">{t("logOut")}</button>
@@ -120,7 +120,7 @@ const NavBar: React.FC<
             <Link href={"/login"} className="text-base text-white rounded-md px-4 py-2 bg-primary-main  hover:bg-gray-500 transition-colors">
               {t("login")}
             </Link>
-          )}
+          )} */}
         </ul>
       </div>
 
