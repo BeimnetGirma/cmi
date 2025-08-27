@@ -23,24 +23,55 @@ export type Resource = {
 export type ResourceType = {
   id?: string;
   name: string;
+  name_am?: string | null;
 };
 export type Magazine = {
   id?: string;
   title: string;
   path: string;
 };
-export type Service = {
+export type ServiceTranslationInput = {
   id?: string;
+  language: string; // "en" | "am"
   title: string;
-  content?: string | null;
-  image: string;
-  link?: string | null;
+  summary?: string;
+  content?: any;
 };
 
+export type SubServiceTranslationInput = {
+  id?: string;
+  language: string;
+  title: string;
+  description?: string;
+};
+
+export type SubServiceInput = {
+  id?: string;
+  order?: number | null;
+  link?: string | null;
+  translations: SubServiceTranslationInput[];
+};
+
+export type ServiceFormInput = {
+  id?: string;
+  slug?: string;
+  imageUrl?: string | null;
+  backgroundImageUrl?: string | null;
+  translations: ServiceTranslationInput[];
+  subservices: SubServiceInput[];
+};
+
+type NewServiceProps = {
+  createService: (payload: any) => Promise<boolean>;
+  editService?: (payload: any) => Promise<boolean>;
+  existingService?: ServiceFormInput | null;
+};
 export type Announcement = {
   id?: string;
   title: string;
   description?: string | null;
+  title_am?: string | null;
+  description_am?: string | null;
   attachment?: string | null;
   link?: string | null;
 };

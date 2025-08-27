@@ -20,7 +20,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "translation:seed": "tsc scripts/import-translations.ts --outDir dist/scripts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -54,6 +55,7 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
     "react-i18next": "^14.1.2",
+    "react-icons": "^5.5.0",
     "react-quill": "^2.0.0",
     "react-slick": "^0.30.2",
     "sharp": "^0.33.4",

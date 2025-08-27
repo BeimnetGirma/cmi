@@ -19,8 +19,14 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate a unique filename for the image (you could use a UUID or timestamp for uniqueness)
-    const filename = `${Date.now()}-${file.name}`;
-    const filePath = path.join(process.cwd(), "uploads/images", filename); // Save to the 'uploads' folder in 'public'
+    const originalName = file.name;
+    const safeName = originalName
+      .replace(/\s+/g, "-") // replace spaces with -
+      .replace(/[^a-zA-Z0-9.\-_]/g, ""); // remove unsafe characters
+
+    const filename = `${Date.now()}-${safeName}`;
+    // const filename = `${Date.now()}-${file.name}`;
+    const filePath = path.join(process.cwd(), "uploads/images", path.basename(filename)); // Save to the 'uploads' folder in 'public'
 
     // Make sure the 'uploads' directory exists, otherwise create it
     const uploadsDir = path.join(process.cwd(), "uploads/images");

@@ -14,6 +14,8 @@ import NewsLink from "@/components/news/news-link";
 import Announcements from "@/components/announcement/announcements";
 import Resources from "@/components/resources/resources";
 import EditPageContents from "@/components/page-contents/edit-page-contents";
+import Events from "@/components/events/events";
+import Stats from "@/components/stats/stats";
 
 const Admin = ({ params }: PageProps) => {
   const { lng } = params;
@@ -33,8 +35,24 @@ const Admin = ({ params }: PageProps) => {
           executives: <Executives key="executives" />,
           services: <Services key="services" />,
           announcements: <Announcements key="announcements" />,
+          events: <Events key="events" />,
+          stats: <Stats key="stats" />,
         }}
-        tabs={["Researches", "Standards", "Resources", "Magazines", "News", "Departments", "Gallery", "Page Contents", "Executives", "Services", "Announcements"]}
+        tabs={[
+          "Researches",
+          "Standards",
+          "Resources",
+          "Magazines",
+          "News",
+          "Departments",
+          "Gallery",
+          "Page Contents",
+          "Executives",
+          "Services",
+          "Announcements",
+          "Events",
+          "Stats",
+        ]}
         lng={lng}
       />
     </>

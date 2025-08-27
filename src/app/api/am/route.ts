@@ -1,19 +1,28 @@
-import fs from "fs";
+import { languages } from "@/app/i18n/settings";
+
 import path from "path";
+import prisma from "@/db";
 // const filePath = path.resolve("src/app/i18n/locales/en/translation.json");
-const filePath = path.join(
-  process.cwd(),
-  "src/app/i18n/locales/am/translation.json"
-);
+const filePath = path.join(process.cwd(), "src/app/i18n/locales/am/translation.json");
 
 export async function GET() {
-  const jsonData = fs.readFileSync(filePath);
-  const data = JSON.parse(jsonData.toString());
-  return Response.json(data);
+  const translations = await prisma.translation.findMany({
+    where: { language: "am" },
+  });
+  const json = Object.fromEntries(translations.map((t: { key: any; value: any }) => [t.key, t.value]));
+  return Response.json(json);
 }
 
 export async function POST(req: Request) {
   const data = await req.json();
-  fs.writeFileSync(filePath, JSON.stringify(data));
-  return Response.json({ message: "JSON file has been updated successfully" });
+  const entries = Object.entries(data);
+  for (const [key, value] of entries) {
+    await prisma.translation.upsert({
+      where: { key_language: { key, language: "am" } },
+      update: { value: value as any },
+      create: { key, language: "am", value: value as any },
+    });
+  }
+
+  return Response.json({ message: "Translations updated." });
 }

@@ -19,9 +19,7 @@ export async function createAnnouncement(newAnnouncement: IAnnouncement) {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        throw new Error(
-          "One or more fields exceed the maximum allowed length."
-        );
+        throw new Error("One or more fields exceed the maximum allowed length.");
       }
     }
     throw error;
@@ -38,7 +36,9 @@ const Announcements = async () => {
         where: { id: announcement.id },
         data: {
           title: announcement.title,
+          title_am: announcement.title_am,
           description: announcement.description,
+          description_am: announcement.description_am,
           link: announcement.link,
           attachment: announcement.attachment,
         },
@@ -83,28 +83,16 @@ const Announcements = async () => {
                 <tr key={announcement.id}>
                   <td className="p-6 border">{index + 1}</td>
                   <td className="p-6 border w-1/4">{announcement.title}</td>
-                  <td className="p-6 border whitespace-nowrap">
-                    {new Date(announcement.createdAt).toDateString()}
-                  </td>
+                  <td className="p-6 border whitespace-nowrap">{new Date(announcement.createdAt).toDateString()}</td>
                   <td className="p-6 border">
-                    {announcement.description
-                      ? announcement.description.length > 200
-                        ? announcement.description.substring(0, 200) + "..."
-                        : announcement.description
-                      : ""}
+                    {announcement.description ? (announcement.description.length > 200 ? announcement.description.substring(0, 200) + "..." : announcement.description) : ""}
                   </td>
                   {/* <td className="p-6 border">{JSON.parse(announcement.attachment || "")?.originalName ?? ""}</td> */}
                   <td className="p-6 border">
                     <div className="flex flex-row gap-3 justify-center">
                       {" "}
-                      <EditAnnouncement
-                        announcement={announcement}
-                        editAnnouncement={editAnnouncement}
-                      />
-                      <DeleteAnnouncement
-                        announcement={announcement}
-                        deleteAnnouncement={deleteAnnouncement}
-                      />
+                      <EditAnnouncement announcement={announcement} editAnnouncement={editAnnouncement} />
+                      <DeleteAnnouncement announcement={announcement} deleteAnnouncement={deleteAnnouncement} />
                     </div>
                   </td>
                 </tr>

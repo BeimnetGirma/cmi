@@ -3,6 +3,7 @@
   "about": "ስለ እኛ",
   "contactUs": "አድራሻ",
   "login": "ይግቡ",
+  "logOut": "ይውጡ",
   "support": "ድጋፍ",
   "services": "አገልግሎቶች",
   "standards": "ደረጃዎች",
@@ -18,6 +19,6 @@
   "consultancy": "ማማከር",
   "coe": "COE",
   "controlPanel": "ቅንብሮች",
-  "admin": "አስተዳዳሪ ገጹ",
+  "admin": "አስተዳዳሪ ገጽ",
   "announcements": "ማስታወቂያ"
 }

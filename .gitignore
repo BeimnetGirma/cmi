@@ -45,12 +45,15 @@ next-env.d.ts
 # ghost data
 /ghost
 
+# database
+/data/mysql
+
 #prisma
 /prisma/migrations
 
 # uploaded test files
 /public/uploads
 file-server/node_modules
-dist/
+# dist/
 uploads/
 .qodo
