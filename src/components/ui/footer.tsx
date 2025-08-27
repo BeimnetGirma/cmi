@@ -1,9 +1,11 @@
 "use client";
 import { useTranslation } from "@/app/i18n/client";
 import { PageProps } from "@/types";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaCubes, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
   const { t } = useTranslation(lng, "translation");
@@ -11,6 +13,7 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
   const [footerData, setFooterData] = useState<{ quickLinks: any[]; serviceLinks: any[]; phoneNumber: string; emailAddress: string; googleAddress: string } | null>(null);
   const [quickLinksDetails, setQuickLinksDetails] = useState<string[]>([]);
   const [serviceLinksDetails, setServiceLinksDetails] = useState<string[]>([]);
+  const { user, isLoaded } = useUser();
 
   useEffect(() => {
     const fetchFooterData = async () => {
@@ -82,6 +85,19 @@ const Footer: React.FC<PageProps> = ({ params: { lng } }) => {
                   <span dangerouslySetInnerHTML={{ __html: link }} />
                 </li>
               ))}
+            </ul>
+            <ul className="p-0 m-0">
+              {isLoaded && user ? (
+                <SignOutButton redirectUrl="/">
+                  <button className="text-base text-white rounded-md  ">
+                    <FaSignOutAlt className="w-7 h-7 transition-transform duration-200 hover:scale-125 flex items-center justify-center" />
+                  </button>
+                </SignOutButton>
+              ) : (
+                <Link href={"/login"} className="text-base text-white rounded-md  ">
+                  <FaSignInAlt className="w-7 h-7 transition-transform duration-200 hover:scale-125 flex items-center justify-center" />
+                </Link>
+              )}
             </ul>
           </div>
 
