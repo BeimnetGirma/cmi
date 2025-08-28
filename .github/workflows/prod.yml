@@ -11,8 +11,9 @@ jobs:
     environment: Prod
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      NEXT_PUBLIC_GHOST_URL: ${{ secrets.NEXT_PUBLIC_GHOST_URL }}
-      NEXT_PUBLIC_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_PUBLIC_GHOST_CONTENT_API_KEY }}
+      NEXT_PUBLIC_GHOST_URL: ${{ secrets.PROD_NEXT_PUBLIC_GHOST_URL }}
+      NEXT_PUBLIC_GHOST_CONTENT_API_KEY: ${{ secrets.PROD_GHOST_CONTENT_API }}
+      NEXT_PUBLIC_GHOST_ADMIN_URL: ${{ secrets.PROD_GHOST_ADMIN_URL }}
       APP_PORT: 3000
     steps:
       - name: Checkout code
