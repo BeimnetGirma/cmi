@@ -70,8 +70,8 @@ services:
       - ./ghost/data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/my.cnf
     healthcheck:
-      test: [
-          MYSQL_USER
+      test:
+        [
           "CMD-SHELL",
           'mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD && mysql -u $$ --password=$$MYSQL_PASSWORD -e ''SHOW DATABASES LIKE "$$MYSQL_DATABASE";''',
         ]
