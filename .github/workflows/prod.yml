@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: ".next,public,package.json,ecosystem.config.js,prisma"
-          target: "/var/www/ecmi"
+          target: "/var/www/ecmi-prod"
 
       - name: Run app on prod port
         uses: appleboy/ssh-action@v0.1.6
@@ -61,7 +61,7 @@ jobs:
 
             export DATABASE_URL="${{ secrets.DATABASE_URL }}"
 
-            cd /var/www/ecmi
+            cd /var/www/ecmi-prod
             npm install --omit=dev
             npm install @prisma/client
             npx prisma migrate deploy
