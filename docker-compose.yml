@@ -108,7 +108,7 @@ services:
     restart: always
     container_name: ecmi-cmidb
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -134,7 +134,7 @@ services:
     restart: always
     container_name: ecmi-cmi-dev-db
     ports:
-      - 127.0.0.1:3350:3306
+      - 3350:3306
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
