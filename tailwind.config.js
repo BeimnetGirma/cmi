@@ -67,7 +67,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: {
-        navbreak: "1650px",
+        navbreak: "1250px",
         aboutbreak: "1515px",
       },
     },
