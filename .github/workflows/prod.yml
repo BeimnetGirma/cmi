@@ -64,7 +64,7 @@ jobs:
 
             cd /var/www/ecmi-prod
             npm install --omit=dev
-
+            npm install @prisma/client
             PORT=3000 pm2 reload cmi_production --update-env || pm2 start npm --name cmi_production -- run start
 
       # npm install @prisma/client

@@ -89,7 +89,8 @@ jobs:
             export DATABASE_URL="${{ secrets.DEV_DATABASE_URL }}"
 
             cd /var/www/ecmi-staging
-            npm install --omit=dev            
+            npm install --omit=dev     
+            npm install @prisma/client       
             PORT=3001 pm2 reload cmi_dev --update-env || pm2 start npm --name cmi_dev -- run start
 
 # npm install @prisma/client
