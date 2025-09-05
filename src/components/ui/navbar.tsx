@@ -79,7 +79,7 @@ const NavBar: React.FC<
                 pathname === `/${lng}${link.href}` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
               } ${lng === `en` ? " text-slate-700" : "font-normal"} `}
             >
-              <Link href={link.href} className="text-base">
+              <Link href={link.href} className={`${lng === "en" ? "text-sm" : "text-base"}`}>
                 {link.title}
               </Link>
             </li>
@@ -99,7 +99,7 @@ const NavBar: React.FC<
               pathname === `/${lng}/contact` ? "font-semibold text-primary-main" : "font-normal text-secondary-light"
             }`}
           >
-            <Link href="/contact" className="text-base">
+            <Link href="/contact" className={`${lng === "en" ? "text-sm" : "text-base"}`}>
               {t("contactUs")}
             </Link>
           </li>

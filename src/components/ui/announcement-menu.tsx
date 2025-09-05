@@ -44,7 +44,7 @@ const AnnouncementMenu: React.FC<PageProps & { announcements: announcement[] }> 
       }`}
     >
       <Link href="announcements" onClick={saveLastVisit}>
-        <span className="inline-flex items-start text-base">
+        <span className={`inline-flex items-start ${lng === "en" ? "text-sm" : "text-base"}`}>
           {t("announcements")}{" "}
           {hasNew && (
             <svg width="10px" height="10px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1 -mt-1">

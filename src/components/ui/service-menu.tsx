@@ -41,7 +41,7 @@ const ServiceMenu: React.FC<PageProps & { services: { title_en: string; title_am
           onMouseEnter={() => !isMobile && setOpenDropdown(true)}
         >
           <li className="px-1 transition-all duration-200 font-normal text-secondary-light hover:scale-105 hover:text-primary-main hover:rounded-md cursor-pointer">
-            <span className="text-base">{t("services")}</span>
+            <span className={`${lng === "en" ? "text-sm" : "text-base"}`}>{t("services")}</span>
           </li>
         </DropdownMenuTrigger>
 
