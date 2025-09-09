@@ -72,7 +72,15 @@ const LanguageSelector: React.FC<PageProps> = ({ params: { lng } }) => {
     <div className="relative flex justify-center">
       {/* <button className="flex items-center space-x-1 text-slate-900 hover:text-indigo-600" onClick={toggelMenu}> */}
       <button className="text-sm flex items-center space-x-1 text-slate-900 hover:text-primary-main" onClick={toggleLanguage}>
-        {getLang(language)}
+        <span className="flex items-center space-x-2 pt-2">
+          <img
+            src={language === "en" ? "/assets/icons/am.png" : "/assets/icons/en.png"}
+            alt={getLang(language)}
+            className="w-5 h-5 rounded-full object-cover"
+            style={{ objectFit: "cover" }}
+          />
+          {/* <span>{getLang(language)}</span> */}
+        </span>
         {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
           {isOpen ? (
             <path fillRule="evenodd" d="M10 3a1 1 0 00-.707.293l-7 7a1 1 0 101.414 1.414L10 5.414l6.293 6.293a1 1 0 001.414-1.414l-7-7A1 1 0 0010 3z" clipRule="evenodd" />
