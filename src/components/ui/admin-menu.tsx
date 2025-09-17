@@ -39,7 +39,7 @@ const AdminMenu: React.FC<PageProps> = ({ params: { lng } }) => {
       }`}
     >
       <Link href="/admin">
-        <span className="inline-flex items-start text-base">{t("admin").toUpperCase()}</span>
+        <span className={`inline-flex items-start ${lng === "en" ? "text-sm" : "text-base"}`}>{t("admin").toUpperCase()}</span>
       </Link>
     </li>
   );

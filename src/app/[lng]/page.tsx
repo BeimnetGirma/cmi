@@ -57,14 +57,9 @@ const Home: React.FC<HomePageProps> = async ({ params }) => {
   const bIMCount = await prisma.bIMCount.findUnique({ where: { id: 1 } });
   const researchCount = await prisma.researchCount.findUnique({ where: { id: 1 } });
 
-  const featuredPosts = await fetch(
-    `${process.env.NEXT_PUBLIC_GHOST_URL}/ghost/api/v4/content/posts/?key=${process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY}&filter=${encodeURIComponent(
-      filter
-    )}&include=authors&limit=3`,
-    {
-      cache: "no-cache",
-    }
-  )
+  const featuredPosts = await fetch(`https://cmi.gov.et/ghost/api/v4/content/posts/?key=309d43f53422c94d81a8cf59e5&filter=${encodeURIComponent(filter)}&include=authors&limit=3`, {
+    cache: "no-cache",
+  })
     .then((res) => {
       return res.json() as Promise<FeaturedPosts>;
     })
